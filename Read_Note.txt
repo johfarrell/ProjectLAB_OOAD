@@ -1,0 +1,10 @@
+RoleId (EmployeeRole):
+-1 = Human Resource
+-2 = Storage Manager
+-3 = Promo Manager
+-4 = Master Manager
+-5 = Cashier
+
+VoucherStatus (VoucherStatus):
+-NotUsed = Voucher Available
+-Used = Voucher Already Used
