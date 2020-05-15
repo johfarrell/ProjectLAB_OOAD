@@ -1,3 +1,4 @@
+package sqlConnect;
 import java.sql.*;
 /**
 * <strong>

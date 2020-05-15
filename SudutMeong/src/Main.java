@@ -1,5 +1,8 @@
 import java.util.*;
 
+import sqlConnect.Connect;
+import view.LoginForm;
+
 public class Main {
 	static int roleID;
 	Scanner sc = new Scanner(System.in);
@@ -18,8 +21,8 @@ public class Main {
 		// TODO Auto-generated constructor stub
 
 		connect = Connect.getConnection();
-		roleID = sc.nextInt();
-		Login(roleID);
+//		roleID = sc.nextInt();
+//		Login(roleID);
 
 		new LoginForm();
 
