@@ -1,3 +1,8 @@
+package main;
+import java.util.Scanner;
+
+import sqlConnect.Connect;
+import view.LoginForm;
 
 public class Main {
 	static int roleID;
@@ -15,6 +20,7 @@ public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
+		new LoginForm();
 
 	}
 
