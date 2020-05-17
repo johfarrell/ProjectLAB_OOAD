@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import controller.HRMController;
 import controller.LoginController;
 import model.EmployeeModel;
 
@@ -100,7 +101,8 @@ public class Login {
 							
 						}else if(emplo.getRoleid() == 4) {
 							System.out.println("Anda adalah Master Manager");
-							//Lempar ke View Master Manager
+							frame.dispose();
+							HRMController.getInstance().view();
 							
 						}else if(emplo.getRoleid() == 5) {
 							System.out.println("Anda adalah Cashier");

@@ -37,4 +37,14 @@ public class LoginController {
 		return employee.getAllPassword();
 	}
 
+	public Vector<String> getAllStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Vector<String> getAllID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

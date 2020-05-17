@@ -1,9 +1,11 @@
 package model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import controller.LoginController;
 import sqlConnect.Connect;
 
 public class EmployeeModel {
@@ -51,6 +53,76 @@ public class EmployeeModel {
 		}
 		return em;
 	}
+	
+	public void addEmployee(int RoleID, String Name, String Username, String DOB, int Salary, String Status, String Password){
+		con = Connect.getConnection();
+		getAllEmployee();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO employee VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+		try {
+			ps.setInt(1, index);
+			ps.setInt(2, RoleID);
+			ps.setString(3, Name);
+			ps.setString(4, Username);
+			ps.setString(5, DOB);
+			ps.setInt(6, Salary);
+			ps.setString(7, Status);
+			ps.setString(8, Password);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateEmployee(int employeeID, int RoleID, String Name, String Username, String DOB, int Salary){
+		con = Connect.getConnection();
+		getAllEmployee();
+		PreparedStatement ps = con.prepareStatement("UPDATE `employee` SET `employeeID`= ?,`roleID`= ?,`name`= ?,`username`= ?,"
+				+ "`DOB`= ?,`salary`= ? WHERE employeeID = ?");
+		try {
+			ps.setInt(1, employeeID);
+			ps.setInt(2, RoleID);
+			ps.setString(3, Name);
+			ps.setString(4, Username);
+			ps.setString(5, DOB);
+			ps.setInt(6, Salary);
+			ps.setInt(7, employeeID);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void resetPassword(int employeeID, String password){
+		con = Connect.getConnection();
+		
+		PreparedStatement ps = con.prepareStatement("UPDATE `employee` SET `password`= ? WHERE employeeID = ?");
+		try {
+			ps.setString(1, password);
+			ps.setInt(2, employeeID);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void fireEmployee(int employeeID, String status){
+		con = Connect.getConnection();
+		
+		PreparedStatement ps = con.prepareStatement("UPDATE `employee` SET `status`= ? WHERE employeeID = ?");
+		try {
+			ps.setString(1, status);
+			ps.setInt(2, employeeID);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public Vector<String> getAllUsername(){
 		con = Connect.getConnection();
