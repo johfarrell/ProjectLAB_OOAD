@@ -28,7 +28,7 @@ public class HRMController {
 	}
 	
 	protected String getPassword() {//BELOM DIUBAH
-        String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder pass = new StringBuilder();
         Random rnd = new Random();
         while (pass.length() < 5) {
@@ -36,6 +36,7 @@ public class HRMController {
             pass.append(rangePass.charAt(index));
         }
         String fixedPass = pass.toString();
+        System.out.println("new password is "+ fixedPass);
         return fixedPass;
 
     }
@@ -66,7 +67,7 @@ public class HRMController {
 	
 	public void fireEmployee(int employeeID){
 		String status = "Inactive";
-		employee.resetPassword(employeeID, status);
+		employee.fireEmployee(employeeID, status);
 	}
 }
 

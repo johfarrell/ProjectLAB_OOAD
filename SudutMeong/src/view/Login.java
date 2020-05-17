@@ -7,6 +7,7 @@ import javax.swing.SwingConstants;
 
 import controller.HRMController;
 import controller.LoginController;
+import controller.PopUpController;
 import model.EmployeeModel;
 
 import javax.swing.JTextField;
@@ -110,10 +111,10 @@ public class Login {
 							
 						}
 					}else{
-						System.out.println("Wrong Password");
+						PopUpController.getInstance().wrongpass();
 					}
 				}else {
-					System.out.println("Employee Not Found");
+					PopUpController.getInstance().usernamenotfound();
 				}
 			}
 		});
