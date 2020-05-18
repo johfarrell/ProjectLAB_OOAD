@@ -9,6 +9,7 @@ import controller.HRMController;
 import controller.LoginController;
 import controller.PMController;
 import controller.PopUpController;
+import controller.SMController;
 import model.EmployeeModel;
 
 import javax.swing.JTextField;
@@ -95,7 +96,8 @@ public class Login {
 							
 						}else if(emplo.getRoleid() == 2) {
 							System.out.println("Anda adalah Storage Manager");
-							//Lempar ke View StorageManager
+							frame.dispose();
+							SMController.getInstance().view();
 							
 						}else if(emplo.getRoleid() == 3) {
 							System.out.println("Anda adalah Promo Manager");

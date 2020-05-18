@@ -3,6 +3,7 @@ package main;
 import controller.HRMController;
 import controller.LoginController;
 import controller.PMController;
+import controller.SMController;
 
 public class Main {
 
