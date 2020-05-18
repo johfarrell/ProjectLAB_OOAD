@@ -17,6 +17,10 @@ public class TransactionModel {
 	private Connect con;
 	Integer index;
 	
+	public TransactionModel() {
+		
+	}
+	
 	public TransactionModel(Integer transactionid, String purchasedate, Integer voucherid, Integer employeeid, String paymenttype) {
 		this.TransactionID=transactionid;
 		this.PurchaseDate=purchasedate;
@@ -25,9 +29,9 @@ public class TransactionModel {
 		this.PaymentType=paymenttype;
 	}
 	
-	public Vector<TransactionModel> getAllTransaction(Integer Month, Integer Year){
+	/*public Vector<TransactionModel> getAllTransaction(Integer Month, Integer Year){
 		con = Connect.getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM transactione WHERE MONTH(purchase_datetime) = ?  AND YEAR(purchase_datetime) = ?");
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM 'transaction' WHERE 'MONTH(purchase_datetime) = 5'  AND 'YEAR(purchase_datetime) = 2020'");
 		Vector<TransactionModel> em = new Vector<TransactionModel>();
 		index = 1;
 		try {
@@ -35,7 +39,25 @@ public class TransactionModel {
 			ps.setInt(1, Year);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				em.add(new TransactionModel(rs.getInt("transactionID"), rs.getString("purhcase_datetime"), rs.getInt("voucherID"), 
+				em.add(new TransactionModel(rs.getInt("transactionID"), rs.getString("purchase_datetime"), rs.getInt("voucherID"), 
+						rs.getInt("employeeID"), rs.getString("paymentType")));
+				index++;
+			}
+		} catch (SQLException e) {
+			
+		}
+		return em;
+	}*/
+	
+	public Vector<TransactionModel> getAllTransaction(){
+		con = Connect.getConnection();
+		//ResultSet rs = con.executeQuery("SELECT * FROM transaction WHERE MONTH(purchase_datetime) = 5  AND YEAR(purchase_datetime) = 2020");
+		ResultSet rs = con.executeQuery("SELECT * FROM transaction");
+		Vector<TransactionModel> em = new Vector<TransactionModel>();
+		index = 1;
+		try {
+			while(rs.next()) {
+				em.add(new TransactionModel(rs.getInt("transactionID"), rs.getString("purchase_datetime"), rs.getInt("voucherID"), 
 						rs.getInt("employeeID"), rs.getString("paymentType")));
 				index++;
 			}
@@ -84,6 +106,20 @@ public class TransactionModel {
 	public void setPaymentType(String paymentType) {
 		PaymentType = paymentType;
 	}
-	
-	
+
+	public Connect getCon() {
+		return con;
+	}
+
+	public void setCon(Connect con) {
+		this.con = con;
+	}
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
 }

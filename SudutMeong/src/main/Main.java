@@ -10,7 +10,7 @@ public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		MController.getInstance().view();
+		LoginController.getInstance().view();
 
 	}
 

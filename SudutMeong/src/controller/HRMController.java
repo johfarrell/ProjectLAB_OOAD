@@ -120,7 +120,6 @@ public class HRMController {
 			employee.resetPassword(employeeID, password);
 			PopUpController.getInstance().resetpasssuccess();
 		}
-		
 	}
 	
 	public void fireEmployee(int employeeID){

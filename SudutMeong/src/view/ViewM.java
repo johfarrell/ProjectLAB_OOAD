@@ -59,6 +59,7 @@ public class ViewM implements ActionListener{
 	 * Create the application.
 	 */
 	public ViewM() {
+		table();
 		table_1();
 		initialize();
 		addlistener();
@@ -263,7 +264,7 @@ public class ViewM implements ActionListener{
 		header.add("EmployeeID");
 		header.add("PaymentType");
 		Vector<TransactionModel> transaction = new Vector<TransactionModel>();
-		transaction = MController.getInstance().getAllTransaction(2,2);
+		transaction = MController.getInstance().getAllTransaction();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
@@ -289,7 +290,7 @@ public class ViewM implements ActionListener{
 		header.add("Status");
 		header.add("Password");
 		Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
-		employee = HRMController.getInstance().getAllEmployee();
+		employee = MController.getInstance().getAllEmployee();
 		dtm = new DefaultTableModel(header,0);
 		table_1 = new JTable(dtm);
 		table_1.getTableHeader();

@@ -11,6 +11,7 @@ public class MController {
 	
 	private static MController mController;
 	private EmployeeModel employee = new EmployeeModel();
+	private TransactionModel transaction = new TransactionModel();
 	
 	public static MController getInstance(){
 		if(mController == null){
@@ -24,10 +25,18 @@ public class MController {
 		return new ViewM();
 	}
 	
-	public Vector<TransactionModel> getAllTransaction(Integer Month, Integer Year){
+	/*public Vector<TransactionModel> getAllTransaction(){
 		int month = 5;
 		int year = 2020;
-		return employee.getAllTransaction(month, year);
+		return transaction.getAllTransaction(month, year);
+	}*/
+	
+	public Vector<EmployeeModel> getAllEmployee(){
+		return employee.getAllEmployee();
+	}
+	
+	public Vector<TransactionModel> getAllTransaction(){
+		return transaction.getAllTransaction();
 	}
 	
 	protected String getPassword() {//BELOM DIUBAH
