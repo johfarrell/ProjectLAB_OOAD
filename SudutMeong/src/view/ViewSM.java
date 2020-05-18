@@ -241,19 +241,19 @@ public class ViewSM implements ActionListener{
 		if(e.getSource().equals(btnInsert)){
 			String Name = insertName.getText();
 			String Description = insertDescription.getText();
-			int Price = Integer.parseInt(insertPrice.getText());
-			int Stock = Integer.parseInt(insertStock.getText());
+			Integer Price = Integer.parseInt(insertPrice.getText());
+			Integer Stock = Integer.parseInt(insertStock.getText());
 			SMController.getInstance().addProduct(Name, Description, Price, Stock);
 			
 		} else if(e.getSource().equals(btnUpdate)){
-			int ProductID = Integer.parseInt(updateID.getText());
+			Integer ProductID = Integer.parseInt(updateID.getText());
 			String Name = updateName.getText();
 			String Description = updateDescription.getText();
 			Integer Price = Integer.parseInt(updatePrice.getText());
 				SMController.getInstance().updateProduct(ProductID, Name, Description, Price);
 				
 		} else if(e.getSource().equals(btnDelete)){
-			int ProductID = Integer.parseInt(deleteID.getText());
+			Integer ProductID = Integer.parseInt(deleteID.getText());
 			SMController.getInstance().deleteProduct(ProductID);
 			
 		} else if(e.getSource().equals(btnRefresh)) {

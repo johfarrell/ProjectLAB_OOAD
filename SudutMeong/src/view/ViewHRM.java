@@ -364,7 +364,6 @@ public class ViewHRM implements ActionListener{
 
 		} else if(e.getSource().equals(btnFire)){
 			Integer employeeID=-1;
-
 			try {
 				employeeID = Integer.parseInt(fireID.getText());
 			} catch (Exception e2) {

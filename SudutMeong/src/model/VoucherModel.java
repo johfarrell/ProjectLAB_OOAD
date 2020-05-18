@@ -60,7 +60,7 @@ public class VoucherModel {
 		}
 	}
 	
-	public void updateVoucher(int VoucherID, float Discount, String ValidDate){
+	public void updateVoucher(Integer VoucherID, float Discount, String ValidDate){
 		con = Connect.getConnection();
 		getAllVoucher();
 		PreparedStatement ps = con.prepareStatement("UPDATE `voucher` SET `discount`= ?,`validDate`= ? WHERE voucherID = ?");
@@ -75,7 +75,7 @@ public class VoucherModel {
 		}
 	}
 	
-	public void deleteVoucher(int employeeID){
+	public void deleteVoucher(Integer employeeID){
 		con = Connect.getConnection();
 		getAllVoucher();
 		PreparedStatement ps = con.prepareStatement("DELETE FROM `voucher` WHERE voucherID = ?");

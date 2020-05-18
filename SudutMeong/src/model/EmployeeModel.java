@@ -54,7 +54,7 @@ public class EmployeeModel {
 		return em;
 	}
 	
-	public void addEmployee(int RoleID, String Name, String Username, String DOB, int Salary, String Status, String Password){
+	public void addEmployee(Integer RoleID, String Name, String Username, String DOB, Integer Salary, String Status, String Password){
 		con = Connect.getConnection();
 		getAllEmployee();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO employee VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -74,7 +74,7 @@ public class EmployeeModel {
 		}
 	}
 	
-	public void updateEmployee(int employeeID, int RoleID, String Name, String Username, String DOB, int Salary){
+	public void updateEmployee(Integer employeeID, Integer RoleID, String Name, String Username, String DOB, Integer Salary){
 		con = Connect.getConnection();
 		getAllEmployee();
 		PreparedStatement ps = con.prepareStatement("UPDATE `employee` SET `employeeID`= ?,`roleID`= ?,`name`= ?,`username`= ?,"
@@ -94,7 +94,7 @@ public class EmployeeModel {
 		}
 	}
 	
-	public void resetPassword(int employeeID, String password){
+	public void resetPassword(Integer employeeID, String password){
 		con = Connect.getConnection();
 		
 		PreparedStatement ps = con.prepareStatement("UPDATE `employee` SET `password`= ? WHERE employeeID = ?");
@@ -108,7 +108,7 @@ public class EmployeeModel {
 		}
 	}
 	
-	public void fireEmployee(int employeeID, String status){
+	public void fireEmployee(Integer employeeID, String status){
 		con = Connect.getConnection();
 		
 		PreparedStatement ps = con.prepareStatement("UPDATE `employee` SET `status`= ? WHERE employeeID = ?");

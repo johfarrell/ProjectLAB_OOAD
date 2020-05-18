@@ -46,7 +46,7 @@ public class ProductModel {
 		return em;
 	}
 	
-	public void addProduct(String Name, String Description, int Price, int Stock){
+	public void addProduct(String Name, String Description, Integer Price, Integer Stock){
 		con = Connect.getConnection();
 		getAllProduct();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO product VALUES (?, ?, ?, ?, ?)");
@@ -63,7 +63,7 @@ public class ProductModel {
 		}
 	}
 	
-	public void updateProduct(int ProductID, String Name, String Description, int Price){
+	public void updateProduct(Integer ProductID, String Name, String Description, Integer Price){
 		con = Connect.getConnection();
 		getAllProduct();
 		PreparedStatement ps = con.prepareStatement("UPDATE `product` SET `name`= ?,`description`= ?,`price`= ? WHERE productID = ?");
@@ -79,7 +79,7 @@ public class ProductModel {
 		}
 	}
 	
-	public void deleteProduct(int ProductID){
+	public void deleteProduct(Integer ProductID){
 		con = Connect.getConnection();
 		getAllProduct();
 		PreparedStatement ps = con.prepareStatement("DELETE FROM `product` WHERE productID = ?");

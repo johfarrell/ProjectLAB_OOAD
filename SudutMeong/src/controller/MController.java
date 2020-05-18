@@ -53,7 +53,7 @@ public class MController {
 
     }
 	
-	public void addEmployee(int RoleID, String Name, String Username, String DOB, int Salary){
+	public void addEmployee(Integer RoleID, String Name, String Username, String DOB, Integer Salary){
 		
 		Vector<String> checkUsername = new Vector<String>();
 		checkUsername = LoginController.getInstance().getAllUsername();//MASIH NGAMBIL DARI LOGIN CONTROLLER
@@ -68,12 +68,12 @@ public class MController {
 		}
 	}
 	
-	public void updateEmployee(int employeeID, int RoleID, String Name, String Username, String DOB, int Salary){	
+	public void updateEmployee(Integer employeeID, Integer RoleID, String Name, String Username, String DOB, Integer Salary){	
 		employee.updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
 		System.out.println("Update Success"); //CONSOLE
 	}
 	
-	public void fireEmployee(int employeeID){
+	public void fireEmployee(Integer employeeID){
 		String status = "Inactive";
 		employee.fireEmployee(employeeID, status);
 		System.out.println("Fire Success"); //CONSOLE

@@ -189,7 +189,7 @@ public class ViewPM implements ActionListener{
 			PMController.getInstance().addVoucher(Discount, ValidDate);
 			
 		} else if(e.getSource().equals(btnUpdate)){
-			int VoucherID = Integer.parseInt(updateID.getText());
+			Integer VoucherID = Integer.parseInt(updateID.getText());
 			Float Discount = Float.parseFloat(updateDiscount.getText());
 			Date date = updateValidDate.getDate();  
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
@@ -197,7 +197,7 @@ public class ViewPM implements ActionListener{
 			PMController.getInstance().updateVoucher(VoucherID, Discount, ValidDate);
 			
 		} else if(e.getSource().equals(btnDelete)){
-			int VoucherID = Integer.parseInt(deleteID.getText());
+			Integer VoucherID = Integer.parseInt(deleteID.getText());
 			PMController.getInstance().deleteVoucher(VoucherID);
 			
 		} else if(e.getSource().equals(btnRefresh)) {
