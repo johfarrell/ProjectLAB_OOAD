@@ -2,6 +2,7 @@ package main;
 
 import controller.HRMController;
 import controller.LoginController;
+import controller.MController;
 import controller.PMController;
 import controller.SMController;
 
@@ -9,7 +10,7 @@ public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		LoginController.getInstance().view();
+		MController.getInstance().view();
 
 	}
 
