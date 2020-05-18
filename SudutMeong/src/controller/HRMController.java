@@ -32,6 +32,14 @@ public class HRMController {
 		return employee.getAllEmployee();
 	}
 	
+	public Vector<String> getAllUsername(){
+		return employee.getAllUsername();
+	}
+	
+	public Vector<String> getAllPassword(){
+		return employee.getAllPassword();
+	}
+	
 	protected String getPassword() {//BELOM DIUBAH
         String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder pass = new StringBuilder();
@@ -49,7 +57,7 @@ public class HRMController {
 	public void addEmployee(int RoleID, String Name, String Username, String DOB, int Salary) throws ParseException{
 		
 		Vector<String> checkUsername = new Vector<String>();
-		checkUsername = LoginController.getInstance().getAllUsername();//MASIH NGAMBIL DARI LOGIN CONTROLLER
+		checkUsername = HRMController.getInstance().getAllUsername();
 		
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -78,7 +86,7 @@ public class HRMController {
 	public void updateEmployee(int employeeID, int RoleID, String Name, String Username, String DOB, int Salary) throws ParseException{
 		
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
-		checkSize = LoginController.getInstance().getAllEmployee();
+		checkSize = HRMController.getInstance().getAllEmployee();
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date DOBEmp = dateFormat.parse(DOB);  
@@ -90,7 +98,7 @@ public class HRMController {
 			PopUpController.getInstance().idnotfound();
 		}else {
 			Vector<String> checkUsername = new Vector<String>();
-			checkUsername = LoginController.getInstance().getAllUsername();
+			checkUsername = HRMController.getInstance().getAllUsername();
 			checkUsername.remove(employeeID-1); //REMOVE CURRENT EDITED ID
 			
 			if(RoleID < 1 || RoleID > 5) {
@@ -111,7 +119,7 @@ public class HRMController {
 	
 	public void resetPassword(int employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
-		checkSize = LoginController.getInstance().getAllEmployee();
+		checkSize = HRMController.getInstance().getAllEmployee();
 		
 		if(employeeID < checkSize.size() || employeeID > checkSize.size()) {
 			PopUpController.getInstance().idnotfound();
@@ -125,7 +133,7 @@ public class HRMController {
 	
 	public void fireEmployee(int employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
-		checkSize = LoginController.getInstance().getAllEmployee();
+		checkSize = HRMController.getInstance().getAllEmployee();
 		
 		if(employeeID < checkSize.size() || employeeID > checkSize.size()) {
 			PopUpController.getInstance().idnotfound();
