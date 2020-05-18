@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
@@ -54,6 +55,7 @@ public class ViewHRM implements ActionListener{
 	private JTextField fireID;
 	private JButton btnReset;
 	private JButton btnFire;
+	private JButton btnRefresh;
 	private JLabel lblFire;
 	private JLabel lblRoleid;
 	private JTextField updateRoleID;
@@ -79,7 +81,7 @@ public class ViewHRM implements ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 670, 570);
+		frame.setBounds(100, 100, 670, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -91,158 +93,158 @@ public class ViewHRM implements ActionListener{
 		
 		lblInsert = new JLabel("INSERT");
 		lblInsert.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblInsert.setBounds(20, 154, 180, 14);
+		lblInsert.setBounds(20, 181, 180, 14);
 		frame.getContentPane().add(lblInsert);
 		
 		lblRole = new JLabel("RoleID:");
-		lblRole.setBounds(55, 183, 46, 14);
+		lblRole.setBounds(55, 210, 46, 14);
 		frame.getContentPane().add(lblRole);
 		
 		lblName = new JLabel("Name:");
-		lblName.setBounds(55, 213, 46, 14);
+		lblName.setBounds(55, 240, 46, 14);
 		frame.getContentPane().add(lblName);
 		
 		lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(55, 243, 70, 14);
+		lblUsername.setBounds(55, 270, 70, 14);
 		frame.getContentPane().add(lblUsername);
 		
 		lblDob = new JLabel("DOB:");
-		lblDob.setBounds(55, 273, 46, 14);
+		lblDob.setBounds(55, 300, 46, 14);
 		frame.getContentPane().add(lblDob);
 		
 		lblSalary = new JLabel("Salary:");
-		lblSalary.setBounds(55, 303, 46, 14);
+		lblSalary.setBounds(55, 330, 46, 14);
 		frame.getContentPane().add(lblSalary);
 		
 		insertSalary = new JTextField();
-		insertSalary.setBounds(130, 301, 160, 20);
+		insertSalary.setBounds(130, 328, 160, 20);
 		frame.getContentPane().add(insertSalary);
 		insertSalary.setColumns(10);
 		
 		insertUsername = new JTextField();
-		insertUsername.setBounds(130, 241, 160, 20);
+		insertUsername.setBounds(130, 268, 160, 20);
 		frame.getContentPane().add(insertUsername);
 		insertUsername.setColumns(10);
 		
 		insertName = new JTextField();
-		insertName.setBounds(130, 211, 160, 20);
+		insertName.setBounds(130, 238, 160, 20);
 		frame.getContentPane().add(insertName);
 		insertName.setColumns(10);
 		
 		insertRoleID = new JTextField();
-		insertRoleID.setBounds(130, 181, 160, 20);
+		insertRoleID.setBounds(130, 208, 160, 20);
 		frame.getContentPane().add(insertRoleID);
 		insertRoleID.setColumns(10);
 		
 		btnInsert = new JButton("INSERT");
-		btnInsert.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnInsert.setBounds(201, 334, 89, 23);
+		btnInsert.setBounds(201, 361, 89, 23);
 		frame.getContentPane().add(btnInsert);
 		
 		lblUpdate = new JLabel("UPDATE");
 		lblUpdate.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUpdate.setBounds(350, 154, 95, 14);
+		lblUpdate.setBounds(350, 181, 95, 14);
 		frame.getContentPane().add(lblUpdate);
 		
 		lblId = new JLabel("ID:");
-		lblId.setBounds(385, 183, 46, 14);
+		lblId.setBounds(385, 210, 46, 14);
 		frame.getContentPane().add(lblId);
 		
 		lblName_1 = new JLabel("Name:");
-		lblName_1.setBounds(385, 213, 46, 14);
+		lblName_1.setBounds(385, 240, 46, 14);
 		frame.getContentPane().add(lblName_1);
 		
 		lblUsername_1 = new JLabel("Username:");
-		lblUsername_1.setBounds(385, 243, 70, 14);
+		lblUsername_1.setBounds(385, 270, 70, 14);
 		frame.getContentPane().add(lblUsername_1);
 		
 		lblDob_1 = new JLabel("DOB:");
-		lblDob_1.setBounds(385, 273, 46, 14);
+		lblDob_1.setBounds(385, 300, 46, 14);
 		frame.getContentPane().add(lblDob_1);
 		
 		lblSalary_1 = new JLabel("Salary:");
-		lblSalary_1.setBounds(385, 303, 46, 14);
+		lblSalary_1.setBounds(385, 330, 46, 14);
 		frame.getContentPane().add(lblSalary_1);
 		
 		lblRoleid = new JLabel("RoleID:");
-		lblRoleid.setBounds(385, 333, 46, 14);
+		lblRoleid.setBounds(385, 360, 46, 14);
 		frame.getContentPane().add(lblRoleid);
 		
 		updateUsername = new JTextField();
-		updateUsername.setBounds(460, 241, 160, 20);
+		updateUsername.setBounds(460, 268, 160, 20);
 		frame.getContentPane().add(updateUsername);
 		updateUsername.setColumns(10);
 		
 		updateName = new JTextField();
-		updateName.setBounds(460, 211, 160, 20);
+		updateName.setBounds(460, 238, 160, 20);
 		frame.getContentPane().add(updateName);
 		updateName.setColumns(10);
 		
 		updateID = new JTextField();
-		updateID.setBounds(460, 181, 160, 20);
+		updateID.setBounds(460, 208, 160, 20);
 		frame.getContentPane().add(updateID);
 		updateID.setColumns(10);
 		
 		updateSalary = new JTextField();
-		updateSalary.setBounds(460, 301, 160, 20);
+		updateSalary.setBounds(460, 328, 160, 20);
 		frame.getContentPane().add(updateSalary);
 		updateSalary.setColumns(10);
 		
 		updateRoleID = new JTextField();
-		updateRoleID.setBounds(460, 331, 160, 20);
+		updateRoleID.setBounds(460, 358, 160, 20);
 		frame.getContentPane().add(updateRoleID);
 		updateRoleID.setColumns(10);
 		
 		btnUpdate = new JButton("UPDATE");
-		btnUpdate.setBounds(531, 364, 89, 23);
+		btnUpdate.setBounds(531, 391, 89, 23);
 		frame.getContentPane().add(btnUpdate);
 		
 		lblResetfire = new JLabel("RESET PASSWORD");
 		lblResetfire.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblResetfire.setBounds(12, 400, 180, 14);
+		lblResetfire.setBounds(12, 427, 180, 14);
 		frame.getContentPane().add(lblResetfire);
 		
 		lblId_1 = new JLabel("ID:");
-		lblId_1.setBounds(55, 429, 46, 14);
+		lblId_1.setBounds(55, 456, 46, 14);
 		frame.getContentPane().add(lblId_1);
 		
 		resetID = new JTextField();
-		resetID.setBounds(130, 427, 160, 20);
+		resetID.setBounds(130, 454, 160, 20);
 		frame.getContentPane().add(resetID);
 		resetID.setColumns(10);
 		
 		btnReset = new JButton("RESET");
-		btnReset.setBounds(201, 460, 89, 23);
+		btnReset.setBounds(201, 487, 89, 23);
 		frame.getContentPane().add(btnReset);
 		
 		lblFire = new JLabel("FIRE");
 		lblFire.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFire.setBounds(350, 400, 95, 14);
+		lblFire.setBounds(350, 427, 95, 14);
 		frame.getContentPane().add(lblFire);
 		
 		lbId_2 = new JLabel("ID:");
-		lbId_2.setBounds(385, 429, 46, 14);
+		lbId_2.setBounds(385, 456, 46, 14);
 		frame.getContentPane().add(lbId_2);
 		
 		fireID = new JTextField();
-		fireID.setBounds(460, 426, 160, 20);
+		fireID.setBounds(460, 453, 160, 20);
 		frame.getContentPane().add(fireID);
 		fireID.setColumns(10);
 		
 		btnFire = new JButton("FIRE");
-		btnFire.setBounds(531, 460, 89, 23);
+		btnFire.setBounds(531, 487, 89, 23);
 		frame.getContentPane().add(btnFire);
 		
 		insertDOB = new JDateChooser();
-		insertDOB.setBounds(130, 271, 160, 22);
+		insertDOB.setBounds(130, 298, 160, 22);
 		frame.getContentPane().add(insertDOB);
 		
 		updateDOB = new JDateChooser();
-		updateDOB.setBounds(460, 271, 160, 22);
+		updateDOB.setBounds(460, 298, 160, 22);
 		frame.getContentPane().add(updateDOB);
+		
+		btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(560, 143, 80, 25);
+		frame.getContentPane().add(btnRefresh);
 	}
 	
 	void table(){
@@ -279,38 +281,97 @@ public class ViewHRM implements ActionListener{
 		btnUpdate.addActionListener(this);
 		btnReset.addActionListener(this);
 		btnFire.addActionListener(this);
+		btnRefresh.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(btnInsert)){
-			int RoleID = Integer.parseInt(insertRoleID.getText());
+			
+			int RoleID=0;
+			int Salary=0;
+			
+			try {
+				RoleID = Integer.parseInt(insertRoleID.getText());
+			} catch (Exception e2) {
+				RoleID = 0;
+			}
+			try {
+				Salary = Integer.parseInt(insertSalary.getText());
+			} catch (Exception e2) {
+				Salary = 0;
+			}
 			String Name = insertName.getText();
 			String Username = insertUsername.getText();
 			Date date = insertDOB.getDate();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-mm");  
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);  
-			int Salary = Integer.parseInt(insertSalary.getText());
-			HRMController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);;
 			
+			try {
+				HRMController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} else if(e.getSource().equals(btnUpdate)){
-			int employeeID = Integer.parseInt(updateID.getText());
-			int RoleID = Integer.parseInt(updateRoleID.getText());
+			
+			int RoleID=0;
+			int Salary=0;
+			int employeeID=-1;
+			
+			try {
+				RoleID = Integer.parseInt(updateRoleID.getText());
+			} catch (Exception e2) {
+				RoleID = 0;
+			}
+			try {
+				Salary = Integer.parseInt(updateSalary.getText());
+			} catch (Exception e2) {
+				Salary = 0;
+			}
+			try {
+				employeeID = Integer.parseInt(updateID.getText());
+			} catch (Exception e2) {
+				employeeID=-1;
+			}
+			
 			String Name = updateName.getText();
 			String Username = updateUsername.getText();
-			int Salary = Integer.parseInt(updateSalary.getText());
 			Date date = updateDOB.getDate();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-mm");  
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);
-			HRMController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
+            
+			try {
+				HRMController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		} else if(e.getSource().equals(btnReset)){
-			int employeeID = Integer.parseInt(resetID.getText());
+			int employeeID=-1;
+			
+			try {
+				employeeID = Integer.parseInt(resetID.getText());
+			} catch (Exception e2) {
+				employeeID=-1;
+			}
+			
 			HRMController.getInstance().resetPassword(employeeID);
 		} else if(e.getSource().equals(btnFire)){
-			int employeeID = Integer.parseInt(fireID.getText());
+			int employeeID=-1;
+			
+			try {
+				employeeID = Integer.parseInt(fireID.getText());
+			} catch (Exception e2) {
+				employeeID=-1;
+			}
+			
 			HRMController.getInstance().fireEmployee(employeeID);
+		} else if(e.getSource().equals(btnRefresh)) {
+			frame.dispose();
+			new ViewHRM();
 		}
 	}
 }

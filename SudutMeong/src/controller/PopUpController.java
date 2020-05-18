@@ -1,6 +1,15 @@
 package controller;
 
+import view.DateMustLess;
+import view.FireSuccess;
+import view.IDNotFound;
+import view.InsertSuccess;
+import view.NotValidRole;
+import view.ResetSuccess;
+import view.SalaryMustMore;
+import view.UpdateSuccess;
 import view.UsernameNotFound;
+import view.UsernameUsed;
 import view.WrongPassword;
 
 public class PopUpController {
@@ -26,4 +35,41 @@ public class PopUpController {
 	public UsernameNotFound usernamenotfound() {
 		return new UsernameNotFound();
 	}
+	
+	public InsertSuccess insertsuccess() {
+		return new InsertSuccess();
+	}
+	
+	public UpdateSuccess updatesuccess() {
+		return new UpdateSuccess();
+	}
+	
+	public ResetSuccess resetpasssuccess() {
+		return new ResetSuccess();
+	}
+	
+	public UsernameUsed usernameused() {
+		return new UsernameUsed();
+	}
+	
+	public FireSuccess fired() {
+		return new FireSuccess();
+	}
+	
+	public NotValidRole notvalidrole() {
+		return new NotValidRole();
+	}
+	
+	public DateMustLess mustlessdate() {
+		return new DateMustLess();
+	}
+	
+	public SalaryMustMore mustmoresalary() {
+		return new SalaryMustMore();
+	}
+	
+	public IDNotFound idnotfound() {
+		return new IDNotFound();
+	}
+	
 }
