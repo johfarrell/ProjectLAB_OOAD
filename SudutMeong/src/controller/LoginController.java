@@ -25,7 +25,7 @@ public class LoginController {
 		return new Login();
 	}
 
-	public Vector<EmployeeModel> getAllProduct(){
+	public Vector<EmployeeModel> getAllEmployee(){
 		return employee.getAllEmployee();
 	}
 	

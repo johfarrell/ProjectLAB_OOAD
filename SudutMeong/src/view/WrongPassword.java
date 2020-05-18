@@ -35,7 +35,7 @@ public class WrongPassword {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Wrong Password!");
-		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setForeground(new Color(139, 0, 0));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(12, 30, 258, 16);
