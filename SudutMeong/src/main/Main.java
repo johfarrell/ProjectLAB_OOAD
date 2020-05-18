@@ -2,7 +2,7 @@ package main;
 
 import controller.HRMController;
 import controller.LoginController;
-import view.Login;
+import controller.PMController;
 
 public class Main {
 

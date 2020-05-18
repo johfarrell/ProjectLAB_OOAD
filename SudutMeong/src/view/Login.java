@@ -7,6 +7,7 @@ import javax.swing.SwingConstants;
 
 import controller.HRMController;
 import controller.LoginController;
+import controller.PMController;
 import controller.PopUpController;
 import model.EmployeeModel;
 
@@ -98,7 +99,8 @@ public class Login {
 							
 						}else if(emplo.getRoleid() == 3) {
 							System.out.println("Anda adalah Promo Manager");
-							//Lempar ke View PromoManager
+							frame.dispose();
+							PMController.getInstance().view();
 							
 						}else if(emplo.getRoleid() == 4) {
 							System.out.println("Anda adalah Master Manager");

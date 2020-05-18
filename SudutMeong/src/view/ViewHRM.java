@@ -2,12 +2,10 @@ package view;
 
 import java.util.Date;
 import java.util.Vector;
-
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import controller.HRMController;
 import model.EmployeeModel;
 import javax.swing.JLabel;
@@ -21,9 +19,9 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 
 public class ViewHRM implements ActionListener{
-
-	private JFrame frame;
+	
 	private DefaultTableModel dtm;
+	private JFrame frame;
 	private JTable table;
 	private JLabel lblInsert;
 	private JLabel lblRole;
@@ -84,7 +82,7 @@ public class ViewHRM implements ActionListener{
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 13, 628, 128);
+		scrollPane.setBounds(12, 11, 632, 130);
 		frame.getContentPane().add(scrollPane);
 	
 		scrollPane.setViewportView(table);
@@ -289,7 +287,7 @@ public class ViewHRM implements ActionListener{
 			String Name = insertName.getText();
 			String Username = insertUsername.getText();
 			Date date = insertDOB.getDate();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-mm");  
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);  
 			int Salary = Integer.parseInt(insertSalary.getText());
 			HRMController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);;
@@ -300,14 +298,15 @@ public class ViewHRM implements ActionListener{
 			String Name = updateName.getText();
 			String Username = updateUsername.getText();
 			int Salary = Integer.parseInt(updateSalary.getText());
-			Date date = updateDOB.getDate();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-mm");  
+			Date date = insertDOB.getDate();  
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);
 			HRMController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
 			
 		} else if(e.getSource().equals(btnReset)){
 			int employeeID = Integer.parseInt(resetID.getText());
 			HRMController.getInstance().resetPassword(employeeID);
+			
 		} else if(e.getSource().equals(btnFire)){
 			int employeeID = Integer.parseInt(fireID.getText());
 			HRMController.getInstance().fireEmployee(employeeID);
