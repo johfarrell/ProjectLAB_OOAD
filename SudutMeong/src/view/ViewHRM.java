@@ -287,19 +287,21 @@ public class ViewHRM implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(btnInsert)){
 
-			int RoleID=0;
-			int Salary=0;
+			Integer RoleID=0;
+			Integer Salary=0;
 
 			try {
 				RoleID = Integer.parseInt(insertRoleID.getText());
 			} catch (Exception e2) {
 				RoleID = 0;
 			}
+			
 			try {
 				Salary = Integer.parseInt(insertSalary.getText());
 			} catch (Exception e2) {
 				Salary = 0;
 			}
+			
 			String Name = insertName.getText();
 			String Username = insertUsername.getText();
 			Date date = insertDOB.getDate();
@@ -314,20 +316,22 @@ public class ViewHRM implements ActionListener{
 			}
 		} else if(e.getSource().equals(btnUpdate)){
 
-			int RoleID=0;
-			int Salary=0;
-			int employeeID=-1;
+			Integer RoleID=0;
+			Integer Salary=0;
+			Integer employeeID=-1;
 
 			try {
 				RoleID = Integer.parseInt(updateRoleID.getText());
 			} catch (Exception e2) {
 				RoleID = 0;
 			}
+			
 			try {
 				Salary = Integer.parseInt(updateSalary.getText());
 			} catch (Exception e2) {
 				Salary = 0;
 			}
+			
 			try {
 				employeeID = Integer.parseInt(updateID.getText());
 			} catch (Exception e2) {
@@ -348,7 +352,7 @@ public class ViewHRM implements ActionListener{
 			}
 
 		} else if(e.getSource().equals(btnReset)){
-			int employeeID=-1;
+			Integer employeeID=-1;
 
 			try {
 				employeeID = Integer.parseInt(resetID.getText());
@@ -359,7 +363,7 @@ public class ViewHRM implements ActionListener{
 			HRMController.getInstance().resetPassword(employeeID);
 
 		} else if(e.getSource().equals(btnFire)){
-			int employeeID=-1;
+			Integer employeeID=-1;
 
 			try {
 				employeeID = Integer.parseInt(fireID.getText());

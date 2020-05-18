@@ -54,7 +54,7 @@ public class HRMController {
 
     }
 	
-	public void addEmployee(int RoleID, String Name, String Username, String DOB, int Salary) throws ParseException{
+	public void addEmployee(Integer RoleID, String Name, String Username, String DOB, Integer Salary) throws ParseException{
 		
 		Vector<String> checkUsername = new Vector<String>();
 		checkUsername = HRMController.getInstance().getAllUsername();
@@ -83,7 +83,7 @@ public class HRMController {
 		}
 	}
 	
-	public void updateEmployee(int employeeID, int RoleID, String Name, String Username, String DOB, int Salary) throws ParseException{
+	public void updateEmployee(Integer employeeID, Integer RoleID, String Name, String Username, String DOB, Integer Salary) throws ParseException{
 		
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
 		checkSize = HRMController.getInstance().getAllEmployee();
@@ -94,7 +94,7 @@ public class HRMController {
 		Date today = new Date();
 		Date today_withouttime = formatter.parse(formatter.format(today));
         
-		if(employeeID < checkSize.size() || employeeID > checkSize.size()) {
+		if((employeeID<0) || (employeeID>checkSize.size())) {
 			PopUpController.getInstance().idnotfound();
 		}else {
 			Vector<String> checkUsername = new Vector<String>();
@@ -117,11 +117,11 @@ public class HRMController {
 		
 	}
 	
-	public void resetPassword(int employeeID){
+	public void resetPassword(Integer employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
 		checkSize = HRMController.getInstance().getAllEmployee();
 		
-		if(employeeID < checkSize.size() || employeeID > checkSize.size()) {
+		if((employeeID<0) || (employeeID>checkSize.size())) {
 			PopUpController.getInstance().idnotfound();
 		}else{
 			String password = getPassword();
@@ -130,13 +130,15 @@ public class HRMController {
 		}
 	}
 	
-	public void fireEmployee(int employeeID){
+	public void fireEmployee(Integer employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
 		checkSize = HRMController.getInstance().getAllEmployee();
 		
-		if(employeeID < checkSize.size() || employeeID > checkSize.size()) {
+		System.out.println(employeeID + ", size:" + checkSize.size());
+		
+		if((employeeID<0) || (employeeID>checkSize.size())) {
 			PopUpController.getInstance().idnotfound();
-		}else {
+		}else{
 			String status = "Inactive";
 			employee.fireEmployee(employeeID, status);
 			PopUpController.getInstance().fired();
