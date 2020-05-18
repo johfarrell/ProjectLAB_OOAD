@@ -73,7 +73,7 @@ public class Login {
 				String pass = String.copyValueOf(password);		//Password di konversi menjadi string
 				
 				Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
-				employee = LoginController.getInstance().getAllProduct();
+				employee = LoginController.getInstance().getAllEmployee();
 				
 				Vector<String> employeeusername = new Vector<String>();
 				employeeusername = LoginController.getInstance().getAllUsername();

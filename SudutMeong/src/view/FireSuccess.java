@@ -11,15 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class UsernameNotFound {
+public class FireSuccess {
 
 	private JFrame frame;
 
-
+	
 	/**
 	 * Create the application.
 	 */
-	public UsernameNotFound() {
+	public FireSuccess() {
 		initialize();
 		frame.setVisible(true);
 	}
@@ -33,8 +33,8 @@ public class UsernameNotFound {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Username Not Found!");
-		lblNewLabel.setForeground(new Color(139, 0, 0));
+		JLabel lblNewLabel = new JLabel("Employee Fired!");
+		lblNewLabel.setForeground(new Color(46, 139, 87));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(12, 30, 258, 16);

@@ -11,15 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class UsernameNotFound {
+public class SalaryMustMore {
 
 	private JFrame frame;
-
 
 	/**
 	 * Create the application.
 	 */
-	public UsernameNotFound() {
+	public SalaryMustMore() {
 		initialize();
 		frame.setVisible(true);
 	}
@@ -33,7 +32,7 @@ public class UsernameNotFound {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Username Not Found!");
+		JLabel lblNewLabel = new JLabel("Salary must be more than 0!");
 		lblNewLabel.setForeground(new Color(139, 0, 0));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
