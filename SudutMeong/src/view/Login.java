@@ -87,34 +87,36 @@ public class Login {
 					Integer posisi = employeeusername.indexOf(username);  //Cari posisi username
 										
 					if(employeepassword.elementAt(posisi).equals(pass)) { //Cocokin password di posisi index username
-						System.out.println("Login Success");
 						
 						EmployeeModel emplo = employee.elementAt(posisi);
-						
-						if(emplo.getRoleid() == 1) {
-							System.out.println("Anda adalah Human Resource");
-							frame.dispose();
-							HRMController.getInstance().view();
-							
-						}else if(emplo.getRoleid() == 2) {
-							System.out.println("Anda adalah Storage Manager");
-							frame.dispose();
-							SMController.getInstance().view();
-							
-						}else if(emplo.getRoleid() == 3) {
-							System.out.println("Anda adalah Promo Manager");
-							frame.dispose();
-							PMController.getInstance().view();
-							
-						}else if(emplo.getRoleid() == 4) {
-							System.out.println("Anda adalah Master Manager");
-							frame.dispose();
-							MController.getInstance().view();
-							
-						}else if(emplo.getRoleid() == 5) {
-							System.out.println("Anda adalah Cashier");
-							//Lempar ke View Cashier
-							
+						if(emplo.getStatus().equals("Inactive")) {
+							PopUpController.getInstance().inactive();
+						}else if(emplo.getStatus().equals("Active")){
+							if(emplo.getRoleid() == 1) {
+								System.out.println("Anda adalah Human Resource");
+								frame.dispose();
+								HRMController.getInstance().view();
+								
+							}else if(emplo.getRoleid() == 2) {
+								System.out.println("Anda adalah Storage Manager");
+								frame.dispose();
+								SMController.getInstance().view();
+								
+							}else if(emplo.getRoleid() == 3) {
+								System.out.println("Anda adalah Promo Manager");
+								frame.dispose();
+								PMController.getInstance().view();
+								
+							}else if(emplo.getRoleid() == 4) {
+								System.out.println("Anda adalah Master Manager");
+								frame.dispose();
+								MController.getInstance().view();
+								
+							}else if(emplo.getRoleid() == 5) {
+								System.out.println("Anda adalah Cashier");
+								//Lempar ke View Cashier
+								
+							}
 						}
 					}else{
 						PopUpController.getInstance().wrongpass();

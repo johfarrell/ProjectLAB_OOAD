@@ -3,6 +3,7 @@ package controller;
 import view.DateMustLess;
 import view.FireSuccess;
 import view.IDNotFound;
+import view.InactiveEmployee;
 import view.InsertSuccess;
 import view.NotValidRole;
 import view.ResetSuccess;
@@ -34,6 +35,10 @@ public class PopUpController {
 	
 	public UsernameNotFound usernamenotfound() {
 		return new UsernameNotFound();
+	}
+	
+	public InactiveEmployee inactive() {
+		return new InactiveEmployee();
 	}
 	
 	public InsertSuccess insertsuccess() {
