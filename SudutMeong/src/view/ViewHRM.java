@@ -80,7 +80,7 @@ public class ViewHRM implements ActionListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Human Resource Manager");
 		frame.setBounds(100, 100, 670, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -91,7 +91,7 @@ public class ViewHRM implements ActionListener{
 
 		scrollPane.setViewportView(table);
 
-		lblInsert = new JLabel("INSERT");
+		lblInsert = new JLabel("INSERT EMPLOYEE");
 		lblInsert.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblInsert.setBounds(20, 181, 180, 14);
 		frame.getContentPane().add(lblInsert);
@@ -140,9 +140,9 @@ public class ViewHRM implements ActionListener{
 		btnInsert.setBounds(201, 361, 89, 23);
 		frame.getContentPane().add(btnInsert);
 
-		lblUpdate = new JLabel("UPDATE");
+		lblUpdate = new JLabel("UPDATE EMPLOYEE");
 		lblUpdate.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUpdate.setBounds(350, 181, 95, 14);
+		lblUpdate.setBounds(350, 181, 240, 14);
 		frame.getContentPane().add(lblUpdate);
 
 		lblId = new JLabel("ID:");
@@ -216,9 +216,9 @@ public class ViewHRM implements ActionListener{
 		btnReset.setBounds(201, 487, 89, 23);
 		frame.getContentPane().add(btnReset);
 
-		lblFire = new JLabel("FIRE");
+		lblFire = new JLabel("FIRE EMPLOYEE");
 		lblFire.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFire.setBounds(350, 427, 95, 14);
+		lblFire.setBounds(350, 427, 240, 14);
 		frame.getContentPane().add(lblFire);
 
 		lbId_2 = new JLabel("ID:");

@@ -25,19 +25,28 @@ public class MController {
 		return new ViewM();
 	}
 	
-	/*public Vector<TransactionModel> getAllTransaction(){
-		int month = 5;
-		int year = 2020;
-		return transaction.getAllTransaction(month, year);
-	}*/
-	
 	public Vector<EmployeeModel> getAllEmployee(){
 		return employee.getAllEmployee();
 	}
 	
-	public Vector<TransactionModel> getAllTransaction(){
-		return transaction.getAllTransaction();
+	public Vector<TransactionModel> getAllTransaction(String Month, String Year){
+		return transaction.getAllTransaction(Month, Year);
 	}
+	
+	/*public void selectTransaction(String Month, String Year){
+		
+		Vector<TransactionModel> viewTransaction = new Vector<TransactionModel>();
+		viewTransaction = MController.getInstance().getAllTransaction();
+		
+		if(!viewTransaction.contains(Year + "-" + Month)) {
+			System.out.println("No Transaction"); //CONSOLE
+		} else{
+			String pass = getPassword();
+			String status = "Active";
+			//employee.addEmployee(RoleID, Name, Username, DOB, Salary, status, pass);;
+			System.out.println("Transaction Exist"); //CONSOLE
+		}
+	}*/
 	
 	protected String getPassword() {//BELOM DIUBAH
         String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";

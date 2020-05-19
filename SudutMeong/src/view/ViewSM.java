@@ -80,7 +80,7 @@ public class ViewSM implements ActionListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Storage Manager");
 		frame.setBounds(100, 100, 670, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -93,42 +93,42 @@ public class ViewSM implements ActionListener{
 		
 		JLabel lblUpdateProduct = new JLabel("UPDATE PRODUCT");
 		lblUpdateProduct.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUpdateProduct.setBounds(330, 205, 182, 14);
+		lblUpdateProduct.setBounds(370, 206, 182, 14);
 		frame.getContentPane().add(lblUpdateProduct);
 		
 		JLabel lblId = new JLabel("ID:");
-		lblId.setBounds(330, 230, 46, 14);
+		lblId.setBounds(370, 231, 46, 14);
 		frame.getContentPane().add(lblId);
 		
 		JLabel lblName_1 = new JLabel("Name:");
-		lblName_1.setBounds(330, 258, 46, 14);
+		lblName_1.setBounds(370, 259, 46, 14);
 		frame.getContentPane().add(lblName_1);
 		
 		JLabel lblDescription_1 = new JLabel("Description:");
-		lblDescription_1.setBounds(330, 289, 78, 14);
+		lblDescription_1.setBounds(370, 290, 78, 14);
 		frame.getContentPane().add(lblDescription_1);
 		
 		JLabel lblPrice_1 = new JLabel("Price:");
-		lblPrice_1.setBounds(330, 319, 46, 14);
+		lblPrice_1.setBounds(370, 320, 46, 14);
 		frame.getContentPane().add(lblPrice_1);
 		
 		updateID = new JTextField();
-		updateID.setBounds(405, 227, 160, 20);
+		updateID.setBounds(445, 228, 160, 20);
 		frame.getContentPane().add(updateID);
 		updateID.setColumns(10);
 		
 		updateName = new JTextField();
-		updateName.setBounds(405, 255, 160, 20);
+		updateName.setBounds(445, 256, 160, 20);
 		frame.getContentPane().add(updateName);
 		updateName.setColumns(10);
 		
 		updateDescription = new JTextField();
-		updateDescription.setBounds(405, 286, 160, 20);
+		updateDescription.setBounds(445, 287, 160, 20);
 		frame.getContentPane().add(updateDescription);
 		updateDescription.setColumns(10);
 		
 		updatePrice = new JTextField();
-		updatePrice.setBounds(405, 316, 160, 20);
+		updatePrice.setBounds(445, 317, 160, 20);
 		frame.getContentPane().add(updatePrice);
 		updatePrice.setColumns(10);
 		
@@ -137,25 +137,25 @@ public class ViewSM implements ActionListener{
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnUpdate.setBounds(476, 347, 89, 23);
+		btnUpdate.setBounds(516, 348, 89, 23);
 		frame.getContentPane().add(btnUpdate);
 		
 		JLabel lblDeleteProduct = new JLabel("DELETE PRODUCT");
 		lblDeleteProduct.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDeleteProduct.setBounds(75, 416, 151, 14);
+		lblDeleteProduct.setBounds(50, 414, 151, 14);
 		frame.getContentPane().add(lblDeleteProduct);
 		
 		JLabel lblId_1 = new JLabel("ID:");
-		lblId_1.setBounds(75, 441, 46, 14);
+		lblId_1.setBounds(50, 439, 46, 14);
 		frame.getContentPane().add(lblId_1);
 		
 		deleteID = new JTextField();
-		deleteID.setBounds(102, 438, 160, 20);
+		deleteID.setBounds(121, 439, 160, 20);
 		frame.getContentPane().add(deleteID);
 		deleteID.setColumns(10);
 		
 		btnDelete = new JButton("DELETE");
-		btnDelete.setBounds(173, 465, 89, 23);
+		btnDelete.setBounds(192, 470, 89, 23);
 		frame.getContentPane().add(btnDelete);
 		
 		btnRefresh = new JButton("Refresh");
@@ -164,47 +164,47 @@ public class ViewSM implements ActionListener{
 		
 		lblInsertProduct = new JLabel("INSERT PRODUCT");
 		lblInsertProduct.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblInsertProduct.setBounds(63, 207, 163, 14);
+		lblInsertProduct.setBounds(50, 206, 163, 14);
 		frame.getContentPane().add(lblInsertProduct);
 		
 		lblNewLabel = new JLabel("Name:");
-		lblNewLabel.setBounds(63, 230, 46, 14);
+		lblNewLabel.setBounds(50, 229, 46, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		lblDescription = new JLabel("Description:");
-		lblDescription.setBounds(63, 258, 72, 14);
+		lblDescription.setBounds(50, 257, 72, 14);
 		frame.getContentPane().add(lblDescription);
 		
 		lblPrice = new JLabel("Price:");
-		lblPrice.setBounds(63, 289, 72, 14);
+		lblPrice.setBounds(50, 288, 72, 14);
 		frame.getContentPane().add(lblPrice);
 		
 		lblStock = new JLabel("Stock:");
-		lblStock.setBounds(63, 319, 46, 14);
+		lblStock.setBounds(50, 318, 46, 14);
 		frame.getContentPane().add(lblStock);
 		
 		insertName = new JTextField();
-		insertName.setBounds(134, 227, 160, 20);
+		insertName.setBounds(121, 226, 160, 20);
 		frame.getContentPane().add(insertName);
 		insertName.setColumns(10);
 		
 		insertDescription = new JTextField();
-		insertDescription.setBounds(134, 255, 160, 20);
+		insertDescription.setBounds(121, 254, 160, 20);
 		frame.getContentPane().add(insertDescription);
 		insertDescription.setColumns(10);
 		
 		insertPrice = new JTextField();
-		insertPrice.setBounds(134, 286, 160, 20);
+		insertPrice.setBounds(121, 285, 160, 20);
 		frame.getContentPane().add(insertPrice);
 		insertPrice.setColumns(10);
 		
 		insertStock = new JTextField();
-		insertStock.setBounds(134, 316, 160, 20);
+		insertStock.setBounds(121, 315, 160, 20);
 		frame.getContentPane().add(insertStock);
 		insertStock.setColumns(10);
 		
 		btnInsert = new JButton("INSERT");
-		btnInsert.setBounds(205, 347, 89, 23);
+		btnInsert.setBounds(192, 346, 89, 23);
 		frame.getContentPane().add(btnInsert);
 	}
 	

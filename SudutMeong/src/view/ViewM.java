@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Vector;
 
@@ -25,13 +26,13 @@ import controller.HRMController;
 import controller.MController;
 import model.EmployeeModel;
 import model.TransactionModel;
+import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JYearChooser;
 
 public class ViewM implements ActionListener{
 	
 	private DefaultTableModel dtm;
 	private JFrame frame;
-	private JTextField viewMonth;
-	private JTextField viewYear;
 	private JButton btnSearch;
 	private JTextField insertRoleID;
 	private JTextField insertName;
@@ -52,6 +53,11 @@ public class ViewM implements ActionListener{
 	private JButton btnRefresh2;
 	private JTable table;
 	private JTable table_1;
+	private JMonthChooser searchMonth;
+	private JYearChooser searchYear;
+	
+	public static String Month;
+	public static String Year;
 
 	/**
 	 * Launch the application.
@@ -72,7 +78,7 @@ public class ViewM implements ActionListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Manager");
 		frame.setBounds(100, 100, 665, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -85,29 +91,15 @@ public class ViewM implements ActionListener{
 		
 		JLabel lblNewLabel = new JLabel("Search Transaction Report");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(40, 185, 217, 14);
+		lblNewLabel.setBounds(40, 163, 217, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblMonth = new JLabel("Month:");
-		lblMonth.setBounds(40, 207, 46, 14);
+		lblMonth.setBounds(40, 212, 46, 14);
 		frame.getContentPane().add(lblMonth);
 		
-		viewMonth = new JTextField();
-		viewMonth.setBounds(96, 204, 160, 20);
-		frame.getContentPane().add(viewMonth);
-		viewMonth.setColumns(10);
-		
-		JLabel lblYear = new JLabel("Year:");
-		lblYear.setBounds(286, 207, 46, 14);
-		frame.getContentPane().add(lblYear);
-		
-		viewYear = new JTextField();
-		viewYear.setBounds(326, 204, 160, 20);
-		frame.getContentPane().add(viewYear);
-		viewYear.setColumns(10);
-		
 		btnSearch = new JButton("SEARCH");
-		btnSearch.setBounds(537, 203, 89, 23);
+		btnSearch.setBounds(326, 208, 89, 23);
 		frame.getContentPane().add(btnSearch);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -249,13 +241,21 @@ public class ViewM implements ActionListener{
 		btnFire.setBounds(176, 757, 89, 23);
 		frame.getContentPane().add(btnFire);
 		
-		btnRefresh = new JButton("REFRESH");
+		btnRefresh = new JButton("Refresh");
 		btnRefresh.setBounds(555, 152, 80, 25);
 		frame.getContentPane().add(btnRefresh);
 		
-		btnRefresh2 = new JButton("REFRESH");
+		btnRefresh2 = new JButton("Refresh");
 		btnRefresh2.setBounds(555, 404, 80, 25);
 		frame.getContentPane().add(btnRefresh2);
+		
+		searchMonth = new JMonthChooser();
+		searchMonth.setBounds(85, 210, 120, 20);
+		frame.getContentPane().add(searchMonth);
+		
+		searchYear = new JYearChooser();
+		searchYear.setBounds(215, 210, 80, 20);
+		frame.getContentPane().add(searchYear);
 	}
 	
 	void table(){
@@ -266,7 +266,7 @@ public class ViewM implements ActionListener{
 		header.add("EmployeeID");
 		header.add("PaymentType");
 		Vector<TransactionModel> transaction = new Vector<TransactionModel>();
-		transaction = MController.getInstance().getAllTransaction();
+		transaction = MController.getInstance().getAllTransaction(Month, Year);
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
@@ -311,6 +311,7 @@ public class ViewM implements ActionListener{
 	}
 
 	void addlistener(){
+		btnSearch.addActionListener(this);
 		btnInsert.addActionListener(this);
 		btnUpdate.addActionListener(this);
 		btnFire.addActionListener(this);
@@ -345,7 +346,20 @@ public class ViewM implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource().equals(btnInsert)){
+		if(e.getSource().equals(btnSearch)){
+			Integer getMonth = searchMonth.getMonth()+1;  
+			Integer getYear = searchYear.getYear();  
+			Month = getMonth.toString();
+			Year = getYear.toString();
+			
+			//CONSOLE CHECK
+			System.out.println(getMonth);
+			System.out.println(getYear);
+			
+			System.out.println(Month);
+			System.out.println(Year);
+			
+		} else if(e.getSource().equals(btnInsert)){
 			Integer RoleID = Integer.parseInt(insertRoleID.getText());
 			String Name = insertName.getText();
 			String Username = insertUsername.getText();
@@ -353,7 +367,7 @@ public class ViewM implements ActionListener{
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);  
 			Integer Salary = Integer.parseInt(insertSalary.getText());
-			MController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);;
+			MController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
 			
 		} else if(e.getSource().equals(btnUpdate)){
 			Integer employeeID = Integer.parseInt(updateID.getText());
@@ -370,6 +384,10 @@ public class ViewM implements ActionListener{
 			Integer employeeID = Integer.parseInt(fireID.getText());
 			MController.getInstance().fireEmployee(employeeID);
 			
+		} else if(e.getSource().equals(btnRefresh)) {
+			   frame.dispose();
+			   new ViewM();
+			   
 		} else if(e.getSource().equals(btnRefresh2)) {
 			   frame.dispose();
 			   new ViewM();

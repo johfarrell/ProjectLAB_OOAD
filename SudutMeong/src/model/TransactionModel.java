@@ -29,14 +29,13 @@ public class TransactionModel {
 		this.PaymentType=paymenttype;
 	}
 	
-	/*public Vector<TransactionModel> getAllTransaction(Integer Month, Integer Year){
+	public Vector<TransactionModel> getAllTransaction(String Month, String Year){
 		con = Connect.getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM 'transaction' WHERE 'MONTH(purchase_datetime) = 5'  AND 'YEAR(purchase_datetime) = 2020'");
+		String Query = "SELECT * FROM transaction WHERE MONTH(purchase_datetime) = " + Month + " AND YEAR(purchase_datetime) = " + Year;
+		PreparedStatement ps = con.prepareStatement(Query);
 		Vector<TransactionModel> em = new Vector<TransactionModel>();
 		index = 1;
 		try {
-			ps.setInt(1, Month);
-			ps.setInt(1, Year);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				em.add(new TransactionModel(rs.getInt("transactionID"), rs.getString("purchase_datetime"), rs.getInt("voucherID"), 
@@ -47,9 +46,9 @@ public class TransactionModel {
 			
 		}
 		return em;
-	}*/
+	}
 	
-	public Vector<TransactionModel> getAllTransaction(){
+	/*public Vector<TransactionModel> getAllTransaction(){
 		con = Connect.getConnection();
 		//ResultSet rs = con.executeQuery("SELECT * FROM transaction WHERE MONTH(purchase_datetime) = 5  AND YEAR(purchase_datetime) = 2020");
 		ResultSet rs = con.executeQuery("SELECT * FROM transaction");
@@ -65,7 +64,7 @@ public class TransactionModel {
 			
 		}
 		return em;
-	}
+	}*/
 
 	public Integer getTransactionID() {
 		return TransactionID;
