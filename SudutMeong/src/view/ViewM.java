@@ -320,28 +320,28 @@ public class ViewM implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(btnInsert)){
-			int RoleID = Integer.parseInt(insertRoleID.getText());
+			Integer RoleID = Integer.parseInt(insertRoleID.getText());
 			String Name = insertName.getText();
 			String Username = insertUsername.getText();
 			Date date = insertDOB.getDate();  
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);  
-			int Salary = Integer.parseInt(insertSalary.getText());
+			Integer Salary = Integer.parseInt(insertSalary.getText());
 			MController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);;
 			
 		} else if(e.getSource().equals(btnUpdate)){
-			int employeeID = Integer.parseInt(updateID.getText());
-			int RoleID = Integer.parseInt(updateRoleID.getText());
+			Integer employeeID = Integer.parseInt(updateID.getText());
+			Integer RoleID = Integer.parseInt(updateRoleID.getText());
 			String Name = updateName.getText();
 			String Username = updateUsername.getText();
-			int Salary = Integer.parseInt(updateSalary.getText());
+			Integer Salary = Integer.parseInt(updateSalary.getText());
 			Date date = updateDOB.getDate();  
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String DOB = dateFormat.format(date);
 			MController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
 			
 		} else if(e.getSource().equals(btnFire)){
-			int employeeID = Integer.parseInt(fireID.getText());
+			Integer employeeID = Integer.parseInt(fireID.getText());
 			MController.getInstance().fireEmployee(employeeID);
 			
 		} else if(e.getSource().equals(btnRefresh2)) {

@@ -38,12 +38,12 @@ public class PMController {
 		//}
 	}
 	
-	public void updateVoucher(int VoucherID, float Discount, String ValidDate){	
+	public void updateVoucher(Integer VoucherID, float Discount, String ValidDate){	
 		voucher.updateVoucher(VoucherID, Discount, ValidDate);
 		System.out.println("Update Success"); //CONSOLE
 	}
 	
-	public void deleteVoucher(int VoucherID){	
+	public void deleteVoucher(Integer VoucherID){	
 		voucher.deleteVoucher(VoucherID);
 		System.out.println("Delete Success"); //CONSOLE
 	}
