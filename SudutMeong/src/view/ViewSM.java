@@ -18,6 +18,8 @@ import model.ProductModel;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,7 +81,7 @@ public class ViewSM implements ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 670, 570);
+		frame.setBounds(100, 100, 670, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -156,8 +158,8 @@ public class ViewSM implements ActionListener{
 		btnDelete.setBounds(173, 465, 89, 23);
 		frame.getContentPane().add(btnDelete);
 		
-		btnRefresh = new JButton("REFRESH");
-		btnRefresh.setBounds(555, 152, 89, 23);
+		btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(560, 143, 80, 25);
 		frame.getContentPane().add(btnRefresh);
 		
 		lblInsertProduct = new JLabel("INSERT PRODUCT");
@@ -234,6 +236,29 @@ public class ViewSM implements ActionListener{
 		btnUpdate.addActionListener(this);
 		btnDelete.addActionListener(this);
 		btnRefresh.addActionListener(this);
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table.getSelectedRow();
+				Integer ID = (Integer)table.getValueAt(row, 0);
+				String Name = (String)table.getValueAt(row, 1);
+				String Description = (String)table.getValueAt(row, 2);
+				Integer Price = (Integer)table.getValueAt(row, 3);
+				//String ValidDate = (String)table.getValueAt(row, 2);
+
+				updateID.setText(ID+"");
+				updateName.setText(Name+"");
+				updateDescription.setText(Description+"");
+				updatePrice.setText(Price+"");
+				//updateDate.setText(ValidDate);
+				//updateDate.setDate(DOB);
+				
+				deleteID.setText(ID+"");
+				
+			}
+		});
 	}
 
 	@Override

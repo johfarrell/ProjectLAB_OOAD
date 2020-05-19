@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -248,11 +250,11 @@ public class ViewM implements ActionListener{
 		frame.getContentPane().add(btnFire);
 		
 		btnRefresh = new JButton("REFRESH");
-		btnRefresh.setBounds(555, 152, 89, 23);
+		btnRefresh.setBounds(555, 152, 80, 25);
 		frame.getContentPane().add(btnRefresh);
 		
 		btnRefresh2 = new JButton("REFRESH");
-		btnRefresh2.setBounds(555, 404, 89, 23);
+		btnRefresh2.setBounds(555, 404, 80, 25);
 		frame.getContentPane().add(btnRefresh2);
 	}
 	
@@ -314,6 +316,30 @@ public class ViewM implements ActionListener{
 		btnFire.addActionListener(this);
 		btnRefresh.addActionListener(this);
 		btnRefresh2.addActionListener(this);
+		
+		table_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table_1.getSelectedRow();
+				Integer ID = (Integer)table_1.getValueAt(row, 0);
+				Integer RoleID = (Integer)table_1.getValueAt(row, 1);
+				String Name = (String)table_1.getValueAt(row, 2);
+				String Username = (String)table_1.getValueAt(row, 3);
+				//Date DOB = (Date)table_1.getValueAt(row, 4);
+				Integer Salary = (Integer)table_1.getValueAt(row, 5);
+	            
+				updateID.setText(ID+"");
+				updateRoleID.setText(RoleID+"");
+				updateName.setText(Name);
+				updateUsername.setText(Username);
+				//updateDOB.setDate(DOB);
+				updateSalary.setText(Salary+"");
+				
+				fireID.setText(ID+"");
+				
+			}
+		});
 	}
 	
 	@Override

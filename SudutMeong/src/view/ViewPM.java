@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,7 +57,7 @@ public class ViewPM implements ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 670, 570);
+		frame.setBounds(100, 100, 670, 585);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -148,8 +150,8 @@ public class ViewPM implements ActionListener{
 		btnDelete.setBounds(204, 411, 89, 23);
 		frame.getContentPane().add(btnDelete);
 		
-		btnRefresh = new JButton("REFRESH");
-		btnRefresh.setBounds(555, 152, 89, 23);
+		btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(560, 143, 80, 25);
 		frame.getContentPane().add(btnRefresh);
 	}
 	
@@ -177,7 +179,27 @@ public class ViewPM implements ActionListener{
 		btnUpdate.addActionListener(this);
 		btnRefresh.addActionListener(this);
 		btnDelete.addActionListener(this);
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table.getSelectedRow();
+				Integer ID = (Integer)table.getValueAt(row, 0);
+				float Discount = (float)table.getValueAt(row, 1);
+				//String ValidDate = (String)table.getValueAt(row, 2);
+
+				updateID.setText(ID+"");
+				updateDiscount.setText(Discount+"");
+				//updateDate.setText(ValidDate);
+				//updateDate.setDate(DOB);
+				
+				deleteID.setText(ID+"");
+				
+			}
+		});
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

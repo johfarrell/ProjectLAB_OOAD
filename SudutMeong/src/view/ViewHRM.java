@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -280,6 +282,31 @@ public class ViewHRM implements ActionListener{
 		btnReset.addActionListener(this);
 		btnFire.addActionListener(this);
 		btnRefresh.addActionListener(this);
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table.getSelectedRow();
+				Integer ID = (Integer)table.getValueAt(row, 0);
+				Integer RoleID = (Integer)table.getValueAt(row, 1);
+				String Name = (String)table.getValueAt(row, 2);
+				String Username = (String)table.getValueAt(row, 3);
+				//Date DOB = (Date)table.getValueAt(row, 4);
+				Integer Salary = (Integer)table.getValueAt(row, 5);
+	            
+				updateID.setText(ID+"");
+				updateRoleID.setText(RoleID+"");
+				updateName.setText(Name);
+				updateUsername.setText(Username);
+				//updateDOB.setDate(DOB);
+				updateSalary.setText(Salary+"");
+				
+				resetID.setText(ID+"");
+				fireID.setText(ID+"");
+				
+			}
+		});
 	}
 
 	@Override
