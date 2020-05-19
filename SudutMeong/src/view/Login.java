@@ -89,6 +89,7 @@ public class Login {
 					if(employeepassword.elementAt(posisi).equals(pass)) { //Cocokin password di posisi index username
 						
 						EmployeeModel emplo = employee.elementAt(posisi);
+						
 						if(emplo.getStatus().equals("Inactive")) {
 							PopUpController.getInstance().inactive();
 						}else if(emplo.getStatus().equals("Active")){
