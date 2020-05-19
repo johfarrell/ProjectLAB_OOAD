@@ -59,7 +59,6 @@ public class HRMController {
 		Vector<String> checkUsername = new Vector<String>();
 		checkUsername = HRMController.getInstance().getAllUsername();
 		
-		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date DOBEmp = dateFormat.parse(DOB);  
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -133,8 +132,6 @@ public class HRMController {
 	public void fireEmployee(Integer employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
 		checkSize = HRMController.getInstance().getAllEmployee();
-		
-		System.out.println(employeeID + ", size:" + checkSize.size());
 		
 		if((employeeID<0) || (employeeID>checkSize.size())) {
 			PopUpController.getInstance().idnotfound();
