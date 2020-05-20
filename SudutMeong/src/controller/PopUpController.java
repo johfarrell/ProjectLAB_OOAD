@@ -1,10 +1,13 @@
 package controller;
 
 import view.DateMustLess;
+import view.DateMustMore;
+import view.DeleteSuccess;
 import view.FireSuccess;
 import view.IDNotFound;
 import view.InactiveEmployee;
 import view.InsertSuccess;
+import view.NotValidDiscount;
 import view.NotValidRole;
 import view.ResetSuccess;
 import view.SalaryMustMore;
@@ -61,12 +64,24 @@ public class PopUpController {
 		return new FireSuccess();
 	}
 	
+	public DeleteSuccess voucherdel() {
+		return new DeleteSuccess();
+	}
+	
 	public NotValidRole notvalidrole() {
 		return new NotValidRole();
 	}
 	
+	public NotValidDiscount notvaliddisc() {
+		return new NotValidDiscount();
+	}
+	
 	public DateMustLess mustlessdate() {
 		return new DateMustLess();
+	}
+	
+	public DateMustMore mustmoredate() {
+		return new DateMustMore();
 	}
 	
 	public SalaryMustMore mustmoresalary() {

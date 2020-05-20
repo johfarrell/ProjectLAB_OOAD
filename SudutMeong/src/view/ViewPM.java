@@ -212,22 +212,60 @@ public class ViewPM implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnInsert)){
-			Float Discount = Float.parseFloat(insertDiscount.getText());
+			
+			Float Discount = 0.0f;
+			
+			try {
+				Discount = Float.parseFloat(insertDiscount.getText());
+			} catch (Exception e2) {
+				Discount = 0.0f;
+			}
+			
 			Date date = insertValidDate.getDate();  
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String ValidDate = dateFormat.format(date);
-			PMController.getInstance().addVoucher(Discount, ValidDate);
+			try {
+				PMController.getInstance().addVoucher(Discount, ValidDate);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		} else if(e.getSource().equals(btnUpdate)){
-			Integer VoucherID = Integer.parseInt(updateID.getText());
-			Float Discount = Float.parseFloat(updateDiscount.getText());
+			
+			Float Discount = 0.0f;
+			Integer VoucherID=0;
+			
+			
+			try {
+				Discount = Float.parseFloat(updateDiscount.getText());
+			} catch (Exception e2) {
+				Discount = 0.0f;
+			}
+			try {
+				VoucherID = Integer.parseInt(updateID.getText());
+			} catch (Exception e2) {
+				VoucherID=0;
+			}
+			
 			Date date = updateValidDate.getDate();  
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String ValidDate = dateFormat.format(date);
-			PMController.getInstance().updateVoucher(VoucherID, Discount, ValidDate);
+			try {
+				PMController.getInstance().updateVoucher(VoucherID, Discount, ValidDate);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		} else if(e.getSource().equals(btnDelete)){
-			Integer VoucherID = Integer.parseInt(deleteID.getText());
+			Integer VoucherID=0;
+			
+			try {
+				VoucherID = Integer.parseInt(updateID.getText());
+			} catch (Exception e2) {
+				VoucherID=0;
+			}
 			PMController.getInstance().deleteVoucher(VoucherID);
 			
 		} else if(e.getSource().equals(btnRefresh)) {

@@ -41,15 +41,33 @@ public class VoucherModel {
 		} catch (SQLException e) {
 			
 		}
+		System.out.println(index);
 		return em;
 	}
 	
-	public void addVoucher(float Discount, String ValidDate, String Status){
+	public Vector<Integer> getAllVoucherId(){
+		con = Connect.getConnection();
+		ResultSet rs = con.executeQuery("SELECT voucherID FROM voucher");
+		Vector<Integer> em = new Vector<Integer>();
+		index = 1;
+		try {
+			while(rs.next()) {
+				em.add(rs.getInt("voucherID"));
+				index++;
+			}
+		} catch (SQLException e) {
+			
+		}
+	
+		return em;
+	}
+	
+	public void addVoucher(float Discount, String ValidDate, String Status, Integer last){
 		con = Connect.getConnection();
 		getAllVoucher();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO voucher VALUES (?, ?, ?, ?)");
 		try {
-			ps.setInt(1, index);
+			ps.setInt(1, last);
 			ps.setFloat(2, Discount);
 			ps.setString(3, ValidDate);
 			ps.setString(4, Status);
