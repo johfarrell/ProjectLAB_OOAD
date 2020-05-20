@@ -49,6 +49,7 @@ public class ViewSM implements ActionListener{
 	private JTextField insertPrice;
 	private JTextField insertStock;
 	private JButton btnInsert;
+	private JTextField updateStock;
 
 	/**
 	 * Launch the application.
@@ -112,6 +113,10 @@ public class ViewSM implements ActionListener{
 		lblPrice_1.setBounds(370, 320, 46, 14);
 		frame.getContentPane().add(lblPrice_1);
 		
+		JLabel lblStock_1 = new JLabel("Stock:");
+		lblStock_1.setBounds(370, 350, 46, 14);
+		frame.getContentPane().add(lblStock_1);
+		
 		updateID = new JTextField();
 		updateID.setBounds(445, 228, 160, 20);
 		frame.getContentPane().add(updateID);
@@ -137,7 +142,12 @@ public class ViewSM implements ActionListener{
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnUpdate.setBounds(516, 348, 89, 23);
+		
+		updateStock = new JTextField();
+		updateStock.setBounds(445, 348, 160, 20);
+		frame.getContentPane().add(updateStock);
+		updateStock.setColumns(10);
+		btnUpdate.setBounds(516, 379, 89, 23);
 		frame.getContentPane().add(btnUpdate);
 		
 		JLabel lblDeleteProduct = new JLabel("DELETE PRODUCT");
@@ -246,14 +256,13 @@ public class ViewSM implements ActionListener{
 				String Name = (String)table.getValueAt(row, 1);
 				String Description = (String)table.getValueAt(row, 2);
 				Integer Price = (Integer)table.getValueAt(row, 3);
-				//String ValidDate = (String)table.getValueAt(row, 2);
+				Integer Stock = (Integer)table.getValueAt(row,4);
 
 				updateID.setText(ID+"");
 				updateName.setText(Name+"");
 				updateDescription.setText(Description+"");
 				updatePrice.setText(Price+"");
-				//updateDate.setText(ValidDate);
-				//updateDate.setDate(DOB);
+				updateStock.setText(Stock+"");
 				
 				deleteID.setText(ID+"");
 				
@@ -275,7 +284,8 @@ public class ViewSM implements ActionListener{
 			String Name = updateName.getText();
 			String Description = updateDescription.getText();
 			Integer Price = Integer.parseInt(updatePrice.getText());
-				SMController.getInstance().updateProduct(ProductID, Name, Description, Price);
+			Integer Stock = Integer.parseInt(updateStock.getText());
+			SMController.getInstance().updateProduct(ProductID, Name, Description, Price, Stock);
 				
 		} else if(e.getSource().equals(btnDelete)){
 			Integer ProductID = Integer.parseInt(deleteID.getText());
