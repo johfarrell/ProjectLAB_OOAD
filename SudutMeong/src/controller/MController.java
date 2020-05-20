@@ -89,7 +89,7 @@ public class MController {
 			PopUpController.getInstance().usernameused();
 		}if(RoleID < 1 || RoleID > 5) {
 			PopUpController.getInstance().notvalidrole();
-		}else if((RoleID > 0 || RoleID < 6) && (checkUsername.contains(Username) != true) && (DOBEmp.before(today_withouttime)) && (Salary>0)){
+		}else if((RoleID > 0 && RoleID < 6) && (checkUsername.contains(Username) != true) && (DOBEmp.before(today_withouttime)) && (Salary>0)){
 			String pass = getPassword();
 			String status = "Active";
 			employee.addEmployee(RoleID, Name, Username, DOB, Salary, status, pass);
@@ -123,7 +123,7 @@ public class MController {
 				PopUpController.getInstance().mustlessdate();
 			}if(checkUsername.contains(Username)) {
 				PopUpController.getInstance().usernameused();
-			}else if((checkUsername.contains(Username) == false) && (DOBEmp.before(today_withouttime)) && (Salary>0) && (RoleID > 0 || RoleID < 6)){
+			}else if((checkUsername.contains(Username) == false) && (DOBEmp.before(today_withouttime)) && (Salary>0) && (RoleID > 0 && RoleID < 6)){
 				employee.updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);	
 				PopUpController.getInstance().updatesuccess();
 			}
