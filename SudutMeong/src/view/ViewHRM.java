@@ -292,14 +292,22 @@ public class ViewHRM implements ActionListener{
 				Integer RoleID = (Integer)table.getValueAt(row, 1);
 				String Name = (String)table.getValueAt(row, 2);
 				String Username = (String)table.getValueAt(row, 3);
-				//Date DOB = (Date)table.getValueAt(row, 4);
+				String DOB = (String)table.getValueAt(row, 4);
 				Integer Salary = (Integer)table.getValueAt(row, 5);
 	            
 				updateID.setText(ID+"");
 				updateRoleID.setText(RoleID+"");
 				updateName.setText(Name);
 				updateUsername.setText(Username);
-				//updateDOB.setDate(DOB);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date DOBEmp = new Date();
+				try {
+					DOBEmp = dateFormat.parse(DOB);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				updateDOB.setDate(DOBEmp);
 				updateSalary.setText(Salary+"");
 				
 				resetID.setText(ID+"");
