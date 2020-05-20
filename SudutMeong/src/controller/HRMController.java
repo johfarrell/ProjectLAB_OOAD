@@ -9,7 +9,9 @@ import java.util.Random;
 import java.util.Vector;
 
 import model.EmployeeModel;
+import view.UsernameNotFound;
 import view.ViewHRM;
+import view.ViewMDetail;
 
 public class HRMController {
 	

@@ -58,6 +58,7 @@ public class ViewM implements ActionListener{
 	
 	public static String Month;
 	public static String Year;
+	public static Integer transactionIDView;
 
 	/**
 	 * Launch the application.
@@ -318,6 +319,16 @@ public class ViewM implements ActionListener{
 		btnRefresh.addActionListener(this);
 		btnRefresh2.addActionListener(this);
 		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table.getSelectedRow();
+				transactionIDView = (Integer)table.getValueAt(row, 0);
+				MController.getInstance().viewMDetail();
+			}
+		});
+		
 		table_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -343,6 +354,15 @@ public class ViewM implements ActionListener{
 		});
 	}
 	
+	
+	public static Integer getTransactionIDView() {
+		return transactionIDView;
+	}
+
+	public static void setTransactionIDView(Integer transactionIDView) {
+		ViewM.transactionIDView = transactionIDView;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

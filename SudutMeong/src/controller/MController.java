@@ -4,14 +4,17 @@ import java.util.Random;
 import java.util.Vector;
 
 import model.EmployeeModel;
+import model.TransactionItemModel;
 import model.TransactionModel;
 import view.ViewM;
+import view.ViewMDetail;
 
 public class MController {
 	
 	private static MController mController;
 	private EmployeeModel employee = new EmployeeModel();
 	private TransactionModel transaction = new TransactionModel();
+	private TransactionItemModel transactionitem = new TransactionItemModel();
 	
 	public static MController getInstance(){
 		if(mController == null){
@@ -31,6 +34,14 @@ public class MController {
 	
 	public Vector<TransactionModel> getAllTransaction(String Month, String Year){
 		return transaction.getAllTransaction(Month, Year);
+	}
+	
+	public ViewMDetail viewMDetail() {
+		return new ViewMDetail();
+	}
+	
+	public Vector<TransactionItemModel> getAllTransactionItem(String X){
+		return transactionitem.getAllTransactionItem(X);
 	}
 	
 	/*public void selectTransaction(String Month, String Year){
