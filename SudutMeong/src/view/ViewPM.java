@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -187,13 +188,20 @@ public class ViewPM implements ActionListener{
 				Integer row = table.getSelectedRow();
 				Integer ID = (Integer)table.getValueAt(row, 0);
 				float Discount = (float)table.getValueAt(row, 1);
-				//String ValidDate = (String)table.getValueAt(row, 2);
+				String ValidDate = (String)table.getValueAt(row, 2);
 
 				updateID.setText(ID+"");
 				updateDiscount.setText(Discount+"");
-				//updateDate.setText(ValidDate);
-				//updateDate.setDate(DOB);
-				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date ValidDateParse = new Date();
+				try {
+					ValidDateParse = dateFormat.parse(ValidDate);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				updateValidDate.setDate(ValidDateParse);
+			
 				deleteID.setText(ID+"");
 				
 			}
