@@ -30,8 +30,8 @@ public class SMController {
 			System.out.println("Insert Success"); //CONSOLE
 	}
 
-	public void updateProduct(Integer ProductID, String Name, String Description, Integer Price){	
-		product.updateProduct(ProductID, Name, Description, Price);
+	public void updateProduct(Integer ProductID, String Name, String Description, Integer Price, Integer Stock){	
+		product.updateProduct(ProductID, Name, Description, Price, Stock);
 		System.out.println("Update Success"); //CONSOLE
 	}
 	

@@ -63,15 +63,16 @@ public class ProductModel {
 		}
 	}
 	
-	public void updateProduct(Integer ProductID, String Name, String Description, Integer Price){
+	public void updateProduct(Integer ProductID, String Name, String Description, Integer Price, Integer Stock){
 		con = Connect.getConnection();
 		getAllProduct();
-		PreparedStatement ps = con.prepareStatement("UPDATE `product` SET `name`= ?,`description`= ?,`price`= ? WHERE productID = ?");
+		PreparedStatement ps = con.prepareStatement("UPDATE `product` SET `name`=?,`description`=?,`price`=?,`stock`=? WHERE productID=?");
 		try {
 			ps.setString(1, Name);
 			ps.setString(2, Description);
 			ps.setInt(3, Price);
-			ps.setInt(4, ProductID);
+			ps.setInt(4, Stock);
+			ps.setInt(5, ProductID);
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
