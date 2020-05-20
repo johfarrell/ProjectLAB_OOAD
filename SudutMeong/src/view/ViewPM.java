@@ -262,7 +262,7 @@ public class ViewPM implements ActionListener{
 			Integer VoucherID=0;
 			
 			try {
-				VoucherID = Integer.parseInt(updateID.getText());
+				VoucherID = Integer.parseInt(deleteID.getText());
 			} catch (Exception e2) {
 				VoucherID=0;
 			}

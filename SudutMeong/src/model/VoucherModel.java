@@ -41,7 +41,6 @@ public class VoucherModel {
 		} catch (SQLException e) {
 			
 		}
-		System.out.println(index);
 		return em;
 	}
 	
