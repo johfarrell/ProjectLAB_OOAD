@@ -13,16 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Vector;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
-
-import controller.HRMController;
 import controller.MController;
 import model.EmployeeModel;
 import model.TransactionModel;
@@ -366,45 +363,83 @@ public class ViewM implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource().equals(btnSearch)){
-			Integer getMonth = searchMonth.getMonth()+1;  
-			Integer getYear = searchYear.getYear();  
-			Month = getMonth.toString();
-			Year = getYear.toString();
+		if(e.getSource().equals(btnInsert)){
+
+			Integer RoleID=0;
+			Integer Salary=0;
+
+			try {
+				RoleID = Integer.parseInt(insertRoleID.getText());
+			} catch (Exception e2) {
+				RoleID = 0;
+			}
 			
-			//CONSOLE CHECK
-			System.out.println(getMonth);
-			System.out.println(getYear);
+			try {
+				Salary = Integer.parseInt(insertSalary.getText());
+			} catch (Exception e2) {
+				Salary = 0;
+			}
 			
-			System.out.println(Month);
-			System.out.println(Year);
-			
-		} else if(e.getSource().equals(btnInsert)){
-			Integer RoleID = Integer.parseInt(insertRoleID.getText());
 			String Name = insertName.getText();
 			String Username = insertUsername.getText();
-			Date date = insertDOB.getDate();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-            String DOB = dateFormat.format(date);  
-			Integer Salary = Integer.parseInt(insertSalary.getText());
-			MController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
-			
+			Date date = insertDOB.getDate();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String DOB = dateFormat.format(date);
+
+			try {
+				MController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} else if(e.getSource().equals(btnUpdate)){
-			Integer employeeID = Integer.parseInt(updateID.getText());
-			Integer RoleID = Integer.parseInt(updateRoleID.getText());
+
+			Integer RoleID=0;
+			Integer Salary=0;
+			Integer employeeID=-1;
+
+			try {
+				RoleID = Integer.parseInt(updateRoleID.getText());
+			} catch (Exception e2) {
+				RoleID = 0;
+			}
+			
+			try {
+				Salary = Integer.parseInt(updateSalary.getText());
+			} catch (Exception e2) {
+				Salary = 0;
+			}
+			
+			try {
+				employeeID = Integer.parseInt(updateID.getText());
+			} catch (Exception e2) {
+				employeeID=-1;
+			}
+
 			String Name = updateName.getText();
 			String Username = updateUsername.getText();
-			Integer Salary = Integer.parseInt(updateSalary.getText());
-			Date date = updateDOB.getDate();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+			Date date = updateDOB.getDate();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String DOB = dateFormat.format(date);
-			MController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
-			
+
+			try {
+				MController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 		} else if(e.getSource().equals(btnFire)){
-			Integer employeeID = Integer.parseInt(fireID.getText());
+			Integer employeeID=-1;
+			try {
+				employeeID = Integer.parseInt(fireID.getText());
+			} catch (Exception e2) {
+				employeeID=-1;
+			}
+
 			MController.getInstance().fireEmployee(employeeID);
-			
-		} else if(e.getSource().equals(btnRefresh)) {
+
+		}  else if(e.getSource().equals(btnRefresh)) {
 			   frame.dispose();
 			   new ViewM();
 			   

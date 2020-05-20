@@ -3,15 +3,11 @@ package controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
 import java.util.Vector;
-
 import model.EmployeeModel;
-import view.UsernameNotFound;
 import view.ViewHRM;
-import view.ViewMDetail;
 
 public class HRMController {
 	

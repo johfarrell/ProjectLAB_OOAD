@@ -41,7 +41,7 @@ public class ViewMDetail {
 	private void initialize() {
 		frame = new JFrame("Transaction Detail");
 		frame.setBounds(100, 100, 300, 175);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

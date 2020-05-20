@@ -1,5 +1,9 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.Vector;
 
@@ -36,28 +40,21 @@ public class MController {
 		return transaction.getAllTransaction(Month, Year);
 	}
 	
-	public ViewMDetail viewMDetail() {
-		return new ViewMDetail();
-	}
-	
 	public Vector<TransactionItemModel> getAllTransactionItem(String X){
 		return transactionitem.getAllTransactionItem(X);
 	}
 	
-	/*public void selectTransaction(String Month, String Year){
-		
-		Vector<TransactionModel> viewTransaction = new Vector<TransactionModel>();
-		viewTransaction = MController.getInstance().getAllTransaction();
-		
-		if(!viewTransaction.contains(Year + "-" + Month)) {
-			System.out.println("No Transaction"); //CONSOLE
-		} else{
-			String pass = getPassword();
-			String status = "Active";
-			//employee.addEmployee(RoleID, Name, Username, DOB, Salary, status, pass);;
-			System.out.println("Transaction Exist"); //CONSOLE
-		}
-	}*/
+	public ViewMDetail viewMDetail() {
+		return new ViewMDetail();
+	}
+	
+	public Vector<String> getAllUsername(){
+		return employee.getAllUsername();
+	}
+	
+	public Vector<String> getAllPassword(){
+		return employee.getAllPassword();
+	}
 	
 	protected String getPassword() {//BELOM DIUBAH
         String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
@@ -73,30 +70,79 @@ public class MController {
 
     }
 	
-	public void addEmployee(Integer RoleID, String Name, String Username, String DOB, Integer Salary){
+	public void addEmployee(Integer RoleID, String Name, String Username, String DOB, Integer Salary) throws ParseException{
 		
 		Vector<String> checkUsername = new Vector<String>();
-		checkUsername = LoginController.getInstance().getAllUsername();//MASIH NGAMBIL DARI LOGIN CONTROLLER
+		checkUsername = MController.getInstance().getAllUsername();
 		
-		if(checkUsername.contains(Username)) {
-			System.out.println("Username Used"); //CONSOLE
-		} else{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date DOBEmp = dateFormat.parse(DOB);  
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		Date today_withouttime = formatter.parse(formatter.format(today));
+		
+		if(Salary<1) {
+			PopUpController.getInstance().mustmoresalary();
+		}if(DOBEmp.after(today_withouttime)) {
+			PopUpController.getInstance().mustlessdate();
+		}if(checkUsername.contains(Username)) {
+			PopUpController.getInstance().usernameused();
+		}if(RoleID < 1 || RoleID > 5) {
+			PopUpController.getInstance().notvalidrole();
+		}else if((RoleID > 0 || RoleID < 6) && (checkUsername.contains(Username) != true) && (DOBEmp.before(today_withouttime)) && (Salary>0)){
 			String pass = getPassword();
 			String status = "Active";
-			employee.addEmployee(RoleID, Name, Username, DOB, Salary, status, pass);;
-			System.out.println("Insert Success"); //CONSOLE
+			employee.addEmployee(RoleID, Name, Username, DOB, Salary, status, pass);
+			PopUpController.getInstance().insertsuccess();
 		}
 	}
 	
-	public void updateEmployee(Integer employeeID, Integer RoleID, String Name, String Username, String DOB, Integer Salary){	
-		employee.updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
-		System.out.println("Update Success"); //CONSOLE
+	public void updateEmployee(Integer employeeID, Integer RoleID, String Name, String Username, String DOB, Integer Salary) throws ParseException{
+		
+		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
+		checkSize = MController.getInstance().getAllEmployee();
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date DOBEmp = dateFormat.parse(DOB);  
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		Date today_withouttime = formatter.parse(formatter.format(today));
+        
+		if((employeeID<0) || (employeeID>checkSize.size())) {
+			PopUpController.getInstance().idnotfound();
+		}else {
+			Vector<String> checkUsername = new Vector<String>();
+			checkUsername = MController.getInstance().getAllUsername();
+			checkUsername.remove(employeeID-1); //REMOVE CURRENT EDITED ID
+			
+			if(RoleID < 1 || RoleID > 5) {
+				PopUpController.getInstance().notvalidrole();
+			}if(Salary<1) {
+				PopUpController.getInstance().mustmoresalary();
+			}if(DOBEmp.after(today_withouttime)) {
+				PopUpController.getInstance().mustlessdate();
+			}if(checkUsername.contains(Username)) {
+				PopUpController.getInstance().usernameused();
+			}else if((checkUsername.contains(Username) == false) && (DOBEmp.before(today_withouttime)) && (Salary>0) && (RoleID > 0 || RoleID < 6)){
+				employee.updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);	
+				PopUpController.getInstance().updatesuccess();
+			}
+		}
+		
 	}
 	
 	public void fireEmployee(Integer employeeID){
-		String status = "Inactive";
-		employee.fireEmployee(employeeID, status);
-		System.out.println("Fire Success"); //CONSOLE
+		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
+		checkSize = MController.getInstance().getAllEmployee();
+		
+		if((employeeID<0) || (employeeID>checkSize.size())) {
+			PopUpController.getInstance().idnotfound();
+		}else{
+			String status = "Inactive";
+			employee.fireEmployee(employeeID, status);
+			PopUpController.getInstance().fired();
+		}
+		
 	}
 
 }

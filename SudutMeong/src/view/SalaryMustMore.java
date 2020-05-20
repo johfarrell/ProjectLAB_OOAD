@@ -29,7 +29,7 @@ public class SalaryMustMore {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 300, 175);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Salary must be more than 0!");
