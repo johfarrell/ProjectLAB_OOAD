@@ -15,12 +15,14 @@ import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
-import controller.MController;
+import controller.EmployeeHandler;
+import controller.TransactionHandler;
 import model.EmployeeModel;
 import model.TransactionModel;
 import com.toedter.calendar.JMonthChooser;
@@ -46,16 +48,15 @@ public class ViewM implements ActionListener{
 	private JButton btnUpdate;
 	private JTextField fireID;
 	private JButton btnFire;
-	private JButton btnRefresh;
 	private JButton btnRefresh2;
 	private JTable table;
 	private JTable table_1;
 	private JMonthChooser searchMonth;
 	private JYearChooser searchYear;
 	
+	public static Integer transactionIDView;
 	public static String Month;
 	public static String Year;
-	public static Integer transactionIDView;
 
 	/**
 	 * Launch the application.
@@ -239,10 +240,6 @@ public class ViewM implements ActionListener{
 		btnFire.setBounds(176, 757, 89, 23);
 		frame.getContentPane().add(btnFire);
 		
-		btnRefresh = new JButton("Refresh");
-		btnRefresh.setBounds(555, 152, 80, 25);
-		frame.getContentPane().add(btnRefresh);
-		
 		btnRefresh2 = new JButton("Refresh");
 		btnRefresh2.setBounds(555, 404, 80, 25);
 		frame.getContentPane().add(btnRefresh2);
@@ -264,7 +261,7 @@ public class ViewM implements ActionListener{
 		header.add("EmployeeID");
 		header.add("PaymentType");
 		Vector<TransactionModel> transaction = new Vector<TransactionModel>();
-		transaction = MController.getInstance().getAllTransaction(Month, Year);
+		transaction = TransactionHandler.getInstance().getAllTransaction(Month, Year);
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
@@ -290,7 +287,7 @@ public class ViewM implements ActionListener{
 		header.add("Status");
 		header.add("Password");
 		Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
-		employee = MController.getInstance().getAllEmployee();
+		employee = EmployeeHandler.getInstance().getAllEmployee();
 		dtm = new DefaultTableModel(header,0);
 		table_1 = new JTable(dtm);
 		table_1.getTableHeader();
@@ -313,7 +310,6 @@ public class ViewM implements ActionListener{
 		btnInsert.addActionListener(this);
 		btnUpdate.addActionListener(this);
 		btnFire.addActionListener(this);
-		btnRefresh.addActionListener(this);
 		btnRefresh2.addActionListener(this);
 		
 		table.addMouseListener(new MouseAdapter() {
@@ -322,7 +318,7 @@ public class ViewM implements ActionListener{
 				// TODO Auto-generated method stub
 				Integer row = table.getSelectedRow();
 				transactionIDView = (Integer)table.getValueAt(row, 0);
-				MController.getInstance().viewMDetail();
+				TransactionHandler.getInstance().viewMDetail();
 			}
 		});
 		
@@ -337,7 +333,6 @@ public class ViewM implements ActionListener{
 				String Username = (String)table_1.getValueAt(row, 3);
 				String DOB = (String)table_1.getValueAt(row, 4);
 				Integer Salary = (Integer)table_1.getValueAt(row, 5);
-	            
 				updateID.setText(ID+"");
 				updateRoleID.setText(RoleID+"");
 				updateName.setText(Name);
@@ -395,7 +390,7 @@ public class ViewM implements ActionListener{
             String DOB = dateFormat.format(date);
 
 			try {
-				MController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
+				EmployeeHandler.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -431,7 +426,7 @@ public class ViewM implements ActionListener{
             String DOB = dateFormat.format(date);
 
 			try {
-				MController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
+				EmployeeHandler.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -445,11 +440,25 @@ public class ViewM implements ActionListener{
 				employeeID=-1;
 			}
 
-			MController.getInstance().fireEmployee(employeeID);
+			EmployeeHandler.getInstance().fireEmployee(employeeID);
 
-		}  else if(e.getSource().equals(btnRefresh)) {
-			   frame.dispose();
-			   new ViewM();
+		} else if(e.getSource().equals(btnSearch)){
+			Month = "-1";
+			Year = "-1";
+			try {
+				Integer MonthInt = searchMonth.getMonth()+1;
+				Month = MonthInt.toString();
+				System.out.println(Month);
+				Integer YearInt = searchYear.getYear();
+				Year = YearInt.toString();
+				System.out.println(Year);
+			} catch (Exception e2) {
+				Month="-1";
+				Year="-1";
+			}
+			
+			frame.dispose();
+			new ViewM();
 			   
 		} else if(e.getSource().equals(btnRefresh2)) {
 			   frame.dispose();

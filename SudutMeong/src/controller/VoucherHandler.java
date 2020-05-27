@@ -10,16 +10,16 @@ import java.util.Vector;
 import model.VoucherModel;
 import view.ViewPM;
 
-public class PMController {
+public class VoucherHandler {
 
-	private static PMController pmController;
+	private static VoucherHandler voucherHandler;
 	private VoucherModel voucher = new VoucherModel();
 	
-	public static PMController getInstance(){
-		if(pmController == null){
-			return new PMController();
+	public static VoucherHandler getInstance(){
+		if(voucherHandler == null){
+			return new VoucherHandler();
 		} else{
-			return pmController;
+			return voucherHandler;
 		}
 	}
 	
@@ -30,7 +30,7 @@ public class PMController {
 	public void addVoucher(float Discount, String ValidDate) throws ParseException{
 
 		Vector<Integer> VouID = new Vector<Integer>();
-		VouID = PMController.getInstance().getAllVoucherId();
+		VouID = VoucherHandler.getInstance().getAllVoucherId();
 		Integer lastid = VouID.lastElement()+1;
 		
 		String Status = "NotUsed";
@@ -53,7 +53,7 @@ public class PMController {
 	public void updateVoucher(Integer VoucherID, float Discount, String ValidDate) throws ParseException{	
 		
 		Vector<Integer> VouID = new Vector<Integer>();
-		VouID = PMController.getInstance().getAllVoucherId();
+		VouID = VoucherHandler.getInstance().getAllVoucherId();
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date ValidDa = dateFormat.parse(ValidDate);  
@@ -77,7 +77,7 @@ public class PMController {
 	
 	public void deleteVoucher(Integer VoucherID){	
 		Vector<Integer> VouID = new Vector<Integer>();
-		VouID = PMController.getInstance().getAllVoucherId();
+		VouID = VoucherHandler.getInstance().getAllVoucherId();
 		
 		if(VouID.contains(VoucherID) != true) {
 			PopUpController.getInstance().idnotfound();

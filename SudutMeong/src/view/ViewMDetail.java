@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.MController;
+import controller.TransactionHandler;
 import model.TransactionItemModel;
 import model.TransactionModel;
 import javax.swing.JButton;
@@ -68,7 +68,7 @@ public class ViewMDetail {
 		Vector<TransactionItemModel> transactionitem = new Vector<TransactionItemModel>();
 		System.out.print(ViewM.getTransactionIDView());
 		String X = ViewM.getTransactionIDView().toString();
-		transactionitem = MController.getInstance().getAllTransactionItem(X);
+		transactionitem = TransactionHandler.getInstance().getAllTransactionItem(X);
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();

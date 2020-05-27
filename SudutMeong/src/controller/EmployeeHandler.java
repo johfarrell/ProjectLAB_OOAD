@@ -9,16 +9,16 @@ import java.util.Vector;
 import model.EmployeeModel;
 import view.ViewHRM;
 
-public class HRMController {
+public class EmployeeHandler {
 	
-	private static HRMController hrmController;
+	private static EmployeeHandler employeeHandler;
 	private EmployeeModel employee = new EmployeeModel();
 	
-	public static HRMController getInstance(){
-		if(hrmController == null){
-			return new HRMController();
+	public static EmployeeHandler getInstance(){
+		if(employeeHandler == null){
+			return new EmployeeHandler();
 		} else{
-			return hrmController;
+			return employeeHandler;
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class HRMController {
 	public void addEmployee(Integer RoleID, String Name, String Username, String DOB, Integer Salary) throws ParseException{
 		
 		Vector<String> checkUsername = new Vector<String>();
-		checkUsername = HRMController.getInstance().getAllUsername();
+		checkUsername = EmployeeHandler.getInstance().getAllUsername();
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date DOBEmp = dateFormat.parse(DOB);  
@@ -83,7 +83,7 @@ public class HRMController {
 	public void updateEmployee(Integer employeeID, Integer RoleID, String Name, String Username, String DOB, Integer Salary) throws ParseException{
 		
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
-		checkSize = HRMController.getInstance().getAllEmployee();
+		checkSize = EmployeeHandler.getInstance().getAllEmployee();
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date DOBEmp = dateFormat.parse(DOB);  
@@ -95,7 +95,7 @@ public class HRMController {
 			PopUpController.getInstance().idnotfound();
 		}else {
 			Vector<String> checkUsername = new Vector<String>();
-			checkUsername = HRMController.getInstance().getAllUsername();
+			checkUsername = EmployeeHandler.getInstance().getAllUsername();
 			checkUsername.remove(employeeID-1); //REMOVE CURRENT EDITED ID
 			
 			if(RoleID < 1 || RoleID > 5) {
@@ -116,7 +116,7 @@ public class HRMController {
 	
 	public void resetPassword(Integer employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
-		checkSize = HRMController.getInstance().getAllEmployee();
+		checkSize = EmployeeHandler.getInstance().getAllEmployee();
 		
 		if((employeeID<0) || (employeeID>checkSize.size())) {
 			PopUpController.getInstance().idnotfound();
@@ -129,7 +129,7 @@ public class HRMController {
 	
 	public void fireEmployee(Integer employeeID){
 		Vector<EmployeeModel> checkSize = new Vector<EmployeeModel>();
-		checkSize = HRMController.getInstance().getAllEmployee();
+		checkSize = EmployeeHandler.getInstance().getAllEmployee();
 		
 		if((employeeID<0) || (employeeID>checkSize.size())) {
 			PopUpController.getInstance().idnotfound();

@@ -10,9 +10,9 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import controller.HRMController;
-import controller.PMController;
-import controller.SMController;
+import controller.EmployeeHandler;
+import controller.VoucherHandler;
+import controller.ProductHandler;
 import model.EmployeeModel;
 import model.ProductModel;
 
@@ -226,7 +226,7 @@ public class ViewSM implements ActionListener{
 		header.add("Price");
 		header.add("Stock");
 		Vector<ProductModel> product = new Vector<ProductModel>();
-		product = SMController.getInstance().getAllProduct();
+		product = ProductHandler.getInstance().getAllProduct();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
@@ -277,7 +277,7 @@ public class ViewSM implements ActionListener{
 			String Description = insertDescription.getText();
 			Integer Price = Integer.parseInt(insertPrice.getText());
 			Integer Stock = Integer.parseInt(insertStock.getText());
-			SMController.getInstance().addProduct(Name, Description, Price, Stock);
+			ProductHandler.getInstance().addProduct(Name, Description, Price, Stock);
 			
 		} else if(e.getSource().equals(btnUpdate)){
 			Integer ProductID = Integer.parseInt(updateID.getText());
@@ -285,11 +285,11 @@ public class ViewSM implements ActionListener{
 			String Description = updateDescription.getText();
 			Integer Price = Integer.parseInt(updatePrice.getText());
 			Integer Stock = Integer.parseInt(updateStock.getText());
-			SMController.getInstance().updateProduct(ProductID, Name, Description, Price, Stock);
+			ProductHandler.getInstance().updateProduct(ProductID, Name, Description, Price, Stock);
 				
 		} else if(e.getSource().equals(btnDelete)){
 			Integer ProductID = Integer.parseInt(deleteID.getText());
-			SMController.getInstance().deleteProduct(ProductID);
+			ProductHandler.getInstance().deleteProduct(ProductID);
 			
 		} else if(e.getSource().equals(btnRefresh)) {
 			   frame.dispose();

@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import controller.HRMController;
+import controller.EmployeeHandler;
 import model.EmployeeModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -258,7 +258,7 @@ public class ViewHRM implements ActionListener{
 		header.add("Status");
 		header.add("Password");
 		Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
-		employee = HRMController.getInstance().getAllEmployee();
+		employee = EmployeeHandler.getInstance().getAllEmployee();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
@@ -344,7 +344,7 @@ public class ViewHRM implements ActionListener{
             String DOB = dateFormat.format(date);
 
 			try {
-				HRMController.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
+				EmployeeHandler.getInstance().addEmployee(RoleID, Name, Username, DOB, Salary);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -380,7 +380,7 @@ public class ViewHRM implements ActionListener{
             String DOB = dateFormat.format(date);
 
 			try {
-				HRMController.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
+				EmployeeHandler.getInstance().updateEmployee(employeeID, RoleID, Name, Username, DOB, Salary);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -395,7 +395,7 @@ public class ViewHRM implements ActionListener{
 				employeeID=-1;
 			}
 
-			HRMController.getInstance().resetPassword(employeeID);
+			EmployeeHandler.getInstance().resetPassword(employeeID);
 
 		} else if(e.getSource().equals(btnFire)){
 			Integer employeeID=-1;
@@ -405,7 +405,7 @@ public class ViewHRM implements ActionListener{
 				employeeID=-1;
 			}
 
-			HRMController.getInstance().fireEmployee(employeeID);
+			EmployeeHandler.getInstance().fireEmployee(employeeID);
 		} else if(e.getSource().equals(btnRefresh)) {
 			frame.dispose();
 			new ViewHRM();

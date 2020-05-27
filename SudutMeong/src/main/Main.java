@@ -1,16 +1,16 @@
 package main;
 
-import controller.HRMController;
+import controller.EmployeeHandler;
 import controller.LoginController;
-import controller.MController;
-import controller.PMController;
-import controller.SMController;
+import controller.TransactionHandler;
+import controller.VoucherHandler;
+import controller.ProductHandler;
 
 public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		LoginController.getInstance().view();
+		TransactionHandler.getInstance().view();
 
 	}
 

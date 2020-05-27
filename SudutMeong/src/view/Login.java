@@ -5,12 +5,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import controller.HRMController;
+import controller.EmployeeHandler;
 import controller.LoginController;
-import controller.MController;
-import controller.PMController;
+import controller.TransactionHandler;
+import controller.VoucherHandler;
 import controller.PopUpController;
-import controller.SMController;
+import controller.ProductHandler;
 import model.EmployeeModel;
 
 import javax.swing.JTextField;
@@ -96,22 +96,22 @@ public class Login {
 							if(emplo.getRoleid() == 1) {
 								System.out.println("Anda adalah Human Resource");
 								frame.dispose();
-								HRMController.getInstance().view();
+								EmployeeHandler.getInstance().view();
 								
 							}else if(emplo.getRoleid() == 2) {
 								System.out.println("Anda adalah Storage Manager");
 								frame.dispose();
-								SMController.getInstance().view();
+								ProductHandler.getInstance().view();
 								
 							}else if(emplo.getRoleid() == 3) {
 								System.out.println("Anda adalah Promo Manager");
 								frame.dispose();
-								PMController.getInstance().view();
+								VoucherHandler.getInstance().view();
 								
 							}else if(emplo.getRoleid() == 4) {
 								System.out.println("Anda adalah Master Manager");
 								frame.dispose();
-								MController.getInstance().view();
+								TransactionHandler.getInstance().view();
 								
 							}else if(emplo.getRoleid() == 5) {
 								System.out.println("Anda adalah Cashier");

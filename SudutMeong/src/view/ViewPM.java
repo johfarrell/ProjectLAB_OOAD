@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
 
-import controller.HRMController;
-import controller.PMController;
+import controller.EmployeeHandler;
+import controller.VoucherHandler;
 import model.VoucherModel;
 import javax.swing.JButton;
 
@@ -162,7 +162,7 @@ public class ViewPM implements ActionListener{
 		header.add("Discount");
 		header.add("Valid Date");
 		Vector<VoucherModel> voucher = new Vector<VoucherModel>();
-		voucher = PMController.getInstance().getAllVoucher();
+		voucher = VoucherHandler.getInstance().getAllVoucher();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
@@ -225,7 +225,7 @@ public class ViewPM implements ActionListener{
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String ValidDate = dateFormat.format(date);
 			try {
-				PMController.getInstance().addVoucher(Discount, ValidDate);
+				VoucherHandler.getInstance().addVoucher(Discount, ValidDate);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -252,7 +252,7 @@ public class ViewPM implements ActionListener{
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             String ValidDate = dateFormat.format(date);
 			try {
-				PMController.getInstance().updateVoucher(VoucherID, Discount, ValidDate);
+				VoucherHandler.getInstance().updateVoucher(VoucherID, Discount, ValidDate);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -266,7 +266,7 @@ public class ViewPM implements ActionListener{
 			} catch (Exception e2) {
 				VoucherID=0;
 			}
-			PMController.getInstance().deleteVoucher(VoucherID);
+			VoucherHandler.getInstance().deleteVoucher(VoucherID);
 			
 		} else if(e.getSource().equals(btnRefresh)) {
 			   frame.dispose();

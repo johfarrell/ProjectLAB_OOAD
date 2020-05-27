@@ -4,16 +4,16 @@ import java.util.Vector;
 import model.ProductModel;
 import view.ViewSM;
 
-public class SMController {
+public class ProductHandler {
 	
-	private static SMController smController;
+	private static ProductHandler productHandler;
 	private ProductModel product = new ProductModel();
 	
-	public static SMController getInstance(){
-		if(smController == null){
-			return new SMController();
+	public static ProductHandler getInstance(){
+		if(productHandler == null){
+			return new ProductHandler();
 		} else{
-			return smController;
+			return productHandler;
 		}
 	}
 	
