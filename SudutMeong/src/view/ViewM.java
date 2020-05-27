@@ -448,10 +448,8 @@ public class ViewM implements ActionListener{
 			try {
 				Integer MonthInt = searchMonth.getMonth()+1;
 				Month = MonthInt.toString();
-				System.out.println(Month);
 				Integer YearInt = searchYear.getYear();
 				Year = YearInt.toString();
-				System.out.println(Year);
 			} catch (Exception e2) {
 				Month="-1";
 				Year="-1";

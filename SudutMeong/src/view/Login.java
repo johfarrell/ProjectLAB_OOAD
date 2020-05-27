@@ -4,30 +4,36 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-
+import javax.swing.table.DefaultTableModel;
 import controller.EmployeeHandler;
-import controller.LoginController;
 import controller.TransactionHandler;
 import controller.VoucherHandler;
 import controller.PopUpController;
 import controller.ProductHandler;
+import controller.RoleHandler;
 import model.EmployeeModel;
-
+import model.RoleModel;
+import model.VoucherModel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class Login {
-
+	
+	private DefaultTableModel dtm;
 	private JFrame frame;
 	private JTextField usernameform;
 	private JPasswordField passwordform;
+	private JTable table;
 
 	
 	public Login() {
+		table();
 		initialize();
 		frame.setVisible(true);
 	}
@@ -37,7 +43,7 @@ public class Login {
 	 */
 	private void initialize() {
 		frame = new JFrame("Login");
-		frame.setBounds(100, 100, 500, 300);
+		frame.setBounds(100, 100, 500, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -74,14 +80,14 @@ public class Login {
 				String pass = String.copyValueOf(password);		//Password di konversi menjadi string
 				
 				Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
-				employee = LoginController.getInstance().getAllEmployee();
+				employee = EmployeeHandler.getInstance().getAllEmployee();
 				
 				Vector<String> employeeusername = new Vector<String>();
-				employeeusername = LoginController.getInstance().getAllUsername();
+				employeeusername = EmployeeHandler.getInstance().getAllUsername();
 				
 				
 				Vector<String> employeepassword = new Vector<String>();
-				employeepassword = LoginController.getInstance().getAllPassword();
+				employeepassword = EmployeeHandler.getInstance().getAllPassword();
 				
 				if(employeeusername.contains(username)) {
 					Integer posisi = employeeusername.indexOf(username);  //Cari posisi username
@@ -129,5 +135,28 @@ public class Login {
 		});
 		btnNewButton.setBounds(200, 170, 97, 25);
 		frame.getContentPane().add(btnNewButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 239, 464, 108);
+		frame.getContentPane().add(scrollPane);
+		
+		scrollPane.setViewportView(table);
+	}
+	
+	void table(){
+		Vector<String> header = new Vector<String>();
+		header.add("Role ID");
+		header.add("Role Name");
+		Vector<RoleModel> role = new Vector<RoleModel>();
+		role = RoleHandler.getInstance().getAllRole();
+		dtm = new DefaultTableModel(header,0);
+		table = new JTable(dtm);
+		table.getTableHeader();
+		for(RoleModel role2 : role){
+			Vector<Object> data = new Vector<Object>();
+			data.add(role2.getRoleId());
+			data.add(role2.getRole());
+			dtm.addRow(data);
+		}
 	}
 }
