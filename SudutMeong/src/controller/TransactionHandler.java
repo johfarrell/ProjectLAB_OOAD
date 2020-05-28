@@ -1,6 +1,12 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
+
+import model.ProductModel;
 import model.TransactionItemModel;
 import model.TransactionModel;
 import view.ViewM;
@@ -38,4 +44,13 @@ public class TransactionHandler {
 		return new ViewMDetail();
 	}
 	
+	public void addProductToCart(Integer ProductID, Integer Quantity) {
+		Integer X = ProductHandler.getInstance().getProduct(ProductID, Quantity);
+		if(X==1){
+			System.out.println("Product Found");
+			CartHandler.getInstance().addToCart(ProductID, Quantity);
+		} else{
+			System.out.println("Product Not Found");
+		}
+	}
 }

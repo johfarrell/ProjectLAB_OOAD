@@ -1,5 +1,6 @@
 package main;
 
+import controller.CartHandler;
 import controller.EmployeeHandler;
 import controller.TransactionHandler;
 import controller.VoucherHandler;
@@ -10,7 +11,7 @@ public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		TransactionHandler.getInstance().view();
+		CartHandler.getInstance().view();
 
 	}
 

@@ -92,6 +92,38 @@ public class ProductModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public Vector<String> checkProductID(){
+		con = Connect.getConnection();
+		ResultSet rs = con.executeQuery("SELECT productID FROM product");
+		Vector<String> emuser = new Vector<String>();
+		index = 1;
+		try {
+			while(rs.next()) {
+				emuser.add(rs.getString("productID"));
+				index++;
+			}
+		} catch (SQLException e) {
+			
+		}
+		return emuser;
+	}
+	
+	public Vector<Integer> checkStock(){
+		con = Connect.getConnection();
+		ResultSet rs = con.executeQuery("SELECT stock FROM product");
+		Vector<Integer> emuser = new Vector<Integer>();
+		index = 1;
+		try {
+			while(rs.next()) {
+				emuser.add(rs.getInt("stock"));
+				index++;
+			}
+		} catch (SQLException e) {
+			
+		}
+		return emuser;
+	}
 
 	public Integer getProductID() {
 		return ProductID;
