@@ -122,17 +122,17 @@ public class ViewHRM implements ActionListener{
 		insertSalary.setColumns(10);
 
 		insertUsername = new JTextField();
-		insertUsername.setBounds(130, 268, 160, 20);
+		insertUsername.setBounds(130, 267, 160, 20);
 		frame.getContentPane().add(insertUsername);
 		insertUsername.setColumns(10);
 
 		insertName = new JTextField();
-		insertName.setBounds(130, 238, 160, 20);
+		insertName.setBounds(130, 237, 160, 20);
 		frame.getContentPane().add(insertName);
 		insertName.setColumns(10);
 
 		insertRoleID = new JTextField();
-		insertRoleID.setBounds(130, 208, 160, 20);
+		insertRoleID.setBounds(130, 207, 160, 20);
 		frame.getContentPane().add(insertRoleID);
 		insertRoleID.setColumns(10);
 
@@ -170,17 +170,17 @@ public class ViewHRM implements ActionListener{
 		frame.getContentPane().add(lblRoleid);
 
 		updateUsername = new JTextField();
-		updateUsername.setBounds(460, 268, 160, 20);
+		updateUsername.setBounds(460, 267, 160, 20);
 		frame.getContentPane().add(updateUsername);
 		updateUsername.setColumns(10);
 
 		updateName = new JTextField();
-		updateName.setBounds(460, 238, 160, 20);
+		updateName.setBounds(460, 237, 160, 20);
 		frame.getContentPane().add(updateName);
 		updateName.setColumns(10);
 
 		updateID = new JTextField();
-		updateID.setBounds(460, 208, 160, 20);
+		updateID.setBounds(460, 207, 160, 20);
 		frame.getContentPane().add(updateID);
 		updateID.setColumns(10);
 
@@ -190,7 +190,7 @@ public class ViewHRM implements ActionListener{
 		updateSalary.setColumns(10);
 
 		updateRoleID = new JTextField();
-		updateRoleID.setBounds(460, 358, 160, 20);
+		updateRoleID.setBounds(460, 357, 160, 20);
 		frame.getContentPane().add(updateRoleID);
 		updateRoleID.setColumns(10);
 
@@ -235,11 +235,11 @@ public class ViewHRM implements ActionListener{
 		frame.getContentPane().add(btnFire);
 
 		insertDOB = new JDateChooser();
-		insertDOB.setBounds(130, 298, 160, 22);
+		insertDOB.setBounds(130, 296, 160, 22);
 		frame.getContentPane().add(insertDOB);
 
 		updateDOB = new JDateChooser();
-		updateDOB.setBounds(460, 298, 160, 22);
+		updateDOB.setBounds(460, 296, 160, 22);
 		frame.getContentPane().add(updateDOB);
 
 		btnRefresh = new JButton("Refresh");

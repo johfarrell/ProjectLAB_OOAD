@@ -78,7 +78,7 @@ public class ViewSM implements ActionListener{
 		
 		JLabel lblUpdateProduct = new JLabel("UPDATE PRODUCT");
 		lblUpdateProduct.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUpdateProduct.setBounds(370, 206, 182, 14);
+		lblUpdateProduct.setBounds(369, 195, 182, 14);
 		frame.getContentPane().add(lblUpdateProduct);
 		
 		JLabel lblId = new JLabel("ID:");
@@ -136,7 +136,7 @@ public class ViewSM implements ActionListener{
 		
 		JLabel lblDeleteProduct = new JLabel("DELETE PRODUCT");
 		lblDeleteProduct.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDeleteProduct.setBounds(50, 414, 151, 14);
+		lblDeleteProduct.setBounds(49, 411, 151, 14);
 		frame.getContentPane().add(lblDeleteProduct);
 		
 		JLabel lblId_1 = new JLabel("ID:");
@@ -158,7 +158,7 @@ public class ViewSM implements ActionListener{
 		
 		lblInsertProduct = new JLabel("INSERT PRODUCT");
 		lblInsertProduct.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblInsertProduct.setBounds(50, 206, 163, 14);
+		lblInsertProduct.setBounds(49, 195, 163, 14);
 		frame.getContentPane().add(lblInsertProduct);
 		
 		lblNewLabel = new JLabel("Name:");

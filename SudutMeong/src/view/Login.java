@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import controller.CartHandler;
 import controller.EmployeeHandler;
 import controller.TransactionHandler;
 import controller.VoucherHandler;
@@ -121,8 +123,8 @@ public class Login {
 								
 							}else if(emplo.getRoleid() == 5) {
 								System.out.println("Anda adalah Cashier");
-								//Lempar ke View Cashier
-								
+								frame.dispose();
+								CartHandler.getInstance().view();
 							}
 						}
 					}else{

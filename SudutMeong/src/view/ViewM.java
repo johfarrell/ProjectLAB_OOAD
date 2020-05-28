@@ -92,7 +92,7 @@ public class ViewM implements ActionListener{
 		
 		JLabel lblNewLabel = new JLabel("Search Transaction Report");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(40, 163, 217, 14);
+		lblNewLabel.setBounds(41, 174, 217, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblMonth = new JLabel("Month:");
@@ -135,31 +135,31 @@ public class ViewM implements ActionListener{
 		frame.getContentPane().add(lblSalary);
 		
 		insertRoleID = new JTextField();
-		insertRoleID.setBounds(105, 462, 160, 20);
+		insertRoleID.setBounds(113, 459, 160, 20);
 		frame.getContentPane().add(insertRoleID);
 		insertRoleID.setColumns(10);
 		
 		insertName = new JTextField();
-		insertName.setBounds(105, 490, 160, 20);
+		insertName.setBounds(113, 490, 160, 20);
 		frame.getContentPane().add(insertName);
 		insertName.setColumns(10);
 		
 		insertUsername = new JTextField();
-		insertUsername.setBounds(105, 523, 160, 20);
+		insertUsername.setBounds(113, 523, 160, 20);
 		frame.getContentPane().add(insertUsername);
 		insertUsername.setColumns(10);
 		
 		insertSalary = new JTextField();
-		insertSalary.setBounds(105, 593, 160, 20);
+		insertSalary.setBounds(113, 593, 160, 20);
 		frame.getContentPane().add(insertSalary);
 		insertSalary.setColumns(10);
 		
 		btnInsert = new JButton("INSERT");
-		btnInsert.setBounds(176, 624, 89, 23);
+		btnInsert.setBounds(184, 624, 89, 23);
 		frame.getContentPane().add(btnInsert);
 		
 		insertDOB = new JDateChooser();
-		insertDOB.setBounds(105, 561, 160, 20);
+		insertDOB.setBounds(113, 558, 160, 20);
 		frame.getContentPane().add(insertDOB);
 		
 		JLabel lblUpdateEmployee = new JLabel("UPDATE EMPLOYEE");
@@ -207,7 +207,7 @@ public class ViewM implements ActionListener{
 		updateUsername.setColumns(10);
 		
 		updateDOB = new JDateChooser();
-		updateDOB.setBounds(400, 561, 160, 20);
+		updateDOB.setBounds(400, 558, 160, 20);
 		frame.getContentPane().add(updateDOB);
 		
 		updateSalary = new JTextField();
@@ -234,12 +234,12 @@ public class ViewM implements ActionListener{
 		frame.getContentPane().add(lblId);
 		
 		fireID = new JTextField();
-		fireID.setBounds(105, 726, 160, 20);
+		fireID.setBounds(113, 723, 160, 20);
 		frame.getContentPane().add(fireID);
 		fireID.setColumns(10);
 		
 		btnFire = new JButton("FIRE");
-		btnFire.setBounds(176, 757, 89, 23);
+		btnFire.setBounds(184, 757, 89, 23);
 		frame.getContentPane().add(btnFire);
 		
 		btnRefresh2 = new JButton("Refresh");

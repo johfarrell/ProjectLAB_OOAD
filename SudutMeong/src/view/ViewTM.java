@@ -68,13 +68,13 @@ public class ViewTM implements ActionListener{
 		
 		scrollPane.setViewportView(table);
 		
-		JLabel lblA = new JLabel("Add To Cart");
+		JLabel lblA = new JLabel("ADD TO CART");
 		lblA.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblA.setBounds(40, 165, 321, 14);
 		frame.getContentPane().add(lblA);
 		
 		JLabel lblProductid = new JLabel("ProductID:");
-		lblProductid.setBounds(40, 194, 120, 14);
+		lblProductid.setBounds(40, 194, 65, 14);
 		frame.getContentPane().add(lblProductid);
 		
 		addProductID = new JTextField();
@@ -83,7 +83,7 @@ public class ViewTM implements ActionListener{
 		addProductID.setColumns(10);
 		
 		JLabel lblQuantity = new JLabel("Quantity:");
-		lblQuantity.setBounds(40, 233, 46, 14);
+		lblQuantity.setBounds(40, 233, 65, 14);
 		frame.getContentPane().add(lblQuantity);
 		
 		addQuantity = new JTextField();
@@ -95,7 +95,7 @@ public class ViewTM implements ActionListener{
 		btnAdd.setBounds(183, 268, 89, 23);
 		frame.getContentPane().add(btnAdd);
 		
-		JLabel lblCheckout = new JLabel("Checkout");
+		JLabel lblCheckout = new JLabel("CHECKOUT");
 		lblCheckout.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblCheckout.setBounds(40, 510, 140, 14);
 		frame.getContentPane().add(lblCheckout);
@@ -110,7 +110,7 @@ public class ViewTM implements ActionListener{
 		checkoutVoucherID.setColumns(10);
 		
 		btnCheckout = new JButton("CHECKOUT");
-		btnCheckout.setBounds(40, 610, 89, 23);
+		btnCheckout.setBounds(40, 610, 100, 23);
 		frame.getContentPane().add(btnCheckout);
 		
 		JLabel lblTotalPrice = new JLabel("Total Price:");
@@ -131,6 +131,10 @@ public class ViewTM implements ActionListener{
 		frame.getContentPane().add(scrollPane_1);
 		
 		scrollPane_1.setViewportView(table_1);
+		
+		JLabel lblNewLabel = new JLabel("CART:");
+		lblNewLabel.setBounds(12, 344, 56, 16);
+		frame.getContentPane().add(lblNewLabel);
 	}
 	
 	void table_1(){
@@ -183,6 +187,10 @@ public class ViewTM implements ActionListener{
 			Integer ProductID = Integer.parseInt(addProductID.getText());
 			Integer Stock = Integer.parseInt(addQuantity.getText());
 			TransactionHandler.getInstance().addProductToCart(ProductID, Stock);
+			
+		}else if(e.getSource().equals(btnApply)) {
+			
+		}else if(e.getSource().equals(btnCheckout)) {
 			
 		}
 		
