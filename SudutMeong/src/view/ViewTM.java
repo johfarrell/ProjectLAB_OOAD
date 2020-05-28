@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.Vector;
 
 import javax.swing.JTextField;
@@ -184,14 +185,38 @@ public class ViewTM implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnAdd)){
-			Integer ProductID = Integer.parseInt(addProductID.getText());
-			Integer Stock = Integer.parseInt(addQuantity.getText());
-			TransactionHandler.getInstance().addProductToCart(ProductID, Stock);
+			Integer ProductID=0;
+			Integer Quantity=0;
+			
+			try {
+				ProductID = Integer.parseInt(addProductID.getText());
+			} catch (Exception e2) {
+				ProductID=0;
+			}
+			try {
+				Quantity = Integer.parseInt(addQuantity.getText());	
+			} catch (Exception e2) {
+				Quantity=0;
+			}
+			TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
 			
 		}else if(e.getSource().equals(btnApply)) {
+			Integer VoucherID=0;
+			try {
+				VoucherID = Integer.parseInt(checkoutVoucherID.getText());
+			} catch (Exception e2) {
+				VoucherID = 0;
+			}
+			
+			TransactionHandler.getInstance().addCheckOutVoucher(VoucherID);
 			
 		}else if(e.getSource().equals(btnCheckout)) {
-			
+			try {
+				TransactionHandler.getInstance().checkoutTransaction();
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}

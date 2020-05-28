@@ -17,6 +17,7 @@ public class TransactionHandler {
 	private static TransactionHandler transactionHandler;
 	private TransactionModel transaction = new TransactionModel();
 	private TransactionItemModel transactionitem = new TransactionItemModel();
+	
 	public static String m;
 	public static String y;
 	
@@ -45,12 +46,46 @@ public class TransactionHandler {
 	}
 	
 	public void addProductToCart(Integer ProductID, Integer Quantity) {
-		Integer X = ProductHandler.getInstance().getProduct(ProductID, Quantity);
-		if(X==1){
-			System.out.println("Product Found");
-			CartHandler.getInstance().addToCart(ProductID, Quantity);
-		} else{
-			System.out.println("Product Not Found");
+		
+		Vector<Integer> ProID = new Vector<Integer>();
+		ProID = ProductHandler.getInstance().getAllProductID();
+		
+		if(ProID.contains(ProductID) != true) {
+			PopUpController.getInstance().idnotfound();
+		}else if(ProID.contains(ProductID)) {
+			Integer index = ProID.indexOf(ProductID);
+			Vector<ProductModel> product = new Vector<ProductModel>();
+			product = ProductHandler.getInstance().getAllProduct();
+			
+			ProductModel checkstock = product.elementAt(index);
+			
+			if(Quantity == 0 || Quantity>checkstock.getStock()) {
+				PopUpController.getInstance().checkquantity();
+			}else if(Quantity != 0 && Quantity<=checkstock.getStock()) {
+				CartHandler.getInstance().addToCart(ProductID, Quantity);
+				//Update tabel cart di view
+			}
 		}
+	}
+	
+	public void addCheckOutVoucher(Integer VoucherID) {
+		Vector<Integer> VouID = new Vector<Integer>();
+		VouID = VoucherHandler.getInstance().getAllVoucherId();
+		
+		if(VouID.contains(VoucherID) != true) {
+			PopUpController.getInstance().idnotfound();
+		}else if(VouID.contains(VoucherID)){
+			//Aktivin voucher potongannya
+			//Update price nya pake vocuher potongan
+		}
+	}
+	
+	public void checkoutTransaction() throws ParseException {
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		Date today_timestamp = formatter.parse(formatter.format(today));
+		
+		//Checkout, catat date nya ke database
+		//Alter voucherID nya jadi used (kalo pake voucher)
 	}
 }

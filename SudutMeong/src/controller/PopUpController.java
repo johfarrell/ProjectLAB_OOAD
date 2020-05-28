@@ -1,5 +1,6 @@
 package controller;
 
+import view.CheckQuantity;
 import view.DateMustLess;
 import view.DateMustMore;
 import view.DeleteProductSuccess;
@@ -83,6 +84,10 @@ public class PopUpController {
 	
 	public NotValidPrice notvalidprice() {
 		return new NotValidPrice();
+	}
+	
+	public CheckQuantity checkquantity() {
+		return new CheckQuantity();
 	}
 	
 	public NameCannotEmpty namecannotbeempty() {
