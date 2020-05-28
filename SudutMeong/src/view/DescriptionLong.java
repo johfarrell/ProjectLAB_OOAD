@@ -11,15 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class DeleteSuccess {
+public class DescriptionLong {
 
 	private JFrame frame;
 
-	
+
 	/**
 	 * Create the application.
 	 */
-	public DeleteSuccess() {
+	public DescriptionLong() {
 		initialize();
 		frame.setVisible(true);
 	}
@@ -33,8 +33,8 @@ public class DeleteSuccess {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Voucher Deleted!");
-		lblNewLabel.setForeground(new Color(46, 139, 87));
+		JLabel lblNewLabel = new JLabel("The description is too long!");
+		lblNewLabel.setForeground(new Color(139, 0, 0));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(12, 30, 258, 16);

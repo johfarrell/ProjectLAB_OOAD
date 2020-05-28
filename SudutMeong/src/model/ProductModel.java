@@ -46,12 +46,12 @@ public class ProductModel {
 		return em;
 	}
 	
-	public void addProduct(String Name, String Description, Integer Price, Integer Stock){
+	public void addProduct(Integer Last, String Name, String Description, Integer Price, Integer Stock){
 		con = Connect.getConnection();
 		getAllProduct();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO product VALUES (?, ?, ?, ?, ?)");
 		try {
-			ps.setInt(1, index);
+			ps.setInt(1, Last);
 			ps.setString(2, Name);
 			ps.setString(3, Description);
 			ps.setInt(4, Price);
@@ -93,14 +93,14 @@ public class ProductModel {
 		}
 	}
 	
-	public Vector<String> checkProductID(){
+	public Vector<Integer> getAllProductID(){
 		con = Connect.getConnection();
 		ResultSet rs = con.executeQuery("SELECT productID FROM product");
-		Vector<String> emuser = new Vector<String>();
+		Vector<Integer> emuser = new Vector<Integer>();
 		index = 1;
 		try {
 			while(rs.next()) {
-				emuser.add(rs.getString("productID"));
+				emuser.add(rs.getInt("productID"));
 				index++;
 			}
 		} catch (SQLException e) {

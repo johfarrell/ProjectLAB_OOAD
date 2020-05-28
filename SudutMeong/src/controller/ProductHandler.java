@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import model.EmployeeModel;
 import model.ProductModel;
+import sun.security.krb5.internal.crypto.Des;
 import view.ViewSM;
 
 public class ProductHandler {
@@ -27,8 +28,8 @@ public class ProductHandler {
 		return product.getAllProduct();
 	}
 	
-	public Vector<String> getProductID(){
-		return product.checkProductID();
+	public Vector<Integer> getAllProductID(){
+		return product.getAllProductID();
 	}
 	
 	public Vector<Integer> getStock(){
@@ -38,9 +39,9 @@ public class ProductHandler {
 	
 	public  Integer getProduct(Integer ProductID, Integer Stock){
 		Vector<Integer> checkStock = getStock();
-		Vector<String> checkProduct = getProductID();
+		Vector<Integer> checkProduct = getAllProductID();
 		Integer x = 0;
-		String check = ProductID.toString();
+		Integer check = ProductID;
 		System.out.println(checkStock);
 		if(checkProduct.contains(check)){
 			Integer loc = checkProduct.indexOf(ProductID);	
@@ -50,29 +51,68 @@ public class ProductHandler {
 			} else{
 				x = 0;
 			}
-			/*if(checkStock.elementAt(posisi+2)>=Stock){
-				x = 1;
-			} else{
-				x = 0;
-			}*/
 		}
 		System.out.println(x);
 		return x;
 	}
 	
 	public void addProduct(String Name, String Description, Integer Price, Integer Stock){
-			product.addProduct(Name, Description, Price, Stock);
-			System.out.println("Insert Success"); //CONSOLE
+		
+		Vector<Integer> ProID = new Vector<Integer>();
+		ProID = ProductHandler.getInstance().getAllProductID();
+		Integer lastid = ProID.lastElement()+1;
+		
+		if(Stock<=0) {
+			PopUpController.getInstance().notvalidstock();
+		}if(Price<=0) {
+			PopUpController.getInstance().notvalidprice();
+		}if(Description.length()>250) {
+			PopUpController.getInstance().desctoolong();
+		}if(Name.isEmpty()) {
+			PopUpController.getInstance().namecannotbeempty();
+		}else if(Name.isEmpty()!=true && Description.length()<251 && Price>0 && Stock>0) {
+			product.addProduct(lastid, Name, Description, Price, Stock);
+			PopUpController.getInstance().insertsuccess();
+		}
+		
 	}
 
 	public void updateProduct(Integer ProductID, String Name, String Description, Integer Price, Integer Stock){	
-		product.updateProduct(ProductID, Name, Description, Price, Stock);
-		System.out.println("Update Success"); //CONSOLE
+		
+		Vector<Integer> ProID = new Vector<Integer>();
+		ProID = ProductHandler.getInstance().getAllProductID();
+		
+		if(ProID.contains(ProductID) != true) {
+			PopUpController.getInstance().idnotfound();
+		}else if(ProID.contains(ProductID)) {
+			if(Stock<=0) {
+				PopUpController.getInstance().notvalidstock();
+			}if(Price<=0) {
+				PopUpController.getInstance().notvalidprice();
+			}if(Description.length()>250) {
+				PopUpController.getInstance().desctoolong();
+			}if(Name.isEmpty()) {
+				PopUpController.getInstance().namecannotbeempty();
+			}else if(Name.isEmpty()!=true && Description.length()<251 && Price>0 && Stock>0) {
+				product.updateProduct(ProductID, Name, Description, Price, Stock);
+				PopUpController.getInstance().updatesuccess();
+			}
+		}
+		
 	}
 	
 	public void deleteProduct(Integer ProductID){	
-		product.deleteProduct(ProductID);
-		System.out.println("Delete Success"); //CONSOLE
+		
+		Vector<Integer> ProID = new Vector<Integer>();
+		ProID = ProductHandler.getInstance().getAllProductID();
+		
+		if(ProID.contains(ProductID) != true) {
+			PopUpController.getInstance().idnotfound();
+		}else if(ProID.contains(ProductID)) {
+			product.deleteProduct(ProductID);
+			PopUpController.getInstance().productdel();
+		}
+		
 	}
 	
 }

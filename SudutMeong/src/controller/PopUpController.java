@@ -2,13 +2,18 @@ package controller;
 
 import view.DateMustLess;
 import view.DateMustMore;
-import view.DeleteSuccess;
+import view.DeleteProductSuccess;
+import view.DeleteVoucherSuccess;
+import view.DescriptionLong;
 import view.FireSuccess;
 import view.IDNotFound;
 import view.InactiveEmployee;
 import view.InsertSuccess;
+import view.NameCannotEmpty;
 import view.NotValidDiscount;
+import view.NotValidPrice;
 import view.NotValidRole;
+import view.NotValidStock;
 import view.ResetSuccess;
 import view.SalaryMustMore;
 import view.UpdateSuccess;
@@ -64,12 +69,32 @@ public class PopUpController {
 		return new FireSuccess();
 	}
 	
-	public DeleteSuccess voucherdel() {
-		return new DeleteSuccess();
+	public DeleteVoucherSuccess voucherdel() {
+		return new DeleteVoucherSuccess();
 	}
+	
+	public DeleteProductSuccess productdel() {
+		return new DeleteProductSuccess();
+	}	
 	
 	public NotValidRole notvalidrole() {
 		return new NotValidRole();
+	}
+	
+	public NotValidPrice notvalidprice() {
+		return new NotValidPrice();
+	}
+	
+	public NameCannotEmpty namecannotbeempty() {
+		return new NameCannotEmpty();
+	}
+	
+	public DescriptionLong desctoolong() {
+		return new DescriptionLong();
+	}
+	
+	public NotValidStock notvalidstock() {
+		return new NotValidStock();
 	}
 	
 	public NotValidDiscount notvaliddisc() {

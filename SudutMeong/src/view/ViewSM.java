@@ -52,22 +52,6 @@ public class ViewSM implements ActionListener{
 	private JTextField updateStock;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewSM window = new ViewSM();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public ViewSM() {
@@ -273,22 +257,66 @@ public class ViewSM implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnInsert)){
+			
+			Integer Price=0;
+			Integer Stock=0;
+			
 			String Name = insertName.getText();
 			String Description = insertDescription.getText();
-			Integer Price = Integer.parseInt(insertPrice.getText());
-			Integer Stock = Integer.parseInt(insertStock.getText());
+			
+			try {
+				Price = Integer.parseInt(insertPrice.getText());
+			} catch (Exception e2) {
+				// TODO: handle exception
+				Price = 0;
+			}
+			
+			try {
+				Stock = Integer.parseInt(insertStock.getText());
+			} catch (Exception e2) {
+				// TODO: handle exception
+				Stock = 0;
+			}
+			
 			ProductHandler.getInstance().addProduct(Name, Description, Price, Stock);
 			
 		} else if(e.getSource().equals(btnUpdate)){
-			Integer ProductID = Integer.parseInt(updateID.getText());
+			
+			Integer Price=0;
+			Integer Stock=0;
+			Integer ProductID=0;
+			
+			
 			String Name = updateName.getText();
 			String Description = updateDescription.getText();
-			Integer Price = Integer.parseInt(updatePrice.getText());
-			Integer Stock = Integer.parseInt(updateStock.getText());
+			
+			try {
+				Price = Integer.parseInt(updatePrice.getText());
+			} catch (Exception e2) {
+				Price = 0;
+			}
+			try {
+				Stock = Integer.parseInt(updateStock.getText());
+			} catch (Exception e2) {
+				Stock = 0;
+			}
+			try {
+				ProductID = Integer.parseInt(updateID.getText());
+			} catch (Exception e2) {
+				ProductID = 0;
+			}
+			
 			ProductHandler.getInstance().updateProduct(ProductID, Name, Description, Price, Stock);
 				
 		} else if(e.getSource().equals(btnDelete)){
-			Integer ProductID = Integer.parseInt(deleteID.getText());
+			
+			Integer ProductID=0;
+			
+			try {
+				ProductID = Integer.parseInt(deleteID.getText());
+			} catch (Exception e2) {
+				ProductID = 0;
+			}
 			ProductHandler.getInstance().deleteProduct(ProductID);
 			
 		} else if(e.getSource().equals(btnRefresh)) {

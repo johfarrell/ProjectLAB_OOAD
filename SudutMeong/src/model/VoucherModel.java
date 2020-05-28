@@ -61,12 +61,12 @@ public class VoucherModel {
 		return em;
 	}
 	
-	public void addVoucher(float Discount, String ValidDate, String Status, Integer last){
+	public void addVoucher(float Discount, String ValidDate, String Status, Integer Last){
 		con = Connect.getConnection();
 		getAllVoucher();
 		PreparedStatement ps = con.prepareStatement("INSERT INTO voucher VALUES (?, ?, ?, ?)");
 		try {
-			ps.setInt(1, last);
+			ps.setInt(1, Last);
 			ps.setFloat(2, Discount);
 			ps.setString(3, ValidDate);
 			ps.setString(4, Status);

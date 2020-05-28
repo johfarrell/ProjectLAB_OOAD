@@ -11,7 +11,7 @@ public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		CartHandler.getInstance().view();
+		RoleHandler.getInstance().view();
 
 	}
 
