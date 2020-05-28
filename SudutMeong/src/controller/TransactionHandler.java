@@ -9,8 +9,10 @@ import java.util.Vector;
 import model.ProductModel;
 import model.TransactionItemModel;
 import model.TransactionModel;
+import view.ViewHRM;
 import view.ViewM;
 import view.ViewMDetail;
+import view.ViewTM;
 
 public class TransactionHandler {
 	
@@ -58,11 +60,12 @@ public class TransactionHandler {
 			product = ProductHandler.getInstance().getAllProduct();
 			
 			ProductModel checkstock = product.elementAt(index);
+			String ProductName = checkstock.getName();
 			
 			if(Quantity == 0 || Quantity>checkstock.getStock()) {
 				PopUpController.getInstance().checkquantity();
 			}else if(Quantity != 0 && Quantity<=checkstock.getStock()) {
-				CartHandler.getInstance().addToCart(ProductID, Quantity);
+				CartHandler.getInstance().addToCart(ProductID, ProductName, Quantity);
 				//Update tabel cart di view
 			}
 		}

@@ -28,8 +28,8 @@ public class CartHandler {
 		return new ViewTM();
 	}
 	
-	public void addToCart(Integer ProductID, Integer Quantity){
-		cart.addToCart(ProductID, Quantity);
+	public void addToCart(Integer ProductID, String ProductName, Integer Quantity){
+		cart.addToCart(ProductID, ProductName, Quantity);
 		System.out.println("success");
 }
 	

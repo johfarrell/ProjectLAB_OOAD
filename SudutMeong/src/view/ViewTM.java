@@ -24,6 +24,7 @@ import controller.VoucherHandler;
 import model.CartModel;
 import model.ProductModel;
 import model.VoucherModel;
+import javax.swing.JComboBox;
 
 public class ViewTM implements ActionListener{
 	
@@ -37,6 +38,9 @@ public class ViewTM implements ActionListener{
 	private JButton btnApply;
 	private JButton btnCheckout;
 	private JTable table_1;
+	private JComboBox<?> paymentmethod;
+	private JTextField updateCartQuantity;
+	private JButton btnUpdateCart;
 
 
 	/**
@@ -106,12 +110,12 @@ public class ViewTM implements ActionListener{
 		frame.getContentPane().add(lblVoucherid);
 		
 		checkoutVoucherID = new JTextField();
-		checkoutVoucherID.setBounds(112, 536, 160, 20);
+		checkoutVoucherID.setBounds(152, 536, 160, 20);
 		frame.getContentPane().add(checkoutVoucherID);
 		checkoutVoucherID.setColumns(10);
 		
 		btnCheckout = new JButton("CHECKOUT");
-		btnCheckout.setBounds(40, 610, 100, 23);
+		btnCheckout.setBounds(310, 642, 100, 23);
 		frame.getContentPane().add(btnCheckout);
 		
 		JLabel lblTotalPrice = new JLabel("Total Price:");
@@ -120,11 +124,11 @@ public class ViewTM implements ActionListener{
 		
 		JLabel lblPrice = new JLabel("PRICE");
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPrice.setBounds(122, 574, 172, 14);
+		lblPrice.setBounds(180, 575, 132, 14);
 		frame.getContentPane().add(lblPrice);
 		
 		btnApply = new JButton("APPLY");
-		btnApply.setBounds(295, 535, 89, 23);
+		btnApply.setBounds(321, 535, 89, 23);
 		frame.getContentPane().add(btnApply);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -134,8 +138,36 @@ public class ViewTM implements ActionListener{
 		scrollPane_1.setViewportView(table_1);
 		
 		JLabel lblNewLabel = new JLabel("CART:");
-		lblNewLabel.setBounds(12, 344, 56, 16);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(10, 350, 56, 16);
 		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Payment Method:");
+		lblNewLabel_1.setBounds(40, 610, 110, 16);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		String[] method = {"Cash", "Credit"};
+		paymentmethod = new JComboBox<Object>(method);
+		paymentmethod.setBounds(152, 607, 100, 22);
+		frame.getContentPane().add(paymentmethod);
+		
+		JLabel lblNewLabel_2 = new JLabel("Rp.");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_2.setBounds(152, 574, 35, 16);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		updateCartQuantity = new JTextField();
+		updateCartQuantity.setBounds(594, 507, 50, 22);
+		frame.getContentPane().add(updateCartQuantity);
+		updateCartQuantity.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Quantity:");
+		lblNewLabel_3.setBounds(526, 510, 56, 16);
+		frame.getContentPane().add(lblNewLabel_3);
+		
+		btnUpdateCart = new JButton("UPDATE");
+		btnUpdateCart.setBounds(526, 534, 118, 25);
+		frame.getContentPane().add(btnUpdateCart);
 	}
 	
 	void table_1(){
@@ -164,6 +196,7 @@ public class ViewTM implements ActionListener{
 	void table(){
 		Vector<String> header = new Vector<String>();
 		header.add("ProductID");
+		header.add("Product Name");
 		header.add("Quantity");
 		Vector<CartModel> cart = new Vector<CartModel>();
 		cart = CartHandler.getInstance().getAllItem();
@@ -173,6 +206,7 @@ public class ViewTM implements ActionListener{
 		for(CartModel cart2 : cart){
 			Vector<Object> data = new Vector<Object>();
 			data.add(cart2.getProductID());
+			data.add(cart2.getProductName());
 			data.add(cart2.getQuantity());
 			dtm.addRow(data);
 		}
@@ -180,6 +214,9 @@ public class ViewTM implements ActionListener{
 	
 	void addlistener(){
 		btnAdd.addActionListener(this);
+		btnApply.addActionListener(this);
+		btnCheckout.addActionListener(this);
+		btnUpdateCart.addActionListener(this);
 	}
 
 	@Override
@@ -200,6 +237,7 @@ public class ViewTM implements ActionListener{
 			}
 			TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
 			
+			
 		}else if(e.getSource().equals(btnApply)) {
 			Integer VoucherID=0;
 			try {
@@ -209,6 +247,15 @@ public class ViewTM implements ActionListener{
 			}
 			
 			TransactionHandler.getInstance().addCheckOutVoucher(VoucherID);
+			
+		}else if(e.getSource().equals(btnUpdateCart)) {
+			Integer Quantity=-1;
+			try {
+				Quantity = Integer.parseInt(updateCartQuantity.getText());
+			} catch (Exception e2) {
+				Quantity=-1;
+			}
+			
 			
 		}else if(e.getSource().equals(btnCheckout)) {
 			try {

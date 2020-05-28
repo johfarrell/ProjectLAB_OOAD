@@ -9,22 +9,29 @@ import sqlConnect.Connect;
 public class CartModel {
 	
 	private Integer ProductID;
+	private String ProductName;
 	private Integer Quantity;
-	public static Vector<CartModel> em = new Vector<CartModel>();
+	public Vector<CartModel> em = new Vector<CartModel>();
 	
 	public CartModel() {
 		
 	}
 	
-	public CartModel(Integer productid, Integer quantity) {
+	public CartModel(Integer productid, String productname, Integer quantity) {
 		this.ProductID=productid;
+		this.ProductName=productname;
 		this.Quantity=quantity;
 	}
 	
-	public void addToCart(Integer ProductID, Integer Quantity){
-		System.out.println(ProductID);
-		System.out.println(Quantity);
-		//em.add(ProductID, Quantity);
+	public void addToCart(Integer ProductID, String ProductName, Integer Quantity){
+		
+		System.out.println("Barang yang masuk ke cart: "+ "ID:"+ProductID + " Name:"+ProductName + " Quantity:"+ Quantity);
+		CartModel item = new CartModel();
+		item.setProductID(ProductID);
+		item.setProductName(ProductName);
+		item.setQuantity(Quantity);
+				
+		em.add(item);
 	}
 	
 	public Vector<CartModel> getAllItem(){
@@ -48,5 +55,12 @@ public class CartModel {
 		Quantity = quantity;
 	}
 	
+	public String getProductName() {
+		return ProductName;
+	}
+
+	public void setProductName(String productName) {
+		ProductName = productName;
+	}
 	
 }
