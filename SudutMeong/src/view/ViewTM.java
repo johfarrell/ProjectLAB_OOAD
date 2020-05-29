@@ -32,7 +32,7 @@ public class ViewTM implements ActionListener{
 	
 	private DefaultTableModel dtm;
 	private DefaultTableModel dtm_1;
-	private JFrame frame;
+	private JFrame frmCashier;
 	private JTextField addProductID;
 	private JTextField addQuantity;
 	private JTextField checkoutVoucherID;
@@ -44,6 +44,7 @@ public class ViewTM implements ActionListener{
 	private JComboBox<?> paymentmethod;
 	private JTextField updateCartQuantity;
 	private JButton btnUpdateCart;
+	private JLabel lblPrice;
 
 
 	/**
@@ -60,119 +61,120 @@ public class ViewTM implements ActionListener{
 		table_1();
 		initialize();
 		addlistener();
-		frame.setVisible(true);
+		frmCashier.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 670, 740);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmCashier = new JFrame();
+		frmCashier.setTitle("Cashier");
+		frmCashier.setBounds(100, 100, 670, 740);
+		frmCashier.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCashier.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 358, 629, 130);
-		frame.getContentPane().add(scrollPane);
+		frmCashier.getContentPane().add(scrollPane);
 		
 		scrollPane.setViewportView(table);
 		
 		JLabel lblA = new JLabel("ADD TO CART");
 		lblA.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblA.setBounds(40, 165, 321, 14);
-		frame.getContentPane().add(lblA);
+		frmCashier.getContentPane().add(lblA);
 		
 		JLabel lblProductid = new JLabel("ProductID:");
 		lblProductid.setBounds(40, 194, 65, 14);
-		frame.getContentPane().add(lblProductid);
+		frmCashier.getContentPane().add(lblProductid);
 		
 		addProductID = new JTextField();
 		addProductID.setBounds(112, 190, 160, 20);
-		frame.getContentPane().add(addProductID);
+		frmCashier.getContentPane().add(addProductID);
 		addProductID.setColumns(10);
 		
 		JLabel lblQuantity = new JLabel("Quantity:");
 		lblQuantity.setBounds(40, 233, 65, 14);
-		frame.getContentPane().add(lblQuantity);
+		frmCashier.getContentPane().add(lblQuantity);
 		
 		addQuantity = new JTextField();
 		addQuantity.setBounds(112, 229, 160, 20);
-		frame.getContentPane().add(addQuantity);
+		frmCashier.getContentPane().add(addQuantity);
 		addQuantity.setColumns(10);
 		
 		btnAdd = new JButton("ADD");
 		btnAdd.setBounds(183, 268, 89, 23);
-		frame.getContentPane().add(btnAdd);
+		frmCashier.getContentPane().add(btnAdd);
 		
 		JLabel lblCheckout = new JLabel("CHECKOUT");
 		lblCheckout.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblCheckout.setBounds(40, 510, 140, 14);
-		frame.getContentPane().add(lblCheckout);
+		frmCashier.getContentPane().add(lblCheckout);
 		
 		JLabel lblVoucherid = new JLabel("VoucherID:");
 		lblVoucherid.setBounds(40, 539, 71, 14);
-		frame.getContentPane().add(lblVoucherid);
+		frmCashier.getContentPane().add(lblVoucherid);
 		
 		checkoutVoucherID = new JTextField();
 		checkoutVoucherID.setBounds(152, 536, 160, 20);
-		frame.getContentPane().add(checkoutVoucherID);
+		frmCashier.getContentPane().add(checkoutVoucherID);
 		checkoutVoucherID.setColumns(10);
 		
 		btnCheckout = new JButton("CHECKOUT");
 		btnCheckout.setBounds(310, 642, 100, 23);
-		frame.getContentPane().add(btnCheckout);
+		frmCashier.getContentPane().add(btnCheckout);
 		
 		JLabel lblTotalPrice = new JLabel("Total Price:");
 		lblTotalPrice.setBounds(40, 575, 71, 14);
-		frame.getContentPane().add(lblTotalPrice);
+		frmCashier.getContentPane().add(lblTotalPrice);
 		
-		JLabel lblPrice = new JLabel("PRICE");
+		lblPrice = new JLabel("0");
 		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblPrice.setBounds(180, 575, 132, 14);
-		frame.getContentPane().add(lblPrice);
+		frmCashier.getContentPane().add(lblPrice);
 		
 		btnApply = new JButton("APPLY");
 		btnApply.setBounds(321, 535, 89, 23);
-		frame.getContentPane().add(btnApply);
+		frmCashier.getContentPane().add(btnApply);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 11, 634, 130);
-		frame.getContentPane().add(scrollPane_1);
+		frmCashier.getContentPane().add(scrollPane_1);
 		
 		scrollPane_1.setViewportView(table_1);
 		
 		JLabel lblNewLabel = new JLabel("CART:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(10, 340, 56, 16);
-		frame.getContentPane().add(lblNewLabel);
+		frmCashier.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Payment Method:");
 		lblNewLabel_1.setBounds(40, 610, 110, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		frmCashier.getContentPane().add(lblNewLabel_1);
 		
 		String[] method = {"Cash", "Credit"};
 		paymentmethod = new JComboBox<Object>(method);
 		paymentmethod.setBounds(152, 607, 100, 22);
-		frame.getContentPane().add(paymentmethod);
+		frmCashier.getContentPane().add(paymentmethod);
 		
 		JLabel lblNewLabel_2 = new JLabel("Rp.");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel_2.setBounds(152, 574, 35, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		frmCashier.getContentPane().add(lblNewLabel_2);
 		
 		updateCartQuantity = new JTextField();
 		updateCartQuantity.setBounds(594, 507, 50, 22);
-		frame.getContentPane().add(updateCartQuantity);
+		frmCashier.getContentPane().add(updateCartQuantity);
 		updateCartQuantity.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Quantity:");
 		lblNewLabel_3.setBounds(526, 510, 56, 16);
-		frame.getContentPane().add(lblNewLabel_3);
+		frmCashier.getContentPane().add(lblNewLabel_3);
 		
 		btnUpdateCart = new JButton("UPDATE");
 		btnUpdateCart.setBounds(526, 534, 118, 25);
-		frame.getContentPane().add(btnUpdateCart);
+		frmCashier.getContentPane().add(btnUpdateCart);
 	}
 	
 	
@@ -227,6 +229,38 @@ public class ViewTM implements ActionListener{
 		}
 	}
 	
+	Integer changeTotalPrice() {
+		Vector<CartModel> oncart = new Vector<CartModel>();
+		oncart = CartHandler.getInstance().getAllItem();
+		
+		Integer totalPrice = 0;
+		
+		for(CartModel cart2 : oncart){
+			Vector<Integer> ProID = new Vector<Integer>();
+			ProID = ProductHandler.getInstance().getAllProductID();
+			
+			Integer index = ProID.indexOf(cart2.getProductID());
+			Vector<ProductModel> product = new Vector<ProductModel>();
+			product = ProductHandler.getInstance().getAllProduct();
+			ProductModel checkprice = product.elementAt(index);
+			
+			
+			Integer currentItemQuantity = cart2.getQuantity();
+			
+			Integer currentPrice = currentItemQuantity*checkprice.getPrice();
+			totalPrice+=currentPrice;
+			
+		}
+		
+		String total = Integer.toString(totalPrice);
+		lblPrice.setText(total);
+		return totalPrice;
+		
+	}
+	
+	
+	
+	Integer quantityProductID;
 	void addlistener(){
 		btnAdd.addActionListener(this);
 		btnApply.addActionListener(this);
@@ -239,7 +273,9 @@ public class ViewTM implements ActionListener{
 				// TODO Auto-generated method stub
 				Integer row = table.getSelectedRow();
 				String quantity = (String) table.getValueAt(row, 2);
-				updateCartQuantity.setText(quantity+"");		
+				updateCartQuantity.setText(quantity+"");
+								
+				quantityProductID = Integer.parseInt((String) table.getValueAt(row, 0));
 			}
 		});
 		
@@ -270,9 +306,9 @@ public class ViewTM implements ActionListener{
 			} catch (Exception e2) {
 				Quantity=0;
 			}
-			boolean x = TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
+			String x = TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
 						
-			if(x == true) {
+			if(x.equals("not_exist")) {
 				
 				Vector<Integer> ProID = new Vector<Integer>();
 				ProID = ProductHandler.getInstance().getAllProductID();
@@ -284,13 +320,29 @@ public class ViewTM implements ActionListener{
 				ProductModel checkstock = product.elementAt(index);
 				String ProductName = checkstock.getName();
                 
-                Vector<Object> data = new Vector<Object>();
+                Vector<Object> data = new Vector<Object>();		//Tambahin langsung ke tabel
     			data.add(addProductID.getText());
     			data.add(ProductName);
     			data.add(addQuantity.getText());
     			dtm.addRow(data);
 
                 dtm.fireTableDataChanged();
+                changeTotalPrice();
+			}else if(x.equals("exist_instock")) {
+				
+				for(int i=0; i<table.getRowCount(); i++) {
+					if(Integer.parseInt((String) table.getValueAt(i, 0)) == ProductID) {	//Cari di tabel
+						Integer oldQuantity = Integer.parseInt((String) table.getValueAt(i, 2));	//Ganti value nya jadi yang baru
+						Integer newQuantity = oldQuantity+Quantity;
+						String cartQuantity = Integer.toString(newQuantity);
+						
+						table.setValueAt(cartQuantity, i, 2);
+						dtm.fireTableDataChanged();
+					}
+				}
+				changeTotalPrice();
+			}else if(x.equals("exist_outofstock")) {
+				//Nothing Happened
 			}
 			
 			
@@ -312,6 +364,33 @@ public class ViewTM implements ActionListener{
 				Quantity=-1;
 			}
 			
+			String x = TransactionHandler.getInstance().updateCartQuantity(quantityProductID, Quantity);
+			
+			if(x.equals("quantity_changed")) {
+				for(int i=0; i<table.getRowCount(); i++) {
+					if(Integer.parseInt((String) table.getValueAt(i, 0)) == quantityProductID) {	//Cari di tabel
+						String cartQuantity = Integer.toString(Quantity); //Ganti value nya jadi yang baru
+						
+						table.setValueAt(cartQuantity, i, 2);
+						dtm.fireTableDataChanged();
+					}
+				}
+				changeTotalPrice();
+			}else if(x.equals("product_removed")) {
+				Integer indexRemove;
+				
+				for(int i=0; i<table.getRowCount(); i++) {
+					if(Integer.parseInt((String) table.getValueAt(i, 0)) == quantityProductID) {	//Cari di tabel
+						indexRemove=i;
+						((DefaultTableModel)table.getModel()).removeRow(indexRemove);  //Remove dari tabel
+						dtm.fireTableDataChanged();
+						break;
+					}
+				}
+				changeTotalPrice();
+			}else if(x.equals("outofstock")) {
+				//Nothing Happened
+			}
 			
 		}else if(e.getSource().equals(btnCheckout)) {
 			try {

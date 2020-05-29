@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
+import model.CartModel;
 import model.ProductModel;
 import model.TransactionItemModel;
 import model.TransactionModel;
@@ -47,7 +48,9 @@ public class TransactionHandler {
 		return new ViewMDetail();
 	}
 	
-	public boolean addProductToCart(Integer ProductID, Integer Quantity) {
+	public String addProductToCart(Integer ProductID, Integer Quantity) {
+		
+		String itemstatus;
 		
 		Vector<Integer> ProID = new Vector<Integer>();
 		ProID = ProductHandler.getInstance().getAllProductID();
@@ -65,12 +68,94 @@ public class TransactionHandler {
 			if(Quantity == 0 || Quantity>checkstock.getStock()) {
 				PopUpController.getInstance().checkquantity();
 			}else if(Quantity != 0 && Quantity<=checkstock.getStock()) {
-				CartHandler.getInstance().addToCart(ProductID, ProductName, Quantity);
-				return true;
+				
+				Vector<Integer> cartItemID = new Vector<Integer>();
+				cartItemID = CartHandler.getInstance().getAllItemID();
+				
+				Vector<CartModel> cartItem = new Vector<CartModel>();
+				cartItem = CartHandler.getInstance().getAllItem();
+				
+				if(cartItemID.contains(ProductID)) {	//Ada di cart, ganti quantity nya
+					Integer indexcart = cartItemID.indexOf(ProductID);
+					CartModel productUpdate = cartItem.elementAt(indexcart);
+					Integer oldQuantity = productUpdate.getQuantity();
+					Integer newQuantity = oldQuantity+Quantity;
+					
+					
+					if(newQuantity>checkstock.getStock()) {
+						PopUpController.getInstance().checkquantity();
+						itemstatus="exist_outofstock";
+						return itemstatus;
+					}else if(newQuantity<=checkstock.getStock()) {
+						productUpdate.setQuantity(newQuantity);
+						
+						CartHandler.getInstance().changeCartItem(indexcart, productUpdate);
+						indexcart=0;
+						itemstatus="exist_instock";
+						return itemstatus;
+					}
+				}else if (cartItemID.contains(ProductID) != true) { //Blom ada di cart, tambah baru
+
+					CartHandler.getInstance().addToCart(ProductID, ProductName, Quantity);
+					itemstatus="not_exist";
+					return itemstatus;	
+					
+				}				
 			}
 		}
-		return false;
+		itemstatus="false";
+		return itemstatus;
 	}
+	
+	public String updateCartQuantity(Integer ProductID, Integer Quantity) {
+		String itemstatus;
+		
+		Vector<Integer> cartItemID = new Vector<Integer>();
+		cartItemID = CartHandler.getInstance().getAllItemID();
+		
+		Vector<CartModel> cartItem = new Vector<CartModel>();
+		cartItem = CartHandler.getInstance().getAllItem();
+		
+		Vector<Integer> ProID = new Vector<Integer>();
+		ProID = ProductHandler.getInstance().getAllProductID();
+		
+		Integer index = ProID.indexOf(ProductID);
+		Vector<ProductModel> product = new Vector<ProductModel>();
+		product = ProductHandler.getInstance().getAllProduct();
+		
+		ProductModel checkstock = product.elementAt(index);
+		
+		Integer indexcart = cartItemID.indexOf(ProductID);
+		CartModel productUpdate = cartItem.elementAt(indexcart);
+		
+		if(Quantity <= -1) {
+			PopUpController.getInstance().checkquantity();
+		}else if(Quantity != -1) {
+			if(Quantity>0) {
+				
+				if(Quantity>checkstock.getStock()) {
+					PopUpController.getInstance().checkquantity();
+					itemstatus="outofstock";
+					return itemstatus;
+				}else if(Quantity<=checkstock.getStock()) {
+					productUpdate.setQuantity(Quantity);
+					CartHandler.getInstance().changeCartItem(indexcart, productUpdate);
+
+					itemstatus="quantity_changed";
+					return itemstatus;
+				}
+				
+			}else if(Quantity==0) {
+				CartHandler.getInstance().removeCartItem(indexcart);
+				itemstatus="product_removed";
+				return itemstatus;
+			}
+		}
+		
+		itemstatus="false";
+		return itemstatus;
+	}
+	
 	
 	public void addCheckOutVoucher(Integer VoucherID) {
 		Vector<Integer> VouID = new Vector<Integer>();

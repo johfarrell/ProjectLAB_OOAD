@@ -32,7 +32,19 @@ public class CartHandler {
 		cart.addToCart(ProductID, ProductName, Quantity);
 	}
 	
+	public void changeCartItem(Integer index, CartModel updatedItem) {
+		cart.changeCartItem(index, updatedItem);
+	}
+	
+	public void removeCartItem(Integer index) {
+		cart.removeCartItem(index);
+	}
+	
 	public Vector<CartModel> getAllItem(){
 		return cart.getAllItem();
+	}
+	
+	public Vector<Integer> getAllItemID(){
+		return cart.getAllItemID();
 	}
 }

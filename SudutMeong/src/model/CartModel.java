@@ -42,11 +42,43 @@ public class CartModel {
 		System.out.println("==============================================");
 	}
 	
+	public void changeCartItem(Integer index, CartModel updatedItem) {
+		em.set(index, updatedItem);
+		System.out.println("Isi cart:");
+		for(int i=0; i<em.size(); i++) {
+			CartModel x = em.elementAt(i);
+			
+			System.out.println(x.getProductName()+"|"+x.getQuantity());
+		}
+		System.out.println("==============================================");
+	}
+	
+	public void removeCartItem(Integer index) {
+		em.removeElementAt(index);
+		System.out.println("Isi cart:");
+		for(int i=0; i<em.size(); i++) {
+			CartModel x = em.elementAt(i);
+			
+			System.out.println(x.getProductName()+"|"+x.getQuantity());
+		}
+		System.out.println("==============================================");
+	}
+	
 	public Vector<CartModel> getAllItem(){
-		System.out.println(em);
 		return em;
 	}
-
+	
+	public Vector<Integer> getAllItemID(){
+		
+		Vector<Integer> id = new Vector<Integer>();
+		for(int i=0; i<em.size(); i++) {
+			CartModel x = em.elementAt(i);
+			id.add(x.getProductID());
+		}
+		
+		return id;
+	}
+	
 	public Integer getProductID() {
 		return ProductID;
 	}
