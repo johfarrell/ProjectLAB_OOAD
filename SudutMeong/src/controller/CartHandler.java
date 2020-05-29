@@ -30,8 +30,7 @@ public class CartHandler {
 	
 	public void addToCart(Integer ProductID, String ProductName, Integer Quantity){
 		cart.addToCart(ProductID, ProductName, Quantity);
-		System.out.println("success");
-}
+	}
 	
 	public Vector<CartModel> getAllItem(){
 		return cart.getAllItem();

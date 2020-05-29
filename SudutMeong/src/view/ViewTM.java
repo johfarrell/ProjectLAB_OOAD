@@ -71,7 +71,7 @@ public class ViewTM implements ActionListener{
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 330, 629, 130);
+		scrollPane.setBounds(10, 358, 629, 130);
 		frame.getContentPane().add(scrollPane);
 		
 		scrollPane.setViewportView(table);
@@ -142,7 +142,7 @@ public class ViewTM implements ActionListener{
 		
 		JLabel lblNewLabel = new JLabel("CART:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(10, 301, 56, 16);
+		lblNewLabel.setBounds(10, 340, 56, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Payment Method:");
@@ -249,8 +249,7 @@ public class ViewTM implements ActionListener{
 				Quantity=0;
 			}
 			boolean x = TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
-			System.out.println(x);
-			
+						
 			if(x == true) {
 				
 				Vector<Integer> ProID = new Vector<Integer>();

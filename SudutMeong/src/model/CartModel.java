@@ -25,13 +25,21 @@ public class CartModel {
 	
 	public void addToCart(Integer ProductID, String ProductName, Integer Quantity){
 		
-		System.out.println("Barang yang masuk ke cart: "+ "ID:"+ProductID + " Name:"+ProductName + " Quantity:"+ Quantity);
+		System.out.println("Barang yang masuk ke cart: "+ "ID:"+ProductID + " Name:"+ProductName + " Quantity:"+ Quantity+"\n");
 		CartModel item = new CartModel();
 		item.setProductID(ProductID);
 		item.setProductName(ProductName);
 		item.setQuantity(Quantity);
 		
 		em.add(item);
+		
+		System.out.println("Isi cart:");
+		for(int i=0; i<em.size(); i++) {
+			CartModel x = em.elementAt(i);
+			
+			System.out.println(x.getProductName()+"|"+x.getQuantity());
+		}
+		System.out.println("==============================================");
 	}
 	
 	public Vector<CartModel> getAllItem(){
