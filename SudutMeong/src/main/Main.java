@@ -11,8 +11,9 @@ public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		RoleHandler.getInstance().view();
-
+//		RoleHandler.getInstance().view();
+		CartHandler.getInstance().view();
+//		TransactionHandler.getInstance().view();
 	}
 
 	public static void main(String[] args) {

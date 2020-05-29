@@ -30,7 +30,7 @@ public class CartModel {
 		item.setProductID(ProductID);
 		item.setProductName(ProductName);
 		item.setQuantity(Quantity);
-				
+		
 		em.add(item);
 	}
 	

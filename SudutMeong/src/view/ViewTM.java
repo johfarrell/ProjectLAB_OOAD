@@ -29,6 +29,7 @@ import javax.swing.JComboBox;
 public class ViewTM implements ActionListener{
 	
 	private DefaultTableModel dtm;
+	private DefaultTableModel dtm_1;
 	private JFrame frame;
 	private JTextField addProductID;
 	private JTextField addQuantity;
@@ -51,7 +52,9 @@ public class ViewTM implements ActionListener{
 	 * Create the application.
 	 */
 	public ViewTM() {
+		init_table();
 		table();
+		init_table_1();
 		table_1();
 		initialize();
 		addlistener();
@@ -170,18 +173,23 @@ public class ViewTM implements ActionListener{
 		frame.getContentPane().add(btnUpdateCart);
 	}
 	
-	void table_1(){
+	
+	void init_table_1(){
 		Vector<String> header = new Vector<String>();
 		header.add("ID");
 		header.add("Name");
 		header.add("Description");
 		header.add("Price");
 		header.add("Stock");
+		dtm_1 = new DefaultTableModel(header,0);
+		table = new JTable(dtm_1);
+		table.getTableHeader();
+	}
+	void table_1(){
+
 		Vector<ProductModel> product = new Vector<ProductModel>();
 		product = ProductHandler.getInstance().getAllProduct();
-		dtm = new DefaultTableModel(header,0);
-		table = new JTable(dtm);
-		table.getTableHeader();
+		
 		for(ProductModel product2 : product){
 			Vector<Object> data = new Vector<Object>();
 			data.add(product2.getProductID());
@@ -189,20 +197,25 @@ public class ViewTM implements ActionListener{
 			data.add(product2.getDescription());
 			data.add(product2.getPrice());
 			data.add(product2.getStock());
-			dtm.addRow(data);
+			dtm_1.addRow(data);
 		}
+		
 	}
 	
-	void table(){
+	void init_table() {
 		Vector<String> header = new Vector<String>();
 		header.add("ProductID");
 		header.add("Product Name");
 		header.add("Quantity");
-		Vector<CartModel> cart = new Vector<CartModel>();
-		cart = CartHandler.getInstance().getAllItem();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
+	}
+	void table(){
+		
+		Vector<CartModel> cart = new Vector<CartModel>();
+		cart = CartHandler.getInstance().getAllItem();
+		
 		for(CartModel cart2 : cart){
 			Vector<Object> data = new Vector<Object>();
 			data.add(cart2.getProductID());
@@ -218,7 +231,7 @@ public class ViewTM implements ActionListener{
 		btnCheckout.addActionListener(this);
 		btnUpdateCart.addActionListener(this);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnAdd)){
@@ -235,7 +248,29 @@ public class ViewTM implements ActionListener{
 			} catch (Exception e2) {
 				Quantity=0;
 			}
-			TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
+			boolean x = TransactionHandler.getInstance().addProductToCart(ProductID, Quantity);
+			System.out.println(x);
+			
+			if(x == true) {
+				
+				Vector<Integer> ProID = new Vector<Integer>();
+				ProID = ProductHandler.getInstance().getAllProductID();
+				
+				Integer index = ProID.indexOf(ProductID);
+				Vector<ProductModel> product = new Vector<ProductModel>();
+				product = ProductHandler.getInstance().getAllProduct();
+				
+				ProductModel checkstock = product.elementAt(index);
+				String ProductName = checkstock.getName();
+                
+                Vector<Object> data = new Vector<Object>();
+    			data.add(addProductID.getText());
+    			data.add(ProductName);
+    			data.add(addQuantity.getText());
+    			dtm.addRow(data);
+
+                dtm.fireTableDataChanged();
+			}
 			
 			
 		}else if(e.getSource().equals(btnApply)) {

@@ -47,7 +47,7 @@ public class TransactionHandler {
 		return new ViewMDetail();
 	}
 	
-	public void addProductToCart(Integer ProductID, Integer Quantity) {
+	public boolean addProductToCart(Integer ProductID, Integer Quantity) {
 		
 		Vector<Integer> ProID = new Vector<Integer>();
 		ProID = ProductHandler.getInstance().getAllProductID();
@@ -66,9 +66,10 @@ public class TransactionHandler {
 				PopUpController.getInstance().checkquantity();
 			}else if(Quantity != 0 && Quantity<=checkstock.getStock()) {
 				CartHandler.getInstance().addToCart(ProductID, ProductName, Quantity);
-				//Update tabel cart di view
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	public void addCheckOutVoucher(Integer VoucherID) {
