@@ -45,6 +45,7 @@ public class ViewTM implements ActionListener{
 	private JTextField updateCartQuantity;
 	private JButton btnUpdateCart;
 	private JLabel lblPrice;
+	private Float appliedVoucher=0.0f;
 
 
 	/**
@@ -229,11 +230,11 @@ public class ViewTM implements ActionListener{
 		}
 	}
 	
-	Integer changeTotalPrice() {
+	Float changeTotalPrice(Float DiscountVoucher) {
 		Vector<CartModel> oncart = new Vector<CartModel>();
 		oncart = CartHandler.getInstance().getAllItem();
 		
-		Integer totalPrice = 0;
+		Float totalPrice = 0.0f;
 		
 		for(CartModel cart2 : oncart){
 			Vector<Integer> ProID = new Vector<Integer>();
@@ -252,10 +253,12 @@ public class ViewTM implements ActionListener{
 			
 		}
 		
-		String total = Integer.toString(totalPrice);
+		totalPrice=totalPrice*((100.0f-DiscountVoucher)/100);
+				
+		String total = String.valueOf(totalPrice); 
 		lblPrice.setText(total);
-		return totalPrice;
 		
+		return totalPrice;
 	}
 	
 	
@@ -327,7 +330,7 @@ public class ViewTM implements ActionListener{
     			dtm.addRow(data);
 
                 dtm.fireTableDataChanged();
-                changeTotalPrice();
+                changeTotalPrice(appliedVoucher);
 			}else if(x.equals("exist_instock")) {
 				
 				for(int i=0; i<table.getRowCount(); i++) {
@@ -340,7 +343,7 @@ public class ViewTM implements ActionListener{
 						dtm.fireTableDataChanged();
 					}
 				}
-				changeTotalPrice();
+				changeTotalPrice(appliedVoucher);
 			}else if(x.equals("exist_outofstock")) {
 				//Nothing Happened
 			}
@@ -354,7 +357,9 @@ public class ViewTM implements ActionListener{
 				VoucherID = 0;
 			}
 			
-			TransactionHandler.getInstance().addCheckOutVoucher(VoucherID);
+			appliedVoucher = TransactionHandler.getInstance().addCheckOutVoucher(VoucherID);
+			
+			changeTotalPrice(appliedVoucher);
 			
 		}else if(e.getSource().equals(btnUpdateCart)) {
 			Integer Quantity=-1;
@@ -375,7 +380,7 @@ public class ViewTM implements ActionListener{
 						dtm.fireTableDataChanged();
 					}
 				}
-				changeTotalPrice();
+				changeTotalPrice(appliedVoucher);
 			}else if(x.equals("product_removed")) {
 				Integer indexRemove;
 				
@@ -387,7 +392,7 @@ public class ViewTM implements ActionListener{
 						break;
 					}
 				}
-				changeTotalPrice();
+				changeTotalPrice(appliedVoucher);
 			}else if(x.equals("outofstock")) {
 				//Nothing Happened
 			}

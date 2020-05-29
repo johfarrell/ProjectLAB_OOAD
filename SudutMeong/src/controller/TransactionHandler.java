@@ -10,6 +10,7 @@ import model.CartModel;
 import model.ProductModel;
 import model.TransactionItemModel;
 import model.TransactionModel;
+import model.VoucherModel;
 import view.ViewHRM;
 import view.ViewM;
 import view.ViewMDetail;
@@ -157,16 +158,29 @@ public class TransactionHandler {
 	}
 	
 	
-	public void addCheckOutVoucher(Integer VoucherID) {
+	public float addCheckOutVoucher(Integer VoucherID) {
 		Vector<Integer> VouID = new Vector<Integer>();
 		VouID = VoucherHandler.getInstance().getAllVoucherId();
+		
+		Vector<VoucherModel> voucher = new Vector<VoucherModel>();
+		voucher = VoucherHandler.getInstance().getAllVoucher();
 		
 		if(VouID.contains(VoucherID) != true) {
 			PopUpController.getInstance().idnotfound();
 		}else if(VouID.contains(VoucherID)){
-			//Aktivin voucher potongannya
-			//Update price nya pake vocuher potongan
+			Integer index = VouID.indexOf(VoucherID);
+			VoucherModel checkdiscount = voucher.elementAt(index);
+			
+			if(checkdiscount.getStatus().equals("NotUsed")) {
+				Float discount = checkdiscount.getDiscount().floatValue();
+				PopUpController.getInstance().voucherapplied();
+				return discount;
+			}else if(checkdiscount.getStatus().equals("Used")) {
+				PopUpController.getInstance().voucheralreadyused();
+				return 0.0f;
+			}
 		}
+		return 0.0f;
 	}
 	
 	public void checkoutTransaction() throws ParseException {

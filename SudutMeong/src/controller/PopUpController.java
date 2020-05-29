@@ -20,6 +20,8 @@ import view.SalaryMustMore;
 import view.UpdateSuccess;
 import view.UsernameNotFound;
 import view.UsernameUsed;
+import view.VoucherApplied;
+import view.VoucherUsed;
 import view.WrongPassword;
 
 public class PopUpController {
@@ -72,6 +74,14 @@ public class PopUpController {
 	
 	public DeleteVoucherSuccess voucherdel() {
 		return new DeleteVoucherSuccess();
+	}
+	
+	public VoucherUsed voucheralreadyused() {
+		return new VoucherUsed();
+	}
+	
+	public VoucherApplied voucherapplied() {
+		return new VoucherApplied();
 	}
 	
 	public DeleteProductSuccess productdel() {
