@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.util.Vector;
 
@@ -230,6 +232,26 @@ public class ViewTM implements ActionListener{
 		btnApply.addActionListener(this);
 		btnCheckout.addActionListener(this);
 		btnUpdateCart.addActionListener(this);
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table.getSelectedRow();
+				String quantity = (String) table.getValueAt(row, 2);
+				updateCartQuantity.setText(quantity+"");		
+			}
+		});
+		
+		table_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Integer row = table_1.getSelectedRow();
+				Integer ID = (Integer)table_1.getValueAt(row, 0);
+				addProductID.setText(ID+"");
+			}
+		});
 	}
 	
 	@Override

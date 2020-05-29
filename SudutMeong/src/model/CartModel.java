@@ -11,7 +11,7 @@ public class CartModel {
 	private Integer ProductID;
 	private String ProductName;
 	private Integer Quantity;
-	public Vector<CartModel> em = new Vector<CartModel>();
+	public static Vector<CartModel> em = new Vector<CartModel>();
 	
 	public CartModel() {
 		
