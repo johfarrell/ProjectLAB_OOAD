@@ -13,8 +13,10 @@ import javax.swing.table.DefaultTableModel;
 import controller.EmployeeHandler;
 import controller.VoucherHandler;
 import controller.ProductHandler;
+import controller.TransactionHandler;
 import model.EmployeeModel;
 import model.ProductModel;
+import model.TransactionModel;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -55,6 +57,7 @@ public class ViewSM implements ActionListener{
 	 * Create the application.
 	 */
 	public ViewSM() {
+		init_table();
 		table();
 		initialize();
 		addlistener();
@@ -202,18 +205,21 @@ public class ViewSM implements ActionListener{
 		frame.getContentPane().add(btnInsert);
 	}
 	
-	void table(){
+	void init_table() {
 		Vector<String> header = new Vector<String>();
 		header.add("ID");
 		header.add("Name");
 		header.add("Description");
 		header.add("Price");
 		header.add("Stock");
-		Vector<ProductModel> product = new Vector<ProductModel>();
-		product = ProductHandler.getInstance().getAllProduct();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
+	}
+	
+	void table(){
+		Vector<ProductModel> product = new Vector<ProductModel>();
+		product = ProductHandler.getInstance().getAllProduct();
 		for(ProductModel product2 : product){
 			Vector<Object> data = new Vector<Object>();
 			data.add(product2.getProductID());
@@ -279,6 +285,9 @@ public class ViewSM implements ActionListener{
 			}
 			
 			ProductHandler.getInstance().addProduct(Name, Description, Price, Stock);
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
 			
 		} else if(e.getSource().equals(btnUpdate)){
 			
@@ -307,6 +316,9 @@ public class ViewSM implements ActionListener{
 			}
 			
 			ProductHandler.getInstance().updateProduct(ProductID, Name, Description, Price, Stock);
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
 				
 		} else if(e.getSource().equals(btnDelete)){
 			
@@ -318,6 +330,9 @@ public class ViewSM implements ActionListener{
 				ProductID = 0;
 			}
 			ProductHandler.getInstance().deleteProduct(ProductID);
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
 			
 		} else if(e.getSource().equals(btnRefresh)) {
 			   frame.dispose();

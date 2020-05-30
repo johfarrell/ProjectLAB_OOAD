@@ -23,9 +23,14 @@ import java.util.Vector;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
+
+import controller.CartHandler;
 import controller.EmployeeHandler;
+import controller.ProductHandler;
 import controller.TransactionHandler;
+import model.CartModel;
 import model.EmployeeModel;
+import model.ProductModel;
 import model.TransactionModel;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
@@ -33,6 +38,7 @@ import com.toedter.calendar.JYearChooser;
 public class ViewM implements ActionListener{
 	
 	private DefaultTableModel dtm;
+	private DefaultTableModel dtm_1;
 	private JFrame frame;
 	private JButton btnSearch;
 	private JTextField insertRoleID;
@@ -68,7 +74,9 @@ public class ViewM implements ActionListener{
 	 * Create the application.
 	 */
 	public ViewM() {
+		init_table();
 		table();
+		init_table_1();
 		table_1();
 		initialize();
 		addlistener();
@@ -255,18 +263,21 @@ public class ViewM implements ActionListener{
 		frame.getContentPane().add(searchYear);
 	}
 	
-	void table(){
+	void init_table() {
 		Vector<String> header = new Vector<String>();
 		header.add("TransactionID");
 		header.add("PurchaseDate");
 		header.add("VoucherID");
 		header.add("EmployeeID");
 		header.add("PaymentType");
-		Vector<TransactionModel> transaction = new Vector<TransactionModel>();
-		transaction = TransactionHandler.getInstance().getAllTransaction(Month, Year);
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
+	}
+	
+	void table(){
+		Vector<TransactionModel> transaction = new Vector<TransactionModel>();
+		transaction = TransactionHandler.getInstance().getAllTransaction(Month, Year);
 		for(TransactionModel transaction2 : transaction){
 			Vector<Object> data = new Vector<Object>();
 			data.add(transaction2.getTransactionID());
@@ -278,7 +289,7 @@ public class ViewM implements ActionListener{
 		}
 	}
 	
-	void table_1(){
+	void init_table_1(){
 		Vector<String> header = new Vector<String>();
 		header.add("ID");
 		header.add("RoleID");
@@ -288,11 +299,14 @@ public class ViewM implements ActionListener{
 		header.add("Salary");
 		header.add("Status");
 		header.add("Password");
+		dtm_1 = new DefaultTableModel(header,0);
+		table_1 = new JTable(dtm_1);
+		table_1.getTableHeader();
+	}
+	
+	void table_1(){
 		Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
 		employee = EmployeeHandler.getInstance().getAllEmployee();
-		dtm = new DefaultTableModel(header,0);
-		table_1 = new JTable(dtm);
-		table_1.getTableHeader();
 		for(EmployeeModel employee2 : employee){
 			Vector<Object> data = new Vector<Object>();
 			data.add(employee2.getEmployeeid());
@@ -303,7 +317,7 @@ public class ViewM implements ActionListener{
 			data.add(employee2.getSalary());
 			data.add(employee2.getStatus());
 			data.add(employee2.getPassword());
-			dtm.addRow(data);
+			dtm_1.addRow(data);
 		}
 	}
 
@@ -397,6 +411,10 @@ public class ViewM implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			dtm_1.setRowCount(0);
+			table_1();
+			dtm_1.fireTableDataChanged();
+			
 		} else if(e.getSource().equals(btnUpdate)){
 
 			Integer RoleID=0;
@@ -433,6 +451,9 @@ public class ViewM implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			dtm_1.setRowCount(0);
+			table_1();
+			dtm_1.fireTableDataChanged();
 
 		} else if(e.getSource().equals(btnFire)){
 			Integer employeeID=-1;
@@ -443,6 +464,9 @@ public class ViewM implements ActionListener{
 			}
 
 			EmployeeHandler.getInstance().fireEmployee(employeeID);
+			dtm_1.setRowCount(0);
+			table_1();
+			dtm_1.fireTableDataChanged();
 
 		} else if(e.getSource().equals(btnSearch)){
 			Month = "-1";

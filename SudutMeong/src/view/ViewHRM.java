@@ -7,7 +7,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import controller.EmployeeHandler;
+import controller.ProductHandler;
 import model.EmployeeModel;
+import model.ProductModel;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -70,6 +73,7 @@ public class ViewHRM implements ActionListener{
 	 * Create the application.
 	 */
 	public ViewHRM() {
+		init_table();
 		table();
 		initialize();
 		addlistener();
@@ -246,8 +250,8 @@ public class ViewHRM implements ActionListener{
 		btnRefresh.setBounds(560, 143, 80, 25);
 		frame.getContentPane().add(btnRefresh);
 	}
-
-	void table(){
+	
+	void init_table() {
 		Vector<String> header = new Vector<String>();
 		header.add("ID");
 		header.add("RoleID");
@@ -257,11 +261,14 @@ public class ViewHRM implements ActionListener{
 		header.add("Salary");
 		header.add("Status");
 		header.add("Password");
-		Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
-		employee = EmployeeHandler.getInstance().getAllEmployee();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
+	}
+	
+	void table(){
+		Vector<EmployeeModel> employee = new Vector<EmployeeModel>();
+		employee = EmployeeHandler.getInstance().getAllEmployee();
 		for(EmployeeModel employee2 : employee){
 			Vector<Object> data = new Vector<Object>();
 			data.add(employee2.getEmployeeid());
@@ -349,6 +356,10 @@ public class ViewHRM implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
+			
 		} else if(e.getSource().equals(btnUpdate)){
 
 			Integer RoleID=0;
@@ -385,7 +396,10 @@ public class ViewHRM implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
+			
 		} else if(e.getSource().equals(btnReset)){
 			Integer employeeID=-1;
 
@@ -396,7 +410,10 @@ public class ViewHRM implements ActionListener{
 			}
 
 			EmployeeHandler.getInstance().resetPassword(employeeID);
-
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
+			
 		} else if(e.getSource().equals(btnFire)){
 			Integer employeeID=-1;
 			try {
@@ -404,8 +421,11 @@ public class ViewHRM implements ActionListener{
 			} catch (Exception e2) {
 				employeeID=-1;
 			}
-
 			EmployeeHandler.getInstance().fireEmployee(employeeID);
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
+			
 		} else if(e.getSource().equals(btnRefresh)) {
 			frame.dispose();
 			new ViewHRM();

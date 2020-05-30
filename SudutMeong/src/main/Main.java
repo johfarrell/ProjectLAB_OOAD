@@ -1,12 +1,16 @@
 package main;
 
+import controller.EmployeeHandler;
+import controller.ProductHandler;
 import controller.RoleHandler;
+import controller.TransactionHandler;
+import controller.VoucherHandler;
 
 public class Main {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
-		RoleHandler.getInstance().view();
+		VoucherHandler.getInstance().view();
 	}
 
 	public static void main(String[] args) {

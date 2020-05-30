@@ -19,7 +19,9 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
 
 import controller.EmployeeHandler;
+import controller.ProductHandler;
 import controller.VoucherHandler;
+import model.ProductModel;
 import model.VoucherModel;
 import javax.swing.JButton;
 
@@ -47,6 +49,7 @@ public class ViewPM implements ActionListener{
 	 * Create the application.
 	 */
 	public ViewPM() {
+		init_table();
 		table();
 		initialize();
 		addlistener();
@@ -156,16 +159,19 @@ public class ViewPM implements ActionListener{
 		frame.getContentPane().add(btnRefresh);
 	}
 	
-	void table(){
+	void init_table() {
 		Vector<String> header = new Vector<String>();
 		header.add("ID");
 		header.add("Discount");
 		header.add("Valid Date");
-		Vector<VoucherModel> voucher = new Vector<VoucherModel>();
-		voucher = VoucherHandler.getInstance().getAllVoucher();
 		dtm = new DefaultTableModel(header,0);
 		table = new JTable(dtm);
 		table.getTableHeader();
+	}
+	
+	void table(){
+		Vector<VoucherModel> voucher = new Vector<VoucherModel>();
+		voucher = VoucherHandler.getInstance().getAllVoucher();
 		for(VoucherModel voucher2 : voucher){
 			Vector<Object> data = new Vector<Object>();
 			data.add(voucher2.getVoucherID());
@@ -230,6 +236,9 @@ public class ViewPM implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
 			
 		} else if(e.getSource().equals(btnUpdate)){
 			
@@ -257,6 +266,9 @@ public class ViewPM implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
 			
 		} else if(e.getSource().equals(btnDelete)){
 			Integer VoucherID=0;
@@ -267,6 +279,9 @@ public class ViewPM implements ActionListener{
 				VoucherID=0;
 			}
 			VoucherHandler.getInstance().deleteVoucher(VoucherID);
+			dtm.setRowCount(0);
+			table();
+			dtm.fireTableDataChanged();
 			
 		} else if(e.getSource().equals(btnRefresh)) {
 			   frame.dispose();
