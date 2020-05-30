@@ -104,6 +104,20 @@ public class VoucherModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public void useVoucher(Integer VoucherID, String Status){
+		con = Connect.getConnection();
+		getAllVoucher();
+		PreparedStatement ps = con.prepareStatement("UPDATE voucher SET status = ? WHERE voucherID = ?");
+		try {
+			ps.setString(1, Status);
+			ps.setInt(2, VoucherID);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Integer getVoucherID() {
 		return VoucherID;

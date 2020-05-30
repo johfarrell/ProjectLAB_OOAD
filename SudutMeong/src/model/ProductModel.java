@@ -93,6 +93,20 @@ public class ProductModel {
 		}
 	}
 	
+	public void updateStock(Integer ProductID, Integer Stock){
+		con = Connect.getConnection();
+		getAllProduct();
+		PreparedStatement ps = con.prepareStatement("UPDATE `product` SET `stock`=? WHERE productID=?");
+		try {
+			ps.setInt(1, Stock);
+			ps.setInt(2, ProductID);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Vector<Integer> getAllProductID(){
 		con = Connect.getConnection();
 		ResultSet rs = con.executeQuery("SELECT productID FROM product");

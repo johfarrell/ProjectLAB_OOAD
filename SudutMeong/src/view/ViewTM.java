@@ -398,8 +398,14 @@ public class ViewTM implements ActionListener{
 			}
 			
 		}else if(e.getSource().equals(btnCheckout)) {
+			Integer VoucherID=0;
+			String PaymentType;
 			try {
-				TransactionHandler.getInstance().checkoutTransaction();
+				VoucherID = Integer.parseInt(checkoutVoucherID.getText());
+				PaymentType = paymentmethod.getSelectedItem().toString();
+				TransactionHandler.getInstance().checkoutTransaction(VoucherID, PaymentType);
+				frmCashier.dispose();
+				new ViewTM();
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

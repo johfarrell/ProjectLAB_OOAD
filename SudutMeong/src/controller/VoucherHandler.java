@@ -87,6 +87,18 @@ public class VoucherHandler {
 		}
 	}
 	
+	public void useVoucher(Integer VoucherID) throws ParseException{	
+		Vector<Integer> VouID = new Vector<Integer>();
+		VouID = VoucherHandler.getInstance().getAllVoucherId();
+		String Status = "Used";
+		
+		if(VouID.contains(VoucherID) != true) {
+			PopUpController.getInstance().idnotfound();
+		}else {
+				voucher.useVoucher(VoucherID, Status);
+		}
+	}
+	
 	public Vector<VoucherModel> getAllVoucher(){
 		return voucher.getAllVoucher();
 	}

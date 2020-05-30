@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Vector;
 
+import model.CartModel;
 import model.EmployeeModel;
 import model.ProductModel;
 import sun.security.krb5.internal.crypto.Des;
@@ -113,6 +114,21 @@ public class ProductHandler {
 			PopUpController.getInstance().productdel();
 		}
 		
+	}
+	
+public void updateStock(Integer ProductID, Integer Stock){	
+		
+		Vector<Integer> ProID = new Vector<Integer>();
+		ProID = ProductHandler.getInstance().getAllProductID();
+		
+		Vector<Integer> getStock = new Vector<Integer>();
+		getStock = product.checkStock();
+
+		Integer posisi = ProID.indexOf(ProductID);
+		Integer newStock = getStock.elementAt(posisi) - Stock;
+		
+		product.updateStock(ProductID, newStock);
+			
 	}
 	
 }

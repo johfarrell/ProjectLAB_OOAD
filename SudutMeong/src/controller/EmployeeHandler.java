@@ -38,7 +38,7 @@ public class EmployeeHandler {
 		return employee.getAllPassword();
 	}
 	
-	protected String getPassword() {//BELOM DIUBAH
+	protected String getPassword() {
         String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder pass = new StringBuilder();
         Random rnd = new Random();
@@ -47,7 +47,6 @@ public class EmployeeHandler {
             pass.append(rangePass.charAt(index));
         }
         String fixedPass = pass.toString();
-        System.out.println("Password is "+ fixedPass);
         return fixedPass;
 
     }

@@ -48,9 +48,8 @@ public class TransactionModel {
 		return em;
 	}
 	
-	/*public Vector<TransactionModel> getAllTransaction(){
+	public Vector<TransactionModel> getAllTransaction(){
 		con = Connect.getConnection();
-		//ResultSet rs = con.executeQuery("SELECT * FROM transaction WHERE MONTH(purchase_datetime) = 5  AND YEAR(purchase_datetime) = 2020");
 		ResultSet rs = con.executeQuery("SELECT * FROM transaction");
 		Vector<TransactionModel> em = new Vector<TransactionModel>();
 		index = 1;
@@ -64,7 +63,24 @@ public class TransactionModel {
 			
 		}
 		return em;
-	}*/
+	}
+	
+	public void checkoutTransaction(Integer VoucherID, Integer EmployeeID, String PaymentType, String Date){
+		con = Connect.getConnection();
+		getAllTransaction();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO transaction VALUES (?, ?, ?, ?, ?)");
+		try {
+			ps.setInt(1, index);
+			ps.setString(2, Date);
+			ps.setInt(3, VoucherID);
+			ps.setInt(4, EmployeeID);
+			ps.setString(5, PaymentType);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Integer getTransactionID() {
 		return TransactionID;
@@ -121,4 +137,5 @@ public class TransactionModel {
 	public void setIndex(Integer index) {
 		this.index = index;
 	}
+
 }

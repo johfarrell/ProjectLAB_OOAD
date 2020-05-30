@@ -47,4 +47,6 @@ public class CartHandler {
 	public Vector<Integer> getAllItemID(){
 		return cart.getAllItemID();
 	}
+	
+	
 }

@@ -21,6 +21,7 @@ public class TransactionHandler {
 	private static TransactionHandler transactionHandler;
 	private TransactionModel transaction = new TransactionModel();
 	private TransactionItemModel transactionitem = new TransactionItemModel();
+	private CartModel cart = new CartModel();
 	
 	public static String m;
 	public static String y;
@@ -183,12 +184,48 @@ public class TransactionHandler {
 		return 0.0f;
 	}
 	
-	public void checkoutTransaction() throws ParseException {
+	public void checkoutTransaction(Integer VoucherID, String PaymentType) throws ParseException {
+		VoucherHandler.getInstance().useVoucher(VoucherID);
+
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
-		Date today_timestamp = formatter.parse(formatter.format(today));
+		String timestamp = formatter.format(today);
+		Integer EmployeeID = 7;//EMPLOYEEID
+		transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
 		
-		//Checkout, catat date nya ke database
-		//Alter voucherID nya jadi used (kalo pake voucher)
+		Vector<CartModel> Cart = new Vector<CartModel>();
+		Cart = cart.getAllItem();
+		Integer index = transaction.getIndex();
+		Integer ProductId = 0;
+		Integer Quantity = 0;
+		for(CartModel cart2 : Cart){
+			ProductId = cart2.getProductID();
+			Quantity = cart2.getQuantity();
+			transactionitem.addTransactionItem(index, ProductId, Quantity);
+			ProductHandler.getInstance().updateStock(ProductId, Quantity);
+		}
+		
+		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
