@@ -421,13 +421,20 @@ public class ViewTM implements ActionListener{
 			}
 			
 			if(status.equals("done")) {
-				
+				//VoucherUsed, inisialisasi ulang jadi 0 discount
 				appliedVoucher = 0.0f;
 				changeTotalPrice(appliedVoucher);
 				
-				frmCashier.dispose();
-				new ViewTM(this.EmployeeID);
-				System.out.println(this.EmployeeID);
+				//Update table Cart
+				dtm.setRowCount(0);
+				table();
+				dtm.fireTableDataChanged();
+				
+				//Update table Stock
+				dtm_1.setRowCount(0);
+				table_1();
+				dtm_1.fireTableDataChanged();
+				
 			}
 		}
 		
