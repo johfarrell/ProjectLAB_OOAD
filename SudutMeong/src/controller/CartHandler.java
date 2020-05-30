@@ -24,8 +24,8 @@ public class CartHandler {
 		}
 	}
 	
-	public ViewTM view(){
-		return new ViewTM();
+	public ViewTM view(Integer EmployeeID){
+		return new ViewTM(EmployeeID);
 	}
 	
 	public void addToCart(Integer ProductID, String ProductName, Integer Quantity){
@@ -38,6 +38,10 @@ public class CartHandler {
 	
 	public void removeCartItem(Integer index) {
 		cart.removeCartItem(index);
+	}
+	
+	public void emptyCart(){
+		cart.emptyCart();
 	}
 	
 	public Vector<CartModel> getAllItem(){

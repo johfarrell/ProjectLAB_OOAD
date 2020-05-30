@@ -184,28 +184,44 @@ public class TransactionHandler {
 		return 0.0f;
 	}
 	
-	public void checkoutTransaction(Integer VoucherID, String PaymentType) throws ParseException {
+	public String checkoutTransaction(Integer EmployeeID, Integer VoucherID, String PaymentType) throws ParseException {
+		
+		String checkoutStatus;
+		
 		VoucherHandler.getInstance().useVoucher(VoucherID);
 
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
 		String timestamp = formatter.format(today);
-		Integer EmployeeID = 7;//EMPLOYEEID
 		transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
 		
 		Vector<CartModel> Cart = new Vector<CartModel>();
 		Cart = cart.getAllItem();
-		Integer index = transaction.getIndex();
-		Integer ProductId = 0;
-		Integer Quantity = 0;
-		for(CartModel cart2 : Cart){
-			ProductId = cart2.getProductID();
-			Quantity = cart2.getQuantity();
-			transactionitem.addTransactionItem(index, ProductId, Quantity);
-			ProductHandler.getInstance().updateStock(ProductId, Quantity);
+		
+		if (Cart.isEmpty()){
+			PopUpController.getInstance().cartisempty();
+			checkoutStatus="emptycart";
+			return checkoutStatus;
+		}else if (Cart.isEmpty()!=true) {
+			Integer index = transaction.getIndex();
+			Integer ProductId = 0;
+			Integer Quantity = 0;
+			for(CartModel cart2 : Cart){
+				ProductId = cart2.getProductID();
+				Quantity = cart2.getQuantity();
+				transactionitem.addTransactionItem(index, ProductId, Quantity);
+				ProductHandler.getInstance().updateStock(ProductId, Quantity);
+			}
+
+			CartHandler.getInstance().emptyCart();
+			PopUpController.getInstance().checkoutsuccess();
+			
+			checkoutStatus="done";
+			return checkoutStatus;
 		}
 		
-		
+		checkoutStatus="false";
+		return checkoutStatus;
 	}
 }
 

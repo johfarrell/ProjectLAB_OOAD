@@ -99,6 +99,7 @@ public class Login {
 						
 						EmployeeModel emplo = employee.elementAt(posisi);
 						
+						
 						if(emplo.getStatus().equals("Inactive")) {
 							PopUpController.getInstance().inactive();
 						}else if(emplo.getStatus().equals("Active")){
@@ -124,8 +125,10 @@ public class Login {
 								
 							}else if(emplo.getRoleid() == 5) {
 								System.out.println("Anda adalah Cashier");
+								Integer employeeID = emplo.getEmployeeid();
+								
 								frame.dispose();
-								CartHandler.getInstance().view();
+								CartHandler.getInstance().view(employeeID);
 							}
 						}
 					}else{

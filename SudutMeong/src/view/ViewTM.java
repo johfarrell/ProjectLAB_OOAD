@@ -46,7 +46,8 @@ public class ViewTM implements ActionListener{
 	private JButton btnUpdateCart;
 	private JLabel lblPrice;
 	private Float appliedVoucher=0.0f;
-
+	
+	private Integer EmployeeID;
 
 	/**
 	 * Launch the application.
@@ -55,7 +56,10 @@ public class ViewTM implements ActionListener{
 	/**
 	 * Create the application.
 	 */
-	public ViewTM() {
+	public ViewTM(Integer EmployeeID) {
+		
+		this.EmployeeID = EmployeeID;
+		
 		init_table();
 		table();
 		init_table_1();
@@ -400,15 +404,30 @@ public class ViewTM implements ActionListener{
 		}else if(e.getSource().equals(btnCheckout)) {
 			Integer VoucherID=0;
 			String PaymentType;
+			
 			try {
 				VoucherID = Integer.parseInt(checkoutVoucherID.getText());
-				PaymentType = paymentmethod.getSelectedItem().toString();
-				TransactionHandler.getInstance().checkoutTransaction(VoucherID, PaymentType);
-				frmCashier.dispose();
-				new ViewTM();
+			} catch (Exception e2) {
+				VoucherID=0;
+			}
+			
+			PaymentType = paymentmethod.getSelectedItem().toString();
+			String status=null;
+			try {
+				status = TransactionHandler.getInstance().checkoutTransaction(this.EmployeeID, VoucherID, PaymentType);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			}
+			
+			if(status.equals("done")) {
+				
+				appliedVoucher = 0.0f;
+				changeTotalPrice(appliedVoucher);
+				
+				frmCashier.dispose();
+				new ViewTM(this.EmployeeID);
+				System.out.println(this.EmployeeID);
 			}
 		}
 		

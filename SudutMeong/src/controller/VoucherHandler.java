@@ -92,10 +92,13 @@ public class VoucherHandler {
 		VouID = VoucherHandler.getInstance().getAllVoucherId();
 		String Status = "Used";
 		
-		if(VouID.contains(VoucherID) != true) {
-			PopUpController.getInstance().idnotfound();
-		}else {
-				voucher.useVoucher(VoucherID, Status);
+		
+		if(VoucherID!=0) {
+			if(VouID.contains(VoucherID) != true) {
+				PopUpController.getInstance().idnotfound();
+			}else {
+					voucher.useVoucher(VoucherID, Status);
+			}
 		}
 	}
 	

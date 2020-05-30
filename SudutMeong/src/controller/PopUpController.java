@@ -1,6 +1,8 @@
 package controller;
 
+import view.CartIsEmpty;
 import view.CheckQuantity;
+import view.CheckoutSuccess;
 import view.DateMustLess;
 import view.DateMustMore;
 import view.DeleteProductSuccess;
@@ -62,6 +64,14 @@ public class PopUpController {
 	
 	public ResetSuccess resetpasssuccess() {
 		return new ResetSuccess();
+	}
+	
+	public CheckoutSuccess checkoutsuccess() {
+		return new CheckoutSuccess();
+	}
+	
+	public CartIsEmpty cartisempty() {
+		return new CartIsEmpty();
 	}
 	
 	public UsernameUsed usernameused() {

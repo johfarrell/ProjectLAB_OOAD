@@ -23,6 +23,10 @@ public class CartModel {
 		this.Quantity=quantity;
 	}
 	
+	public void emptyCart() {
+		em.clear();
+	}
+	
 	public void addToCart(Integer ProductID, String ProductName, Integer Quantity){
 		
 		System.out.println("Barang yang masuk ke cart: "+ "ID:"+ProductID + " Name:"+ProductName + " Quantity:"+ Quantity+"\n");
