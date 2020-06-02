@@ -11,19 +11,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class CheckoutSuccess {
+public class CheckMoneyAmount {
 
 	private JFrame frame;
-	private JLabel ChangesIs;
-	private float Changes=0f;
+
 	
 	/**
 	 * Create the application.
 	 */
-	public CheckoutSuccess(float Changes) {
-		this.Changes = Changes;
+	public CheckMoneyAmount() {
 		initialize();
-		ChangesIs.setText("Changes: Rp. "+String.valueOf(this.Changes));
 		frame.setVisible(true);
 	}
 
@@ -32,19 +29,19 @@ public class CheckoutSuccess {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 300, 205);
+		frame.setBounds(100, 100, 300, 175);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Checkout Success!");
-		lblNewLabel.setForeground(new Color(46, 139, 87));
+		JLabel lblNewLabel = new JLabel("Check money amout!");
+		lblNewLabel.setForeground(new Color(139, 0, 0));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(12, 30, 258, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton okButton = new JButton("OK");
-		okButton.setBounds(92, 108, 97, 25);
+		okButton.setBounds(95, 75, 97, 25);
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,11 +50,6 @@ public class CheckoutSuccess {
 			}
 		});
 		frame.getContentPane().add(okButton);
-		
-		ChangesIs = new JLabel("******");
-		ChangesIs.setHorizontalAlignment(SwingConstants.CENTER);
-		ChangesIs.setBounds(0, 59, 282, 16);
-		frame.getContentPane().add(ChangesIs);
 	}
 
 }

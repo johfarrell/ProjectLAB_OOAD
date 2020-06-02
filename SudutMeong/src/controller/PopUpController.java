@@ -1,8 +1,13 @@
 package controller;
 
 import view.CartIsEmpty;
+import view.CheckMoneyAmount;
 import view.CheckQuantity;
 import view.CheckoutSuccess;
+import view.ConfirmationDeleteProduct;
+import view.ConfirmationDeleteVoucher;
+import view.ConfirmationFire;
+import view.ConfirmationResetPassword;
 import view.DateMustLess;
 import view.DateMustMore;
 import view.DeleteProductSuccess;
@@ -42,6 +47,26 @@ public class PopUpController {
 		
 	}
 
+	public ConfirmationFire confirm_fire(Integer EmployeeID) {
+		return new ConfirmationFire(EmployeeID);
+	}
+	
+	public ConfirmationDeleteProduct confirm_del_product(Integer ProductID) {
+		return new ConfirmationDeleteProduct(ProductID);
+	}
+	
+	public ConfirmationDeleteVoucher confirm_del_voucher(Integer VoucherID) {
+		return new ConfirmationDeleteVoucher(VoucherID);
+	}
+	
+	public ConfirmationResetPassword confirm_reset_pass(Integer EmployeeID) {
+		return new ConfirmationResetPassword(EmployeeID);
+	}
+	
+	public CheckMoneyAmount checkmoney() {
+		return new CheckMoneyAmount();
+	}
+	
 	public WrongPassword wrongpass() {
 		return new WrongPassword();
 	}
@@ -62,12 +87,12 @@ public class PopUpController {
 		return new UpdateSuccess();
 	}
 	
-	public ResetSuccess resetpasssuccess() {
-		return new ResetSuccess();
+	public ResetSuccess resetpasssuccess(String password) {
+		return new ResetSuccess(password);
 	}
 	
-	public CheckoutSuccess checkoutsuccess() {
-		return new CheckoutSuccess();
+	public CheckoutSuccess checkoutsuccess(float Changes) {
+		return new CheckoutSuccess(Changes);
 	}
 	
 	public CartIsEmpty cartisempty() {

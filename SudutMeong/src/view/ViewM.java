@@ -26,6 +26,7 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.CartHandler;
 import controller.EmployeeHandler;
+import controller.PopUpController;
 import controller.ProductHandler;
 import controller.TransactionHandler;
 import model.CartModel;
@@ -463,7 +464,8 @@ public class ViewM implements ActionListener{
 				employeeID=-1;
 			}
 
-			EmployeeHandler.getInstance().fireEmployee(employeeID);
+			PopUpController.getInstance().confirm_fire(employeeID);
+			//Table jadi ga ke update nihhhh gara2 confirmation dialog
 			dtm_1.setRowCount(0);
 			table_1();
 			dtm_1.fireTableDataChanged();

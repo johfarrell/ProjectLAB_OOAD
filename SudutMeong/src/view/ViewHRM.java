@@ -7,7 +7,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import controller.EmployeeHandler;
+import controller.PopUpController;
 import controller.ProductHandler;
+import javafx.stage.Popup;
 import model.EmployeeModel;
 import model.ProductModel;
 
@@ -409,7 +411,8 @@ public class ViewHRM implements ActionListener{
 				employeeID=-1;
 			}
 
-			EmployeeHandler.getInstance().resetPassword(employeeID);
+			PopUpController.getInstance().confirm_reset_pass(employeeID);
+			//Table jadi ga ke update nihhhh gara2 confirmation dialog
 			dtm.setRowCount(0);
 			table();
 			dtm.fireTableDataChanged();
@@ -421,7 +424,8 @@ public class ViewHRM implements ActionListener{
 			} catch (Exception e2) {
 				employeeID=-1;
 			}
-			EmployeeHandler.getInstance().fireEmployee(employeeID);
+			PopUpController.getInstance().confirm_fire(employeeID);
+			//Table jadi ga ke update nihhhh gara2 confirmation dialog
 			dtm.setRowCount(0);
 			table();
 			dtm.fireTableDataChanged();

@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import controller.EmployeeHandler;
+import controller.PopUpController;
 import controller.VoucherHandler;
 import controller.ProductHandler;
 import controller.TransactionHandler;
@@ -329,7 +330,8 @@ public class ViewSM implements ActionListener{
 			} catch (Exception e2) {
 				ProductID = 0;
 			}
-			ProductHandler.getInstance().deleteProduct(ProductID);
+			PopUpController.getInstance().confirm_del_product(ProductID);
+			//Table jadi ga ke update nihhhh gara2 confirmation dialog
 			dtm.setRowCount(0);
 			table();
 			dtm.fireTableDataChanged();

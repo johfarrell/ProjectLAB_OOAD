@@ -36,6 +36,7 @@ public class ViewTM implements ActionListener{
 	private JTextField addProductID;
 	private JTextField addQuantity;
 	private JTextField checkoutVoucherID;
+	private JTextField customerMoney;
 	private JTable table;
 	private JButton btnAdd;
 	private JButton btnApply;
@@ -45,6 +46,9 @@ public class ViewTM implements ActionListener{
 	private JTextField updateCartQuantity;
 	private JButton btnUpdateCart;
 	private JLabel lblPrice;
+	private JLabel labelMoney;
+	private JLabel lblRpLabel2;
+	private JLabel lblRpLabel1;
 	private Float appliedVoucher=0.0f;
 	
 	private Integer EmployeeID;
@@ -127,7 +131,7 @@ public class ViewTM implements ActionListener{
 		checkoutVoucherID.setColumns(10);
 		
 		btnCheckout = new JButton("CHECKOUT");
-		btnCheckout.setBounds(310, 642, 100, 23);
+		btnCheckout.setBounds(321, 642, 100, 23);
 		frmCashier.getContentPane().add(btnCheckout);
 		
 		JLabel lblTotalPrice = new JLabel("Total Price:");
@@ -140,7 +144,7 @@ public class ViewTM implements ActionListener{
 		frmCashier.getContentPane().add(lblPrice);
 		
 		btnApply = new JButton("APPLY");
-		btnApply.setBounds(321, 535, 89, 23);
+		btnApply.setBounds(321, 535, 100, 23);
 		frmCashier.getContentPane().add(btnApply);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -163,10 +167,10 @@ public class ViewTM implements ActionListener{
 		paymentmethod.setBounds(152, 607, 100, 22);
 		frmCashier.getContentPane().add(paymentmethod);
 		
-		JLabel lblNewLabel_2 = new JLabel("Rp.");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_2.setBounds(152, 574, 35, 16);
-		frmCashier.getContentPane().add(lblNewLabel_2);
+		lblRpLabel1 = new JLabel("Rp.");
+		lblRpLabel1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblRpLabel1.setBounds(152, 574, 35, 16);
+		frmCashier.getContentPane().add(lblRpLabel1);
 		
 		updateCartQuantity = new JTextField();
 		updateCartQuantity.setBounds(594, 507, 50, 22);
@@ -180,6 +184,20 @@ public class ViewTM implements ActionListener{
 		btnUpdateCart = new JButton("UPDATE");
 		btnUpdateCart.setBounds(526, 534, 118, 25);
 		frmCashier.getContentPane().add(btnUpdateCart);
+		
+		labelMoney = new JLabel("Customer Money:");
+		labelMoney.setBounds(40, 645, 110, 16);
+		frmCashier.getContentPane().add(labelMoney);
+		
+		lblRpLabel2 = new JLabel("Rp.");
+		lblRpLabel2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblRpLabel2.setBounds(152, 645, 35, 16);
+		frmCashier.getContentPane().add(lblRpLabel2);
+		
+		customerMoney = new JTextField();
+		customerMoney.setBounds(182, 642, 130, 22);
+		frmCashier.getContentPane().add(customerMoney);
+		customerMoney.setColumns(10);
 	}
 	
 	
@@ -273,6 +291,26 @@ public class ViewTM implements ActionListener{
 		btnApply.addActionListener(this);
 		btnCheckout.addActionListener(this);
 		btnUpdateCart.addActionListener(this);
+		
+		paymentmethod.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(paymentmethod.getSelectedItem().toString().equals("Credit")) {
+					labelMoney.setVisible(false);
+					lblRpLabel2.setVisible(false);
+					customerMoney.setText(null);
+					customerMoney.setVisible(false);
+				}else if(paymentmethod.getSelectedItem().toString().equals("Cash")) {
+					labelMoney.setVisible(true);
+					lblRpLabel2.setVisible(true);
+					customerMoney.setText(null);
+					customerMoney.setVisible(true);
+				}
+			}
+		});
+		
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -404,17 +442,30 @@ public class ViewTM implements ActionListener{
 		}else if(e.getSource().equals(btnCheckout)) {
 			Integer VoucherID=0;
 			String PaymentType;
+			Float MoneyAmount=0f;
+			Float TotalPrice=0f;
 			
 			try {
 				VoucherID = Integer.parseInt(checkoutVoucherID.getText());
 			} catch (Exception e2) {
 				VoucherID=0;
 			}
+			try {
+				MoneyAmount = Float.valueOf(customerMoney.getText()); 
+			} catch (Exception e2) {
+				MoneyAmount=0f;
+			}
+			try {
+				TotalPrice = Float.valueOf(lblPrice.getText());
+			} catch (Exception e2) {
+				// TODO: handle exception
+				TotalPrice=0f;
+			}
 			
 			PaymentType = paymentmethod.getSelectedItem().toString();
 			String status=null;
 			try {
-				status = TransactionHandler.getInstance().checkoutTransaction(this.EmployeeID, VoucherID, PaymentType);
+				status = TransactionHandler.getInstance().checkoutTransaction(this.EmployeeID, VoucherID, PaymentType, TotalPrice, MoneyAmount);
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -11,16 +11,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controller.EmployeeHandler;
+
 public class ResetSuccess {
 
 	private JFrame frame;
-
+	private JLabel newPass;
+	private String password="";
+	
 
 	/**
 	 * Create the application.
 	 */
-	public ResetSuccess() {
+	public ResetSuccess(String password) {
 		initialize();
+		newPass.setText("New password: "+password);
 		frame.setVisible(true);
 	}
 
@@ -29,7 +34,7 @@ public class ResetSuccess {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 300, 175);
+		frame.setBounds(100, 100, 300, 205);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -41,7 +46,7 @@ public class ResetSuccess {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton okButton = new JButton("OK");
-		okButton.setBounds(95, 75, 97, 25);
+		okButton.setBounds(92, 108, 97, 25);
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -50,6 +55,10 @@ public class ResetSuccess {
 			}
 		});
 		frame.getContentPane().add(okButton);
+				
+		newPass = new JLabel("******");
+		newPass.setHorizontalAlignment(SwingConstants.CENTER);
+		newPass.setBounds(0, 59, 282, 16);
+		frame.getContentPane().add(newPass);
 	}
-
 }

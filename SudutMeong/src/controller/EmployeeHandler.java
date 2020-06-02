@@ -126,7 +126,7 @@ public class EmployeeHandler {
 		}else{
 			String password = getPassword();
 			employee.resetPassword(employeeID, password);
-			PopUpController.getInstance().resetpasssuccess();
+			PopUpController.getInstance().resetpasssuccess(password);
 		}
 	}
 	

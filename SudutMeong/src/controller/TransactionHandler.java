@@ -184,7 +184,7 @@ public class TransactionHandler {
 		return 0.0f;
 	}
 	
-	public String checkoutTransaction(Integer EmployeeID, Integer VoucherID, String PaymentType) throws ParseException {
+	public String checkoutTransaction(Integer EmployeeID, Integer VoucherID, String PaymentType, Float TotalPrice, Float Money) throws ParseException {
 		
 		String checkoutStatus;
 		
@@ -193,7 +193,7 @@ public class TransactionHandler {
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
 		String timestamp = formatter.format(today);
-		transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
+		
 		
 		Vector<CartModel> Cart = new Vector<CartModel>();
 		Cart = cart.getAllItem();
@@ -203,21 +203,48 @@ public class TransactionHandler {
 			checkoutStatus="emptycart";
 			return checkoutStatus;
 		}else if (Cart.isEmpty()!=true) {
-			Integer index = transaction.getIndex();
-			Integer ProductId = 0;
-			Integer Quantity = 0;
-			for(CartModel cart2 : Cart){
-				ProductId = cart2.getProductID();
-				Quantity = cart2.getQuantity();
-				transactionitem.addTransactionItem(index, ProductId, Quantity);
-				ProductHandler.getInstance().updateStock(ProductId, Quantity);
-			}
 
-			CartHandler.getInstance().emptyCart();
-			PopUpController.getInstance().checkoutsuccess();
-			
-			checkoutStatus="done";
-			return checkoutStatus;
+			if(PaymentType.equals("Credit")) {
+				Integer index = transaction.getIndex();
+				Integer ProductId = 0;
+				Integer Quantity = 0;
+				transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
+				for(CartModel cart2 : Cart){
+					ProductId = cart2.getProductID();
+					Quantity = cart2.getQuantity();
+					transactionitem.addTransactionItem(index, ProductId, Quantity);
+					ProductHandler.getInstance().updateStock(ProductId, Quantity);
+				}
+
+				CartHandler.getInstance().emptyCart();
+				PopUpController.getInstance().checkoutsuccess(0f);
+				
+				checkoutStatus="done";
+				return checkoutStatus;
+				
+			}else if(PaymentType.equals("Cash")) {
+				if(Money<TotalPrice) {
+					PopUpController.getInstance().checkmoney();
+				}else if(Money>=TotalPrice) {
+					Integer index = transaction.getIndex();
+					Integer ProductId = 0;
+					Integer Quantity = 0;
+					transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
+					for(CartModel cart2 : Cart){
+						ProductId = cart2.getProductID();
+						Quantity = cart2.getQuantity();
+						transactionitem.addTransactionItem(index, ProductId, Quantity);
+						ProductHandler.getInstance().updateStock(ProductId, Quantity);
+					}
+
+					Float Changes = Money-TotalPrice;
+					CartHandler.getInstance().emptyCart();
+					PopUpController.getInstance().checkoutsuccess(Changes);
+					
+					checkoutStatus="done";
+					return checkoutStatus;
+				}
+			}	
 		}
 		
 		checkoutStatus="false";

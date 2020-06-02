@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
 
 import controller.EmployeeHandler;
+import controller.PopUpController;
 import controller.ProductHandler;
 import controller.VoucherHandler;
 import model.ProductModel;
@@ -278,7 +279,8 @@ public class ViewPM implements ActionListener{
 			} catch (Exception e2) {
 				VoucherID=0;
 			}
-			VoucherHandler.getInstance().deleteVoucher(VoucherID);
+			PopUpController.getInstance().confirm_del_voucher(VoucherID);
+			//Table jadi ga ke update nihhhh gara2 confirmation dialog
 			dtm.setRowCount(0);
 			table();
 			dtm.fireTableDataChanged();
