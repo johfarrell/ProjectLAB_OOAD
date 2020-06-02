@@ -193,8 +193,6 @@ public class TransactionHandler {
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
 		String timestamp = formatter.format(today);
-		
-		
 		Vector<CartModel> Cart = new Vector<CartModel>();
 		Cart = cart.getAllItem();
 		
@@ -205,10 +203,10 @@ public class TransactionHandler {
 		}else if (Cart.isEmpty()!=true) {
 
 			if(PaymentType.equals("Credit")) {
+				transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
 				Integer index = transaction.getIndex();
 				Integer ProductId = 0;
 				Integer Quantity = 0;
-				transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
 				for(CartModel cart2 : Cart){
 					ProductId = cart2.getProductID();
 					Quantity = cart2.getQuantity();
@@ -226,10 +224,10 @@ public class TransactionHandler {
 				if(Money<TotalPrice) {
 					PopUpController.getInstance().checkmoney();
 				}else if(Money>=TotalPrice) {
+					transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
 					Integer index = transaction.getIndex();
 					Integer ProductId = 0;
 					Integer Quantity = 0;
-					transaction.checkoutTransaction(VoucherID, EmployeeID, PaymentType, timestamp);
 					for(CartModel cart2 : Cart){
 						ProductId = cart2.getProductID();
 						Quantity = cart2.getQuantity();

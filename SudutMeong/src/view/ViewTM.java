@@ -475,7 +475,7 @@ public class ViewTM implements ActionListener{
 				//VoucherUsed, inisialisasi ulang jadi 0 discount
 				appliedVoucher = 0.0f;
 				changeTotalPrice(appliedVoucher);
-				checkoutVoucherID = null;
+				checkoutVoucherID.setText("");
 				
 				//Update table Cart
 				dtm.setRowCount(0);
