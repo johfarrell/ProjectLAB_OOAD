@@ -399,9 +399,17 @@ public class ViewTM implements ActionListener{
 				VoucherID = 0;
 			}
 			
-			appliedVoucher = TransactionHandler.getInstance().addCheckOutVoucher(VoucherID);
+			try {
+				appliedVoucher = TransactionHandler.getInstance().addCheckOutVoucher(VoucherID);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			changeTotalPrice(appliedVoucher);
+			if(appliedVoucher.equals(0.0f)) {
+				checkoutVoucherID.setText("");
+			}
 			
 		}else if(e.getSource().equals(btnUpdateCart)) {
 			Integer Quantity=-1;

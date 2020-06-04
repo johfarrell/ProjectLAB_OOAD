@@ -42,7 +42,7 @@ public class EmployeeHandler {
         String rangePass = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder pass = new StringBuilder();
         Random rnd = new Random();
-        while (pass.length() < 5) {
+        while (pass.length() < 6) {
             int index = (int) (rnd.nextFloat() * rangePass.length());
             pass.append(rangePass.charAt(index));
         }

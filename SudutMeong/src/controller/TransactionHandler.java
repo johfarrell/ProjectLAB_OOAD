@@ -159,7 +159,7 @@ public class TransactionHandler {
 	}
 	
 	
-	public float addCheckOutVoucher(Integer VoucherID) {
+	public float addCheckOutVoucher(Integer VoucherID) throws ParseException {
 		Vector<Integer> VouID = new Vector<Integer>();
 		VouID = VoucherHandler.getInstance().getAllVoucherId();
 		
@@ -173,9 +173,23 @@ public class TransactionHandler {
 			VoucherModel checkdiscount = voucher.elementAt(index);
 			
 			if(checkdiscount.getStatus().equals("NotUsed")) {
+				
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				Date today = new Date();
+				Date today_withouttime = formatter.parse(formatter.format(today));
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date ValidDate = dateFormat.parse(checkdiscount.getDate());  
+				
 				Float discount = checkdiscount.getDiscount().floatValue();
-				PopUpController.getInstance().voucherapplied();
-				return discount;
+				
+				if(ValidDate.before(today_withouttime)) {
+					PopUpController.getInstance().voucherexpired();
+					return 0.0f;
+				}else if(ValidDate.after(today_withouttime)) {	
+					PopUpController.getInstance().voucherapplied();
+					return discount;
+				}
 			}else if(checkdiscount.getStatus().equals("Used")) {
 				PopUpController.getInstance().voucheralreadyused();
 				return 0.0f;

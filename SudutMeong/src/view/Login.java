@@ -102,7 +102,7 @@ public class Login {
 						
 						if(emplo.getStatus().equals("Inactive")) {
 							PopUpController.getInstance().inactive();
-						}else if(emplo.getStatus().equals("Active")){
+						}else if(emplo.getStatus().equals("Active")){   //Lanjut ke view masing2
 							if(emplo.getRoleid() == 1) {
 								System.out.println("Anda adalah Human Resource");
 								frame.dispose();

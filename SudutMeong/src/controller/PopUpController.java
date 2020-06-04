@@ -28,6 +28,7 @@ import view.UpdateSuccess;
 import view.UsernameNotFound;
 import view.UsernameUsed;
 import view.VoucherApplied;
+import view.VoucherExpired;
 import view.VoucherUsed;
 import view.WrongPassword;
 
@@ -117,6 +118,10 @@ public class PopUpController {
 	
 	public VoucherApplied voucherapplied() {
 		return new VoucherApplied();
+	}
+	
+	public VoucherExpired voucherexpired() {
+		return new VoucherExpired();
 	}
 	
 	public DeleteProductSuccess productdel() {
